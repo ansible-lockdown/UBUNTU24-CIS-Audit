@@ -1,0 +1,27 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_4_2 }}
+file:
+  default_grub_perms:
+    title: 1.4.2 | Ensure access to bootloader if configured
+    exists: true
+    path: /boot/grub/grub.cfg
+    owner: root
+    group: root
+    mode:
+      or:
+      - "0400"
+      - "0600"
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.4.2
+      CISv8: 3.3
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5: AC-3
+  {{ end }}
+{{ end }}

@@ -1,0 +1,39 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_1_1_5 }}
+file:
+  jffs2_disabled:
+    title: 1.1.1.5 | Ensure jffs2 kernel module is not available | modprobe
+    path: /etc/modprobe.d/CIS.conf
+    exists: true
+    contents:
+    - '/^install jffs2 /bin/(true|false)/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 1.1.1.5
+      CISv8:
+      - 4.8
+      CISv8_IG1: false
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5: CM-7
+  jffs2_blacklist:
+    title: 1.1.1.5 | Ensure jffs2 kernel module is not available | blacklist
+    path: /etc/modprobe.d/blacklist.conf
+    exists: true
+    contents:
+    - '/^blacklist jffs2/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 1.1.1.5
+      CISv8:
+      - 4.8
+      CISv8_IG1: false
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5: CM-7
+  {{ end }}
+{{ end }}

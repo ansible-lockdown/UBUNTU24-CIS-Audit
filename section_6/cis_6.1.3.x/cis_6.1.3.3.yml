@@ -1,0 +1,30 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_6_1_3_3 }}
+command:
+  forward_journald_conf:
+    title: 6.1.3.3 | Ensure journald is not configured to send logs to rsyslog
+    exec: grep -i forward /etc/systemd/journald.conf /etc/systemd/journald.conf.d/
+    exit-status: 0
+    stdout:
+    - '!/^\.*:ForwardToSyslog/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.3.3
+      CISv8:
+      - 8.2
+      - 8.9
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - AC-3
+      - AU-2
+      - AU-4
+      - AU-12
+      - MP-2
+  {{ end }}
+{{ end }}

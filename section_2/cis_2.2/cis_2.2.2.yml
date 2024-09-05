@@ -1,0 +1,24 @@
+---
+
+{{ if not .Vars.ubtu24cis_rsh_client }}
+  {{ if .Vars.ubtu24cis_level_1 }}
+    {{ if .Vars.ubtu24cis_rule_2_2_2 }}
+package:
+  rsh-client:
+    title: 2.2.2 | Ensure rsh client is not installed
+    name: rsh-client
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.2.2
+      CISv8:
+      - 4.8
+      CISv8_IG1: false
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - CM-7
+    {{ end }}
+  {{ end }}
+{{ end }}

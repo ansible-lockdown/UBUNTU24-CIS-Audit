@@ -1,0 +1,33 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_4_2_4 }}
+command:
+  ufw_loopback:
+    title: 4.2.4 | Ensure ufw loopback traffic is configured
+    exec: ufw status verbose
+    exit-status: 0
+    stdout:
+    - '/^Anywhere on lo\s+ ALLOW IN\s+ Anywhere/'
+    - '/^Anywhere\s+DENY IN\s+127.0.0.0\/8/'
+    - '/^Anywhere\s+ ALLOW OUT\s+ Anywhere on lo/'
+    {{ if .Vars.ubtu24cis_ipv6_required}}
+    - '/^Anywhere \(v6\) on lo\s+ALLOW IN\s+Anywhere \(v6\)/'
+    - '/^Anywhere \(v6\)\s+DENY IN\s+::1/'
+    - '/^Anywhere \(v6\)\s+ALLOW OUT\s+Anywhere \(v6\) on lo/'
+    {{ end }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.2.4
+      CISv8:
+      - 4.4
+      - 4.5
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - SC-7
+  {{ end }}
+{{ end }}

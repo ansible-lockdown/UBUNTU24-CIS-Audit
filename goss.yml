@@ -1,0 +1,96 @@
+gossfile:
+# Section 1
+  {{ if .Vars.ubtu24cis_section1 }}
+  section_1/*/*.yml: {}
+  {{ end }}
+
+ # Section 2
+  {{ if .Vars.ubtu24cis_section2 }}
+  # Special Services
+  section_2/cis_2.1/*.yml: {}
+  # Client Service
+  section_2/cis_2.2/*.yml: {}
+  # Time services
+  section_2/cis_2.3/*.yml: {}
+  # scheduling services
+  section_2/cis_2.4/*.yml: {}
+  {{ end }}
+
+# Section 3
+  {{ if .Vars.ubtu24cis_section3 }}
+  section_3/cis_3.1/*.yml: {}
+  section_3/cis_3.2/*.yml: {}
+  section_3/cis_3.3/*.yml: {}
+    {{ if .Vars.ubtu24cis_ipv6_required }}
+  section_3/cis_3.3/ipv6/*.yml: {}
+    {{ end }}
+  {{ end }}
+
+# Section 4
+  {{ if .Vars.ubtu24cis_section4 }}
+    # If ufw firewall
+    {{ if eq .Vars.ubtu24cis_firewall_package "ufw" }}
+  section_4/cis_4.2/*.yml: {}
+    {{ end }}
+    # If nftables firewall
+    {{ if eq .Vars.ubtu24cis_firewall_package "nftables" }}
+  section_4/cis_4.3/*.yml: {}
+    {{ end }}
+    # If iptables firewall
+    {{ if eq .Vars.ubtu24cis_firewall_package "iptables" }}
+  section_4/cis_4.4/*.yml: {}
+    {{ end }}
+  {{ end }}
+
+# Section 5
+  {{ if .Vars.ubtu24cis_section5 }}
+  section_5/*/*.yml: {}
+  {{ end }}
+
+# Section 6
+  {{ if .Vars.ubtu24cis_section6 }}
+  # Journald
+  {{ if eq .Vars.ubtu24cis_syslog_service "journald" }}
+  section_6/cis_6.1.1.x/*.yml: {}
+  section_6/cis_6.1.2.x/*.yml: {}
+  {{ end }}
+  # Rsyslog
+  {{ if eq .Vars.ubtu24cis_syslog_service "rsyslog" }}
+  section_6/cis_6.1.3.*/*.yml: {}
+  {{ end }}
+  # logrotate
+  section_6/cis_6.1.4.*/*.yml: {}
+  # Auditd and level 2
+  # Auditd
+    {{ if .Vars.ubtu24cis_level_2 }}
+      {{ if .Vars.ubtu24cis_auditd }}
+  section_6/cis_6.2.*/*.yml: {}
+      {{ end }}
+    {{ end }}
+  # Aide
+  section_6/cis_6.3.*/*.yml: {}
+  {{ end }}
+
+# Section 7
+  {{ if .Vars.ubtu24cis_section7 }}
+  section_7/cis_7.*/*.yml: {}
+  {{ end }}
+
+# Metadata
+command:
+  benchmark_meta:
+    title: Benchmark MetaData
+    exec: echo BenchMark MetaData
+    exit-status: 0
+    meta:
+      host_machine_uuid: {{ .Vars.machine_uuid }}
+      host_epoch: {{ .Vars.epoch }}
+      host_os_locale: {{ .Vars.os_locale }}
+      host_os_release: {{ .Vars.os_release }}
+      host_os_distribution: {{ .Vars.os_distribution }}
+      host_automation_group: {{ .Vars.auto_group }}
+      host_hostname: {{ .Vars.os_hostname }}
+      host_system_type: {{ .Vars.system_type }}
+      benchmark_type: {{ .Vars.benchmark_type }}
+      benchmark_version: {{ .Vars.benchmark_version }}
+      benchmark_os: {{ .Vars.benchmark_os }}

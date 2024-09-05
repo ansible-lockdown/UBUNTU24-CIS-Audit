@@ -1,0 +1,44 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_5_2_2 }}
+file:
+  sudoers_use_pty:
+    title: 5.2.2 | Ensure sudo commands use pty | Config
+    path: /etc/sudoers
+    exists: true
+    contents:
+    - '/^Defaults.*\suse_pty/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.2.2
+      CISv8:
+      - 5.4
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - AC-6
+command:
+  pty_sudoers_d:
+    title: 5.2.2 | Ensure sudo commands use pty | sudoers.d
+    exec: "ls -1 /etc/sudoers.d/* > /dev/null 2>&1; if [ '$?' = '0' ]; then grep -c '^Defaults\\s*use_pty' /etc/sudoers.d/*; else echo 99;fi"
+    exit-status: 0
+    stdout:
+    - '/[0-99]/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.2.2
+      CISv8:
+      - 5.4
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - AC-6
+  {{ end }}
+{{ end }}

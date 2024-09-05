@@ -1,0 +1,31 @@
+
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_6_1_3_8 }}
+command:
+  rsyslog_logrotate:
+    title: 6.1.3.8 | Ensure rsyslog logrotate is configured
+    exec: grep -A9 "rsyslog/*.log" /etc/logrotate.conf /etc/logrotate.d/*
+    exit-status:
+      or:
+      - 0
+      - 1
+      - 2
+    stdout:
+    - '/.*: rotate/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.3.8
+      CISv8:
+      - 4.8
+      - 8.2
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - AU-8
+  {{ end }}
+{{ end }}

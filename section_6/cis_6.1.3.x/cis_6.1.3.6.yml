@@ -1,0 +1,30 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_6_1_3_6 }}
+    {{ if not .Vars.ubtu24cis_remote_log_server }}
+command:
+  remote_syslog:
+    title: 6.1.3.6 | Ensure rsyslog is configured to send logs to a remote host
+    exec: 'grep -E "action.*omfwd.*target" /etc/rsyslog.conf /etc/rsyslog.d/*.conf'
+    exit-status:
+      or:
+        - 0
+        - 2
+    stdout:
+    - '*.* action(type="omfwd" target="{{ .Vars.ubtu24cis_remote_log_host }}" port="{{ .Vars.ubtu24cis_remote_log_port }}"'
+    - protocol="{{ .Vars.ubtu24cis_remote_log_protocol }}"
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.3.6
+      CISv8: 8.2
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - AU-6
+    {{ end }}
+  {{ end }}
+{{ end }}

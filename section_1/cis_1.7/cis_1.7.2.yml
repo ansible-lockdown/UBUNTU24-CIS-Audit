@@ -1,0 +1,32 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_desktop_required }}
+    {{ if .Vars.ubtu24cis_rule_1_7_2 }}
+file:
+  gdm_banner:
+    title: 1.7.2 | Ensure GDM login banner is configured
+    path: /etc/gdm3/greeter.dconf-defaults
+    exists: true
+    contents:
+    - '/^[org/gnome/login-screen]/'
+    - '/^banner-message-enable=true/'
+    - '/^banner-message-text='{{ .Vars.ubtu24cis_warning_banner }}'/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.7.2
+      CISv8: NA
+      CISv8_IG1: NA
+      CISv8_IG2: NA
+      CISv8_IG3: NA
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,23 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_4_3_1 }}
+package:
+  nftables:
+    title: 4.3.1 | Ensure nftables is installed
+    installed: true
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.3.1
+      CISv8:
+      - 4.4
+      - 4.5
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - SC-7
+  {{ end }}
+{{ end }}

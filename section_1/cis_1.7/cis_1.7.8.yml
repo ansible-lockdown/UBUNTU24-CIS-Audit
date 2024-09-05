@@ -1,0 +1,31 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_desktop_required }}
+    {{ if .Vars.ubtu24cis_rule_1_7_8 }}
+file:
+  gdm_autorun_never:
+    title: 1.7.8 | Ensure GDM autorun-never is enabled
+    path: /etc/dconf/db/local.d/00-media-autorun
+    exists: true
+    contents:
+    - '/^[org/gnome/desktop/media-handling]/'
+    - '/^autrun-never=true/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.7.8
+      CISv8: 10.3
+      CISv8_IG1: true
+      CISv8_IG2: true
+      CISv8_IG3: true
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
+    {{ end }}
+  {{ end }}
+{{ end }}
