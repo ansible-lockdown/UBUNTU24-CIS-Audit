@@ -2,30 +2,29 @@
 
 ## Overview
 
-### Based on CIS Ubuntu Linux 24.04 LTS Benchmark v1.0.0 [Release](https://downloads.cisecurity.org/#/)
+### Based on CIS Benchmark for Ubuntu 24.04 LTS Benchmark v1.0.0
 
-Set of configuration files and directories to run the first stages of CIS of Ubuntu 24.04 servers
+[Centre For Internet Security]
+
+This repository is set of configuration files and directories to run the audit of the relevant benchmark of Ubuntu 24.04 servers
 
 This is configured in a directory structure level.
 
-This could do with further testing but sections 1.x should be complete
-
-Goss is run based on the goss.yml file in the top level directory. This specifies the configuration.
-
 ## variables
 
-file: vars/cis.yml
+file: vars/{benchmark_type}.yml
 
 Please refer to the file for all options and their meanings
 
-CIS listed variable for every control/benchmark can be turned on/off or section
+The listed variable for every control/benchmark can be turned on/off or section
 
-- other controls
-enable_selinux
-run_heavy_tasks
+- Other controls
+  - enable_selinux
+  - run_heavy_tasks
 
-- bespoke options
-If a site has specific options e.g. password complexity these can also be set.
+- Bespoke options
+
+  If a site has specific options e.g. password complexity these can also be set.
 
 ## Requirements
 
@@ -39,101 +38,47 @@ If running as part of the ansible playbook, this will pull in the relevant branc
 - e.g. v1.0.0 will pull in branch benchmark-v1.0.0
 
 Devel is normally the latest benchmark version, so maybe different from the version of benchmark you wish to test.
-Details will show in the README as to the benchmark for the version it is written for.
+Details will show in the README as part of the remedation as to the benchmark for the version it is written for.
 
 ## Usage
 
-You must have [goss](https://github.com/goss-org/goss/) available to your host you would like to test.
+Fot the latest information on audit and how it can be used please visit
 
-- Run as root not sudo due to sudo and shared memory access
-
-Assuming you have already clone this repository you can run goss from where you wish.
-
-- full check
-
-```sh
-# {{path to your goss binary}} --vars {{ path to the vars file }} -g {{path to your clone of this repo }}/goss.yml --validate
-
-```
-
-example:
-
-```sh
-# /usr/local/bin/goss --vars ../vars/cis.yml -g /home/bolly/rh8_cis_goss/goss.yml validate
-......FF....FF................FF...F..FF.............F........................FSSSS.............FS.F.F.F.F.........FFFFF....
-
-Failures/Skipped:
-
-Title: 1.6.1 Ensure core dumps are restricted (Automated)_sysctl
-Command: suid_dumpable_2: exit-status:
-Expected
-    <int>: 1
-to equal
-    <int>: 0
-Command: suid_dumpable_2: stdout: patterns not found: [fs.suid_dumpable = 0]
-
-
-Title: 1.4.2 Ensure filesystem integrity is regularly checked (Automated)
-Service: aidecheck: enabled:
-Expected
-    <bool>: false
-to equal
-    <bool>: true
-Service: aidecheck: running:
-Expected
-    <bool>: false
-to equal
-    <bool>: true
-
-< ---------cut ------- >
-
-Title: 1.1.22 Ensure sticky bit is set on all world-writable directories
-Command: version: exit-status:
-Expected
-    <int>: 0
-to equal
-    <int>: 123
-
-Total Duration: 5.102s
-Count: 124, Failed: 21, Skipped: 5
-
-```
-
-- running a particular section of tests
-
-```sh
-# /usr/local/bin/goss -g /home/bolly/rh8_cis_goss/section_1/cis_1.1/cis_1.1.22.yml  validate
-............
-
-Total Duration: 0.033s
-Count: 12, Failed: 0, Skipped: 0
-
-```
-
-- changing the output
-
-```sh
-# /usr/local/bin/goss -g /home/bolly/rh8_cis_goss/section_1/cis_1.1/cis_1.1.22.yml  validate -f documentation
-Title: 1.1.20 Check for removeable media nodev
-Command: floppy_nodev: exit-status: matches expectation: [0]
-Command: floppy_nodev: stdout: matches expectation: [OK]
-< -------cut ------- >
-Title: 1.1.20 Check for removeable media noexec
-Command: floppy_noexec: exit-status: matches expectation: [0]
-Command: floppy_noexec: stdout: matches expectation: [OK]
-
-
-Total Duration: 0.022s
-Count: 12, Failed: 0, Skipped: 0
-```
+[Read the Docs - Audit]
 
 ## Extra settings
 
 Ability to add your own requirements is available in several sections
 
-## further information
+## Support
 
-- [goss documentation](https://github.com/goss-org/goss/blob/master/README.md)
-- [CIS standards](https://www.cisecurity.org)
+[Discord Community Discussions]
 
-## Feedback required
+[Enterprise Support]
+
+[MindPoint Group]
+
+## Links and Further information
+
+- [Goss]
+  - [Goss documentation]
+- [Centre For Internet Security]
+
+<!----
+README Links
+---->
+
+[benchmark-type]: CIS
+[OS-VERSION]: Ubuntu2404
+[os-type]: Linux
+[Centre For Internet Security]: https://www.cisecurity.org
+[Read the Docs - Audit]: https://ansible-lockdown.readthedocs.io/en/latest/audit/getting-started-audit.html
+
+[goss documentation]: (https://github.com/goss-org/goss/blob/master/README.md)
+
+[Goss]: https://goss.rocks
+[DISA STIG]: https://public.cyber.mil/stigs
+
+[MindPoint Group]: https://mindpointgroup.com/cybersecurity-consulting/automate/baseline-modernization#GH_LockdownReadMe
+[Discord Community Discussions]: https://www.lockdownenterprise.com/discord
+[Enterprise Support]: https://lockdownenterprise.com#GH_LockdownReadMe
