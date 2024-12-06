@@ -25,7 +25,7 @@ mount:
 file:
   var_tmp_nodev_fstab_options:
      title: 1.1.2.5.2 | Ensure nodev option set on /var/tmp partition
-      exists: true
+     exists: true
      path: /etc/fstab
      contents:
      - '/\s\/var\/tmp\s.*nodev/'
