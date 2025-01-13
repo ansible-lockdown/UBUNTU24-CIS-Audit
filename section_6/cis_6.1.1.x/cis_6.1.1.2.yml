@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_6_1_1_2 }}
 command:
   /etc/tmpfiles.d/systemd.conf:
-    title: 6.2.1.1.2 | Ensure journald log file access is configured | Manual Check Required
+    title: 6.1.1.2 | Ensure journald log file access is configured | Manual Check Required
     exec: echo "Manual - Please check journald default permissions"
     exit-status: 0
     stdout:
