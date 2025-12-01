@@ -5,12 +5,11 @@
 command:
   check_updates:
     title: 1.2.2.1 | Ensure updates, patches, and additional security software are installed
-    exec: apt update | tail -1
+    exec: apt --just-print upgrade
     exit-status: 0
     timeout: {{ .Vars.timeout_ms }}
     stdout:
-    - '!/^[1-9]{0,4}$ packages can be upgraded/'
-    - '/^All packages are up to date/'
+    - '!/^The following packages will be upgraded/'
     meta:
       server: 1
       workstation: 1
