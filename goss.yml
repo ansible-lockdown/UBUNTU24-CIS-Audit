@@ -50,8 +50,8 @@ gossfile:
 # Section 6
   {{ if .Vars.ubtu24cis_section6 }}
   # Journald
-  {{ if eq .Vars.ubtu24cis_syslog_service "journald" }}
   section_6/cis_6.1.1.x/*.yml: {}
+   {{ if eq .Vars.ubtu24cis_syslog_service "journald" }}
   section_6/cis_6.1.2.x/*.yml: {}
   {{ end }}
   # Rsyslog
