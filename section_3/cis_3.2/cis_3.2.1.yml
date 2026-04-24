@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_3_2_1 }}
 command:
   modprobe_dccp:
-    title: 3.2.1 | Ensure dccp kernel module is not available | DCCP config
+    title: 3.2.1 | Ensure dccp kernel module is not available
     exit-status: 0
     exec: 'modprobe -n -v dccp'
     stdout:
@@ -23,8 +23,7 @@ command:
       - CM-7
       - SI-4
   lsmod_dccp:
-    title: 3.2.1 | Ensure dccp kernel module is not available | running dccp
-    exit-status: 1
+    title: 3.2.1 | Ensure dccp keEnsure dccp kernel module is not availableus: 1
     exec: lsmod | grep -i dccp
     stdout:
     - '!/^.*/'

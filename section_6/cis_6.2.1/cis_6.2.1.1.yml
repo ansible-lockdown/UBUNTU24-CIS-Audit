@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_6_2_1_1 }}
 package:
   audit_packages:
-    title: 6.2.1.1 | Ensure auditd packages are installed | auditd pkg
+    title: 6.2.1.1 | Ensure auditd packages are installed
     installed: true
     name: auditd
     meta:
@@ -23,8 +23,7 @@ package:
       - AU-12
       - SI-5
   audispd-plugins:
-    title: 6.2.1.1 | Ensure auditd is installed | audispd-plugins pkg
-    name: audispd-plugins
+    title: 6.2.1.1 | Ensure auditdEnsure auditd packages are installeddispd-plugins
     installed: true
     meta:
       server: 2

@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_5_1_18 }}
 file:
   ssh_maxstartups:
-    title: 5.1.18 | Ensure SSH MaxStartups is configured
+    title: 5.1.18 | Ensure sshd MaxStartups is configured
     path: /etc/ssh/sshd_config
     exists: true
     contents:

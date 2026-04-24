@@ -6,7 +6,7 @@
       {{ if not .Vars.ubtu24cis_message_mask }}
 package:
   dovecot_imapd_pkg:
-    title: 2.1.8 | Ensure message access server services are not in use | pkg removed
+    title: 2.1.8 | Ensure message access server services are not in use
     name: dovecot-imapd
     installed: false
     meta:
@@ -22,8 +22,7 @@ package:
       NIST800-53R5:
       - CM-7
   dovecot_pop3d_pkg:
-    title: 2.1.8 | Ensure message access server services are not in use | pkg removed
-    name: dovecot-pop3d
+    title: 2.1.8 | Ensure messageEnsure message access server services are not in useecot-pop3d
     installed: false
     meta:
       server: 1
@@ -41,8 +40,7 @@ package:
       {{ if .Vars.ubtu24cis_message_mask }}
 file:
   dovecot_service_masked:
-    title: 2.1.8 | Ensure message access server services are not in use | masked
-    path: /etc/systemd/system/dovecot.service
+    title: 2.1.8 | Ensure message access serverEnsure message access server services are not in useem/dovecot.service
     exists: true
     filetype: symlink
     linked-to: /dev/null
@@ -59,8 +57,7 @@ file:
       NIST800-53R5:
       - CM-7
   dovecot_socket_masked:
-    title: 2.1.8 | Ensure message access server services are not in use | masked
-    path: /etc/systemd/system/dovecot.socket
+    title: 2.1.8 | Ensure message access server servicesEnsure message access server services are not in uset.socket
     exists: true
     filetype: symlink
     linked-to: /dev/null

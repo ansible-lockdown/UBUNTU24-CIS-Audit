@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_1_5_5 }}
 package:
   apport:
-    title: 1.5.5 | Ensure Automatic Error Reporting is not enabled | Package
+    title: 1.5.5 | Ensure Automatic Error Reporting is not enabled
     installed: false
     meta:
       server: 1
@@ -17,8 +17,7 @@ package:
       CISv8_IG3: true
 file:
   error_report_apport_disable:
-    title: 1.5.5 | Ensure Automatic Error Reporting is not enabled | disabled
-    exists: true
+    title: 1.5.5 | Ensure AutEnsure Automatic Error Reporting is not enableds: true
     path: /etc/default/apport
     contents:
     - 'enabled=0'

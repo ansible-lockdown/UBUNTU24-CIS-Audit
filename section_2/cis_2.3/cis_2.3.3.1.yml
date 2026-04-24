@@ -5,7 +5,7 @@
     {{ if .Vars.ubtu24cis_rule_2_3_3_1 }}
 file:
   chrony_pool:
-    title: 2.3.3.1 | Ensure chrony is configured with authorized timeserver | timeserver pool
+    title: 2.3.3.1 | Ensure chrony is configured with authorized timeserver
     path: /etc/chrony/sources.d/pool.sources
     exists: true
     contents:
@@ -25,8 +25,7 @@ file:
       - AU-3
       - AU-12
   chrony_timeservers:
-    title: 2.3.3.1 | Ensure chrony is configured with authorized timeserver | timeserver servers
-    path: /etc/chrony/sources.d/server.sources
+    title: 2.3.3.1 | Ensure chrony is cEnsure chrony is configured with authorized timeserverrony/sources.d/server.sources
     exists: true
     contents:
     {{- range .Vars.ubtu24cis_time_servers }}

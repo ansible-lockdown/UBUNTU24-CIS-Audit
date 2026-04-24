@@ -5,7 +5,7 @@
     {{ if not .Vars.ubtu24cis_xwindow_server }}
 package:
   xwindow_pkg:
-    title: 2.1.20 | Ensure X window server services are not in use | pkg removed
+    title: 2.1.20 | Ensure X window server services are not in use
     name: xserver-common
     installed: false
     meta:

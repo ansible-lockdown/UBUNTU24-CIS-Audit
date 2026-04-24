@@ -5,7 +5,7 @@
 service:
   {{ if eq .Vars.ubtu24cis_syslog_service "journald" }}
   single_syslog_journald_running:
-    title: 6.1.1.4 | Ensure only one logging system is in use | journald running
+    title: 6.1.1.4 | Ensure only one logging system is in use
     name: systemd-jounald.service
     running: true
     enabled: true
@@ -15,8 +15,7 @@ service:
       CIS_ID:
       - 6.1.1.4
   single_syslog_rsyslod_stopped:
-    title: 6.1.1.4 | Ensure only one logging system is in use | rsyslogd stopped
-    name: rsyslog.service
+    title: 6.1.1.4 | Ensure only one logEnsure only one logging system is in useservice
     running: false
     enabled: false
     meta:
@@ -27,9 +26,7 @@ service:
   {{ end }}
   {{ if eq .Vars.ubtu24cis_syslog_service "rsyslog" }}
   single_syslog_rsyslog_running:
-    title: 6.1.1.4 | Ensure only one logging system is in use | rsyslogd running
-    name: rsyslog.service
-    running: true
+    title: 6.1.1.4 | Ensure only one logging system is in uEnsure only one logging system is in use: true
     enabled: true
     meta:
       server: 1
@@ -37,10 +34,7 @@ service:
       CIS_ID:
       - 6.1.1.4
   single_syslog_journald_stopped:
-    title: 6.1.1.4 | Ensure only one logging system is in use | journald stopped
-    name: systemd-jounald.service
-    running: false
-    enabled: false
+    title: 6.1.1.4 | Ensure only one logging system is in use | journald stoppEnsure only one logging system is in use enabled: false
     meta:
       server: 1
       workstation: 1

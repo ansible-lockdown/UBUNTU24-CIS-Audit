@@ -26,8 +26,8 @@
 
 # Goss benchmark variables (these should not need changing unless new release)
 BENCHMARK=CIS # Benchmark Name aligns to the audit
-BENCHMARK_VER=2.2.0
-BENCHMARK_OS=UBUNTU22
+BENCHMARK_VER=1.0.0
+BENCHMARK_OS=UBUNTU24
 
 # Goss host Variables
 AUDIT_BIN="${AUDIT_BIN:-/usr/local/bin/goss}"  # location of the goss executable

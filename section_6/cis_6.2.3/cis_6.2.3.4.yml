@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_6_2_3_4 }}
 command:
   auditd_time_cnf:
-    title: 6.2.3.4 | Ensure events that modify date and time information are collected | Config
+    title: 6.2.3.4 | Ensure events that modify date and time information are collected
     exec: grep time-change /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -25,8 +25,7 @@ command:
       - AU-3
       - CM-6
   auditd_time_live:
-    title: 6.2.3.4 | Ensure events that modify date and time information are collected | Live
-    exec: auditctl -l | grep time-change
+    title: 6.2.3.4 | Ensure evEnsure events that modify date and time information are collected: auditctl -l | grep time-change
     exit-status: 0
     stdout:
     - '-a always,exit -F arch=b64 -S adjtimex,settimeofday,clock_settime -F key=time-change'

@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_4_3_3 }}
 command:
   iptables_flushed:
-    title: 4.3.3 | Ensure iptables are flushed with nftables | iptable IPv4 flushed
+    title: 4.3.3 | Ensure iptables are flushed with nftables
     exec: iptables -L
     exit-status:
       or:
@@ -27,8 +27,7 @@ command:
       - CA-9
       - SC-7
   ip6tables_flushed:
-    title: 4.3.3 | Ensure iptables are flushed with nftables | iptable IPv4 flushed
-    exec: ip6tables -L
+    title: 4.3.3 | Ensure iptables are fluEnsure iptables are flushed with nftables
     exit-status:
       or:
       - 0

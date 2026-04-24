@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_4_3_10 }}
 file:
   nftable_perm:
-    title: 4.3.10 | Ensure nftables rules are permanent | conf file exists
+    title: 4.3.10 | Ensure nftables rules are permanent
     path: /etc/nftables.conf
     exists: true
     meta:
@@ -23,8 +23,7 @@ file:
       - SC-7
 command:
   nft_rules:
-    title: 4.3.10 | Ensure nftables rules are permanent | conf file exists
-    exec: echo "Manual - Please review nfttables configuration and matches site policy"
+    title: 4.3.10 | Ensure nftables rulEnsure nftables rules are permanentnual - Please review nfttables configuration and matches site policy"
     exit-status: 0
     stdout:
     - '!/.*/'

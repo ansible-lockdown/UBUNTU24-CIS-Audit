@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_6_2_3_8 }}
 command:
   auditd_identity_cnf:
-    title: 6.2.3.8 | Ensure events that modify user/group information are collected | Config
+    title: 6.2.3.8 | Ensure events that modify user/group information are collected
     exec: grep identity /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -29,8 +29,7 @@ command:
       NIST800-53R5:
       - AU-3
   auditd_identity_live:
-    title: 6.2.3.8 | Ensure events that modify user/group information are collected | Live
-    exec: auditctl -l | grep identity
+    title: 6.2.3.8 | Ensure evEnsure events that modify user/group information are collected: auditctl -l | grep identity
     exit-status: 0
     stdout:
     - '-w /etc/group -p wa -k identity'

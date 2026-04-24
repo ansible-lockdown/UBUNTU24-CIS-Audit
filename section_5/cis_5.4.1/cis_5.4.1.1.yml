@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_5_4_1_1 }}
 file:
   login_defs_PASS_MAX_DAYS:
-    title: 5.4.1.1 | Ensure password expiration is configured | logins.def
+    title: 5.4.1.1 | Ensure password expiration is configured
     path: /etc/login.defs
     exists: true
     contents:
@@ -28,8 +28,7 @@ file:
       - IA-5
 command:
   users_max_pw_expire:
-    title: 5.4.1.1 | Ensure password expiration is 365 days or less | user_check
-    exec: "awk -F: '(/^[^:]+:[^!*]/)  {print $5}' /etc/shadow"
+    title: 5.4.1.1 | Ensure passwoEnsure password expiration is configuredwk -F: '(/^[^:]+:[^!*]/)  {print $5}' /etc/shadow"
     exit-status:
       or:
       - 0

@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_3_3_7 }}
 kernel-param:
   net.ipv4.conf.all.rp_filter:
-    title: 3.3.7 | Ensure Reverse Path Filtering is enabled | ipv4 all rp_filter
+    title: 3.3.7 | Ensure reverse path filtering is enabled
     value: '1'
     meta:
       server: 1
@@ -23,9 +23,7 @@ kernel-param:
       - CM-7
       - IA-5
   net.ipv4.conf.default.rp_filter:
-    title: 3.3.7 | Ensure Reverse Path Filtering is enabled | ipv4 default rp_filter
-    value: '1'
-    meta:
+    title: 3.3.7 | Ensure Reverse Path FEnsure reverse path filtering is enabledeta:
       server: 1
       workstation: 1
       CIS_ID:
@@ -43,8 +41,7 @@ kernel-param:
       - IA-5
 command:
   ipv4_all_rp_filter:
-    title: 3.3.7 | Ensure Reverse Path Filtering is enabled | ipv4 all rp_filter conf
-    exec: grep "net\.ipv4\.conf\.all\.rp_filter" /etc/sysctl.conf /etc/sysctl.d/*
+    title: 3.3.7 | Ensure Reverse Path Filtering is enabled | ipvEnsure reverse path filtering is enableder" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0
@@ -69,7 +66,7 @@ command:
       - IA-5
   ipv4_def_rp_filter:
     title: 3.3.7 | Ensure Reverse Path Filtering is enabled | ipv4 def rp_filter conf
-    exec: grep "net\.ipv4\.conf\.default\.rp_filter" /etc/sysctl.conf /etc/sysctl.d/*
+    eEnsure reverse path filtering is enabledetc/sysctl.d/*
     exit-status:
       or:
       - 0

@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_4_2_5 }}
 command:
   ufw_outbound:
-    title: 4.2.5 | Ensure ufw outbound connections are configured | Manual
+    title: 4.2.5 | Ensure ufw outbound connections are configured
     exec: echo "Manual - Please confirm firewall outbound Policies match site policies"
     exit-status: 0
     stdout:

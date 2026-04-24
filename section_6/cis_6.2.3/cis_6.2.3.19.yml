@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_6_2_3_19 }}
 command:
   auditd_module_cnf:
-    title: 6.2.3.19 | Ensure kernel module loading and unloading is collected | Config
+    title: 6.2.3.19 | Ensure kernel module loading unloading and modification is collected
     exec: grep kernel_module /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -24,7 +24,7 @@ command:
       - AU-3
       - CM-6
   auditd_admin_module_live:
-    title: 6.2.3.19 | Ensure kernel module loading and unloading is collected | Live
+    title: 6.2.3.1Ensure kernel module loading unloading and modification is collectedLive
     exec: auditctl -l | grep kernel_module
     exit-status: 0
     stdout:

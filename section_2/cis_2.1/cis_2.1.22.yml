@@ -2,7 +2,7 @@
     {{ if .Vars.ubtu24cis_rule_2_1_22 }}
 command:
   manual_listening_ports:
-    title: 2.1.22 | Ensure only approved services are listening on a network interface | Manual Check required
+    title: 2.1.22 | Ensure only approved services are listening on a network interface
     exit-status:
       or:
       - 0

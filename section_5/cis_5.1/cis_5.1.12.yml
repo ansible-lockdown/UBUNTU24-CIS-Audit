@@ -2,7 +2,7 @@
   {{ if .Vars.ubtu24cis_rule_5_1_12 }}
 file:
   sshd_KEX:
-    title: 5.1.12 | Ensure sshd Kex algorithms is configured
+    title: 5.1.12 | Ensure sshd KexAlgorithms is configured
     path: /etc/ssh/sshd_config
     exists: true
     contents:

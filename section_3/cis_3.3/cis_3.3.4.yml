@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_3_3_4 }}
 kernel-param:
   net.ipv4.icmp_echo_ignore_broadcasts:
-    title: 3.3.4 | Ensure broadcast ICMP requests are ignored | ipv4 ignore broadcast icmp
+    title: 3.3.4 | Ensure broadcast icmp requests are ignored
     value: '1'
     meta:
       server: 1
@@ -24,8 +24,7 @@ kernel-param:
       - IA-5
 command:
   ipv4_ignore_icmp_broadcast:
-    title: 3.3.4 | Ensure broadcast ICMP requests are ignored | ipv4 ignore broadcast icmp conf
-    exec: grep "net\.ipv4\.icmp_echo_ignore_broadcasts" /etc/sysctl.conf /etc/sysctl.d/*
+    title: 3.3.4 | Ensure broadcast ICMP requestEnsure broadcast icmp requests are ignoredcmp_echo_ignore_broadcasts" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0

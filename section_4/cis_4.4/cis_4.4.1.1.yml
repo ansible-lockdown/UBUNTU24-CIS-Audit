@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_4_4_1_1 }}
 package:
   iptables:
-    title: 4.4.1.1 | Ensure iptables packages are installed | iptables pkg
+    title: 4.4.1.1 | Ensure iptables packages are installed
     installed: true
     meta:
       server: 1
@@ -21,8 +21,7 @@ package:
       - CA-9
       - SC-7
   iptables-persistent:
-    title: 4.4.1.1 | Ensure iptables packages are installed | iptables-persistent pkg
-    installed: true
+    title: 4.4.1.1 | Ensure iptablesEnsure iptables packages are installed true
     meta:
       server: 1
       workstation: 1

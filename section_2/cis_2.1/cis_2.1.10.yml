@@ -6,7 +6,7 @@
       {{ if not .Vars.ubtu24cis_nis_mask }}
 package:
   ypserv_pkg:
-    title: 2.1.10 | Ensure nis server services are not in use | pkg removed
+    title: 2.1.10 | Ensure nis server services are not in use
     name: ypserv
     installed: false
     meta:
@@ -25,8 +25,7 @@ package:
       {{ if .Vars.ubtu24cis_nis_mask }}
 file:
   ypserv_service_masked:
-    title: 2.1.10 | Ensure nis server services are not in use | masked
-    path: /etc/systemd/system/ypserv-server.service
+    title: 2.1.10 | Ensure nis serEnsure nis server services are not in usec/systemd/system/ypserv-server.service
     exists: true
     filetype: symlink
     linked-to: /dev/null

@@ -2,7 +2,7 @@
   {{ if .Vars.ubtu24cis_rule_5_3_3_3_1 }}
 file:
   pwhistory_remember_common_passwd:
-    title: 5.3.3.3.1 | Ensure password history remember is configured | common-password
+    title: 5.3.3.3.1 | Ensure password history remember is configured
     path: /etc/pam.d/common-password
     exists: true
     contents:
@@ -19,8 +19,7 @@ file:
       NIST800-53R5: IA-5
 command:
   pwhistory_remember_pam_configs:
-    title: 5.3.3.3.1 | Ensure password history remember is configured | pam_configs
-    exec:  for file in `awk '/Password-Type:/{ f = 1;next } /-Type:/{ f = 0 } f {if (/pam_pwhistory\.so/) print FILENAME}' /usr/share/pam-configs/*`; do grep pam_pwhistory $file | grep -v remember;  done
+    title: 5.3.3.3.1 | Ensure password hiEnsure password history remember is configuredle in `awk '/Password-Type:/{ f = 1;next } /-Type:/{ f = 0 } f {if (/pam_pwhistory\.so/) print FILENAME}' /usr/share/pam-configs/*`; do grep pam_pwhistory $file | grep -v remember;  done
     exit-status:
       or:
       - 0

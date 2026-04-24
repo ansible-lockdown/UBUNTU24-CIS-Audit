@@ -6,7 +6,7 @@
       {{ if not .Vars.ubtu24cis_rpc_mask }}
 package:
   rpcbind_pkg:
-    title: 2.1.12 | Ensure rpcbind services are not in use | pkg removed
+    title: 2.1.12 | Ensure rpcbind services are not in use
     name: rpcbind
     installed: false
     meta:
@@ -26,8 +26,7 @@ package:
       {{ if .Vars.ubtu24cis_rpc_mask }}
 file:
   rpcbind_service_masked:
-    title: 2.1.12 | Ensure rpc services are not in use | masked
-    path: /etc/systemd/system/rpcbind.service
+    title: 2.1.12 | Ensure rpc serEnsure rpcbind services are not in usec/systemd/system/rpcbind.service
     exists: true
     filetype: symlink
     linked-to: /dev/null
@@ -45,8 +44,7 @@ file:
       - CM-6
       - CM-7
   rpcbind_socket_masked:
-    title: 2.1.12 | Ensure rpc services are not in use | masked
-    path: /etc/systemd/system/rpcbind.socket
+    title: 2.1.12 | Ensure rpc servicesEnsure rpcbind services are not in usetemd/system/rpcbind.socket
     exists: true
     filetype: symlink
     linked-to: /dev/null

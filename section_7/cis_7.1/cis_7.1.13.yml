@@ -5,7 +5,7 @@
     {{ if .Vars.ubtu24cis_rule_7_1_13 }}
 command:
   audit_sgid:
-    title: 7.1.13 | Ensure SUID and SGID files are reviewed | Manual
+    title: 7.1.13 | Ensure SUID and SGID files are reviewed
     exec: "df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type f -perm -02000 -o -perm -04000"
     timeout: {{ .Vars.timeout_ms }}
     exit-status:

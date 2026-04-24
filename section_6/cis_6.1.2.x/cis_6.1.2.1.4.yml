@@ -5,7 +5,7 @@
     {{ if not .Vars.ubtu24cis_is_syslog_server }}
 service:
   systemd-journal-remote.service:
-    title: 6.1.2.1.4 | Ensure systemd-journal-remote service is not in use | service
+    title: 6.1.2.1.4 | Ensure systemd-journal-remote service is not in use
     running: false
     # enabled: false  # managed by socket so seen as indirect although not enabled - goss issue
     meta:
@@ -24,8 +24,7 @@ service:
       - AU-7
       - AU-12
   systemd-journal-remote.socket:
-    title: 6.1.2.1.4 | Ensure systemd-journal-remote service is not in use | socket
-    running: false
+    title: 6.1.2.1.4 | Ensure sysEnsure systemd-journal-remote service is not in useng: false
     enabled: false
     meta:
       server: 1
@@ -44,8 +43,7 @@ service:
       - AU-12
 command:
   journald_service_masked:
-    title: 6.1.2.1.4 | Ensure systemd-journal-remote service is not in use | service masked
-    exec: systemctl is-enabled systemd-journal-remote.socket
+    title: 6.1.2.1.4 | Ensure systemd-jourEnsure systemd-journal-remote service is not in usel is-enabled systemd-journal-remote.socket
     exit-status: 1
     stdout:
     - '/^masked/'
@@ -65,8 +63,7 @@ command:
       - AU-7
       - AU-12
   journald_socket_masked:
-    title: 6.1.2.1.4 | Ensure systemd-journal-remote service is not in use | socket masked
-    exec: systemctl is-enabled systemd-journal-remote.socket
+    title: 6.1.2.1.4 | Ensure systemd-journal-remote servicEnsure systemd-journal-remote service is not in useemd-journal-remote.socket
     exit-status: 1
     stdout:
     - '/^masked/'

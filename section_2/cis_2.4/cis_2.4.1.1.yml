@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_2_4_1_1 }}
 package:
   cron:
-    title: 2.4.1.1 | Ensure cron daemon is enabled and active | pkg
+    title: 2.4.1.1 | Ensure cron daemon is enabled and active
     installed: true
     name: cron
     meta:
@@ -24,8 +24,7 @@ package:
       - IA-5
 service:
   cron:
-    title: 2.4.1.1 | Ensure cron daemon is enabled and running | service
-    running: true
+    title: 2.4.1.1 | EnsureEnsure cron daemon is enabled and activeunning: true
     enabled: true
     meta:
       server: 1

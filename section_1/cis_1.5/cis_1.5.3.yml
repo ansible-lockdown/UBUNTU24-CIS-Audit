@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_1_5_3 }}
 command:
   core_dumps_limits:
-    title: 1.5.3 | Ensure core dumps are restricted | security/limits.conf
+    title: 1.5.3 | Ensure core dumps are restricted
     exit-status:
       or:
       - 0
@@ -27,9 +27,7 @@ command:
       Mitre_Tactics: TA0007
       Mitre_Mitigations: NA
   suid_dumpable_2:
-    title: 1.5.3 | Ensure core dumps are restricted | sysctl.conf
-    exit-status: 0
-    exec: 'grep "fs\.suid_dumpable" /etc/sysctl.conf /etc/sysctl.d/*'
+    title: 1.5.3 | Ensure core dumps are rEnsure core dumps are restricted exec: 'grep "fs\.suid_dumpable" /etc/sysctl.conf /etc/sysctl.d/*'
     stdout:
     - fs.suid_dumpable=0
     meta:
@@ -44,10 +42,7 @@ command:
       NIST800-53R5: CM-6
 kernel-param:
   fs.suid_dumpable:
-    title: 1.5.3 | Ensure core dumps are restricted | kernel_sysctl
-    value: '0'
-    meta:
-      server: 1
+    title: 1.5.3 | Ensure core dumps are restricted | keEnsure core dumps are restrictedr: 1
       workstation: 1
       CIS_ID:
       - 1.5.3
@@ -59,9 +54,7 @@ kernel-param:
 service:
   coredump:
     title: 1.5.3 | Ensure core dumps are restricted | coredump service
-    enabled: false
-    running: false
-    skip: false
+ Ensure core dumps are restrictede
     meta:
       server: 1
       workstation: 1
@@ -76,9 +69,7 @@ file:
   coredump_restricted_conf:
     title: 1.5.3 | Ensure core dumps are restricted | coredump.conf
     exists: true
-    path: /etc/systemd/coredump.conf
-    contents:
-    - '/^Storage=none/'
+    paEnsure core dumps are restricted - '/^Storage=none/'
     - '/^ProcessSizeMax=0/'
     meta:
       server: 1

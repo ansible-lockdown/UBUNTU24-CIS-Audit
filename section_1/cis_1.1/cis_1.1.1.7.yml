@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_1_1_1_7 }}
 file:
   squashfs_disabled:
-    title: 1.1.1.7 | Ensure squashfs kernel module is not available | modprobe
+    title: 1.1.1.7 | Ensure squashfs kernel module is not available
     path: /etc/modprobe.d/CIS.conf
     exists: true
     {{ if .Vars.ubtu24cis_squashfs_skip }}
@@ -23,8 +23,7 @@ file:
       CISv8_IG3: true
       NIST800-53R5: CM-7
   squashfs_blacklist:
-    title: 1.1.1.7 | Ensure squashfs kernel module is not available | blacklist
-    path: /etc/modprobe.d/blacklist.conf
+    title: 1.1.1.7 | Ensure squaEnsure squashfs kernel module is not available/etc/modprobe.d/blacklist.conf
     exists: true
     {{ if .Vars.ubtu24cis_squashfs_skip }}
     skip: true

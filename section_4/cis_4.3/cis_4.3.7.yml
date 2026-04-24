@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_4_3_7 }}
 command:
   nft_conns:
-    title: 4.3.7 | Ensure nftables outbound and established connections are configured | Manual
+    title: 4.3.7 | Ensure nftables outbound and established connections are configured
     exec: echo "Manual - Please confirm nfttables connections are configured and matched site policy"
     exit-status: 0
     stdout:

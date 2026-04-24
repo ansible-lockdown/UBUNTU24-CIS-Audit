@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_3_3_2 }}
 kernel-param:
   net.ipv4.conf.all.send_redirects:
-    title: 3.3.2 | Ensure packet redirect sending is disabled | all send_redirect
+    title: 3.3.2 | Ensure packet redirect sending is disabled
     value: '0'
     meta:
       server: 1
@@ -23,9 +23,7 @@ kernel-param:
       - CM-7
       - IA-5
   net.ipv4.conf.default.send_redirects:
-    title: 3.3.2 | Ensure packet redirect sending is disabled | default send_redirects
-    value: '0'
-    meta:
+    title: 3.3.2 | Ensure packet redireEnsure packet redirect sending is disabledmeta:
       server: 1
       workstation: 1
       CIS_ID:
@@ -43,8 +41,7 @@ kernel-param:
       - IA-5
 command:
   ipv4_disable_all_redirect:
-    title: 3.3.2 | Ensure packet redirect sending is disabled | all send_redirect config
-    exec: grep -E "^\s*net\.ipv4\.conf\.all\.send_redirects" /etc/sysctl.conf /etc/sysctl.d/*
+    title: 3.3.2 | Ensure packet redirect sending is disabled | Ensure packet redirect sending is disabled.send_redirects" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0
@@ -68,8 +65,7 @@ command:
       - CM-7
       - IA-5
   ipv4_disable_def_redirect:
-    title: 3.3.2 | Ensure packet redirect sending is disabled | default send_redirect config
-    exec: grep -E "^\s*net\.ipv4\.conf\.default\.send_redirects" /etc/sysctl.conf /etc/sysctl.d/*
+    title: 3.3.2 | Ensure packet redirect sending is disabled | default send_redirect confiEnsure packet redirect sending is disabledysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0

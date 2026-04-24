@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_6_2_3_7 }}
 command:
   auditd_access_cnf:
-    title: 6.2.3.7 | Ensure unsuccessful unauthorized file access attempts are collected | Conf
+    title: 6.2.3.7 | Ensure unsuccessful file access attempts are collected
     exec: sh -c "grep auid /etc/audit/rules.d/*.rules"
     exit-status: 0
     stdout:
