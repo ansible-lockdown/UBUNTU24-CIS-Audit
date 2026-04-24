@@ -5,7 +5,6 @@
 command:
   ufw_outbound:
     title: 4.2.5 | Ensure ufw outbound connections are configured | Manual
-
     exec: echo "Manual - Please confirm firewall outbound Policies match site policies"
     exit-status: 0
     stdout:

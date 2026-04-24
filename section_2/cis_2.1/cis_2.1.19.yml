@@ -7,7 +7,6 @@
 package:
   xinetd_pkg:
     title: 2.1.19 | Ensure xinetd services are not in use | pkg removed
-
     name: xinetd
     installed: false
     meta:
@@ -27,7 +26,6 @@ package:
 file:
   xinetd_service_masked:
     title: 2.1.19 | Ensure xinetd services are not in use | masked
-
     path: /etc/systemd/system/xinetd.service
     exists: true
     filetype: symlink

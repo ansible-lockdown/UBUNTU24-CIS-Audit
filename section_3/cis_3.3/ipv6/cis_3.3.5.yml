@@ -5,7 +5,6 @@
 kernel-param:
   net.ipv6.conf.all.accept_redirects:
     title: 3.3.5 | Ensure icmp redirects are not accepted | ipv6 all icmp redirects
-
     value: '0'
     meta:
       server: 1
@@ -25,7 +24,6 @@ kernel-param:
       - IA-5
   net.ipv6.conf.default.accept_redirects:
     title: 3.3.5 | Ensure icmp redirects are not accepted | ipv6 default icmp redirects
-
     value: '0'
     meta:
       server: 1
@@ -46,7 +44,6 @@ kernel-param:
 command:
   ipv6_all_icmp_redirects:
     title: 3.3.5 | Ensure icmp redirects are not accepted | ipv6 all icmp redirects conf
-
     exec: grep "net\.ipv6\.conf\.all\.accept_redirects" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
@@ -72,7 +69,6 @@ command:
       - IA-5
   ipv6_def_icmp_redirects:
     title: 3.3.5 | Ensure icmp redirects are not accepted | ipv6 def icmp redirects conf
-
     exec: grep "net\.ipv6\.conf\.default\.accept_redirects" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:

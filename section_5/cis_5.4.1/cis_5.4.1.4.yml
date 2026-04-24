@@ -5,7 +5,6 @@
 file:
   yescrypt_login_defs:
     title: 5.4.1.4 | Ensure strong password hashing algorithm is configured | common password
-
     path: /etc/login.defs
     exists: true
     contents:

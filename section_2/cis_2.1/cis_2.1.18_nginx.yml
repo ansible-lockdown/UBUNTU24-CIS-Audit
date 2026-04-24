@@ -7,7 +7,6 @@
 package:
   nginx_pkg:
     title: 2.1.18 | Ensure web server services are not in use | pkg removed
-
     name: nginx
     installed: false
     meta:
@@ -27,7 +26,6 @@ package:
 file:
   nginx_service_masked:
     title: 2.1.18 | Ensure web server services are not in use | masked
-
     path: /etc/systemd/system/nginx.service
     exists: true
     filetype: symlink

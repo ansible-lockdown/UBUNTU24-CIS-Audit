@@ -7,7 +7,6 @@
 package:
   ldap_pkg:
     title: 2.1.7 | Ensure ldap server services are not in use | pkg removed
-
     name: slapd
     installed: false
     meta:
@@ -27,7 +26,6 @@ package:
 file:
   ldap_service_masked:
     title: 2.1.7 | Ensure ldap server services are not in use | masked
-
     path: /etc/systemd/system/slapd.service
     exists: true
     filetype: symlink

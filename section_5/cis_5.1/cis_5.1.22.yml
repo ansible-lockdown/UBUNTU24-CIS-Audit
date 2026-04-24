@@ -5,7 +5,6 @@
 file:
   ssh_usepam:
     title: 5.1.22 | Ensure sshd UsePAM is enabled
-
     path: /etc/ssh/sshd_config
     exists: true
     contents:

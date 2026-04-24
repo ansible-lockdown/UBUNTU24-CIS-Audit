@@ -5,7 +5,6 @@
 command:
   usermod_module_cnf:
     title: 6.2.3.18 | Ensure successful and unsuccessful attempts to use the usermod command are collected | Config
-
     exec: grep usermod /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -26,7 +25,6 @@ command:
       - SI-5
   usermod_module_live:
     title: 6.2.3.18 | Ensure successful and unsuccessful attempts to use the usermod command are collected | Live
-
     exec: auditctl -l | grep usermod
     exit-status: 0
     stdout:

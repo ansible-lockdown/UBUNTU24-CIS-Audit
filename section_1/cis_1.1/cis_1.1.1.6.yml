@@ -5,7 +5,6 @@
 file:
   overlayfs_disabled:
     title: 1.1.1.6 | Ensure overlayfs kernel module is not available | modprobe
-
     path: /etc/modprobe.d/CIS.conf
     exists: true
     contents:
@@ -22,7 +21,6 @@ file:
       NIST800-53R5: CM-7
   overlayfs_blacklist:
     title: 1.1.1.6 | Ensure overlayfs kernel module is not available | blacklist
-
     path: /etc/modprobe.d/blacklist.conf
     exists: true
     contents:

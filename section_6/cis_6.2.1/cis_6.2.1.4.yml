@@ -5,7 +5,6 @@
 command:
   auditd_grub_backlog:
     title: 6.2.1.4 | Ensure audit_backlog_limit is sufficient | bootloader file
-
     exec: grep "^\s*linux" /boot/grub/grub.cfg | grep -Evc "audit_backlog_limit="
     exit-status: 1
     stdout:
@@ -27,7 +26,6 @@ command:
 file:
   grub_audit_backlog:
     title: 6.2.1.4 | Ensure audit_backlog_limit is sufficient | default grub
-
     path: /etc/default/grub
     exists: true
     contents:

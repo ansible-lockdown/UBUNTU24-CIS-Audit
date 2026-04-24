@@ -7,7 +7,6 @@
 package:
   rpcbind_pkg:
     title: 2.1.12 | Ensure rpcbind services are not in use | pkg removed
-
     name: rpcbind
     installed: false
     meta:
@@ -28,7 +27,6 @@ package:
 file:
   rpcbind_service_masked:
     title: 2.1.12 | Ensure rpcbind services are not in use | masked
-
     path: /etc/systemd/system/rpcbind.service
     exists: true
     filetype: symlink
@@ -48,7 +46,6 @@ file:
       - CM-7
   rpcbind_socket_masked:
     title: 2.1.12 | Ensure rpcbind services are not in use | masked
-
     path: /etc/systemd/system/rpcbind.socket
     exists: true
     filetype: symlink

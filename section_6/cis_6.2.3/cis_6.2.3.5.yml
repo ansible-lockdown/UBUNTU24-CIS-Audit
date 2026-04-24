@@ -5,7 +5,6 @@
 command:
   auditd_locale_cnf:
     title: 6.2.3.5 | Ensure events that modify the system's network environment are collected | Config
-
     exec: grep system-locale /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -32,7 +31,6 @@ command:
       - CM-6
   auditd_locale_live:
     title: 6.2.3.5 | Ensure events that modify the system's network environment are collected | Live
-
     exec: auditctl -l | grep system-locale
     exit-status: 0
     stdout:

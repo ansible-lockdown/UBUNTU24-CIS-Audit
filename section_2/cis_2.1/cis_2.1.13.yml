@@ -7,7 +7,6 @@
 package:
   rsync_pkg:
     title: 2.1.13 | Ensure rsync services are not in use | pkg removed
-
     name: rsync
     installed: false
     meta:
@@ -28,7 +27,6 @@ package:
 file:
   rsync_service_masked:
     title: 2.1.13 | Ensure rsync services are not in use | masked
-
     path: /etc/systemd/system/rsync.service
     exists: true
     filetype: symlink

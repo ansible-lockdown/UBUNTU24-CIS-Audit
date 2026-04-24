@@ -5,7 +5,6 @@
 command:
   setfacl_module_cnf:
     title: 6.2.3.16 | Ensure successful and unsuccessful attempts to use the setfacl command are collected | Config
-
     exec: grep setfacl /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -26,7 +25,6 @@ command:
       - SI-5
   setfacl_module_live:
     title: 6.2.3.16 | Ensure successful and unsuccessful attempts to use the setfacl command are collected | Live
-
     exec: auditctl -l | grep setfacl
     exit-status: 0
     stdout:

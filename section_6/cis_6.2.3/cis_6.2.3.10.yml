@@ -5,7 +5,6 @@
 command:
   auditd_mounts_cnf:
     title: 6.2.3.10 | Ensure successful file system mounts are collected | Config
-
     exec: grep mounts /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -25,7 +24,6 @@ command:
       - CM-6
   auditd_mounts_live:
     title: 6.2.3.10 | Ensure successful file system mounts are collected | Live
-
     exec: auditctl -l | grep mounts
     exit-status: 0
     stdout:

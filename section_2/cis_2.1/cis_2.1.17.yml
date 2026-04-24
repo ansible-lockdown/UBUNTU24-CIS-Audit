@@ -7,7 +7,6 @@
 package:
   squid_pkg:
     title: 2.1.17 | Ensure web proxy server services are not in use | pkg removed
-
     name: squid
     installed: false
     meta:
@@ -28,7 +27,6 @@ package:
 file:
   squid_service_masked:
     title: 2.1.17 | Ensure web proxy server services are not in use | masked
-
     path: /etc/systemd/system/squid.service
     exists: true
     filetype: symlink

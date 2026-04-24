@@ -5,7 +5,6 @@
 command:
   auditd_sudolog_chg:
     title: 6.2.3.3 | Ensure events that modify the sudo log file are collected | Config
-
     exec: grep sudo_log_file /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -23,7 +22,6 @@ command:
       NIST800-53R5: NA
   auditd_sudolog_chg_live:
     title: 6.2.3.3 | Ensure events that modify the sudo log file are collected | Live
-
     exec: auditctl -l | grep sudo_log_file
     exit-status: 0
     stdout:

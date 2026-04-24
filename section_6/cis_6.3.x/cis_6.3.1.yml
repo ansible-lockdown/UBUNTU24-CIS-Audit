@@ -6,7 +6,6 @@
 package:
   aide:
     title: 6.3.1 | Ensure AIDE is installed | aide pkg
-
     installed: true
     meta:
       server: 1
@@ -20,7 +19,6 @@ package:
       - AU-2
   aide-common:
     title: 6.3.1 | Ensure AIDE is installed | aide-common pkg
-
     installed: true
     meta:
       server: 1

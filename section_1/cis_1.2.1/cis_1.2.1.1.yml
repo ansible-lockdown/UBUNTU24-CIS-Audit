@@ -6,7 +6,6 @@
 command:
   gpg_keys_list:
     title: 1.2.1.1 | Ensure GPG keys are configured | Manual
-
     exit-status: 0
     exec: echo "MANUAL - Please check manually for gpg keys"
     stdout:

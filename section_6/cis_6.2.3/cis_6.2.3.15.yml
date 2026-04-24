@@ -5,7 +5,6 @@
 command:
   chcon_module_cnf:
     title: 6.2.3.15 | Ensure successful and unsuccessful attempts to use the chcon command are collected | Config
-
     exec: grep chcon /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -26,7 +25,6 @@ command:
       - SI-5
   chcon_module_live:
     title: 6.2.3.15 | Ensure successful and unsuccessful attempts to use the chcon command are collected | Live
-
     exec: auditctl -l | grep chcon
     exit-status: 0
     stdout:

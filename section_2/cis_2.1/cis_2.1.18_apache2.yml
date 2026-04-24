@@ -7,7 +7,6 @@
 package:
   apache2_pkg:
     title: 2.1.18 | Ensure web server services are not in use | pkg removed
-
     name: apache2
     installed: false
     meta:
@@ -27,7 +26,6 @@ package:
 file:
   apache2_service_masked:
     title: 2.1.18 | Ensure web server services are not in use | masked
-
     path: /etc/systemd/system/apache2.service
     exists: true
     filetype: symlink
@@ -46,7 +44,6 @@ file:
       - CM-7
   apache2_socket_masked:
     title: 2.1.18 | Ensure web server services are not in use | masked
-
     path: /etc/systemd/system/apache2.socket
     exists: true
     filetype: symlink

@@ -5,7 +5,6 @@
 package:
   iptables:
     title: 4.4.1.1 | Ensure iptables packages are installed | iptables pkg
-
     installed: true
     meta:
       server: 1
@@ -23,7 +22,6 @@ package:
       - SC-7
   iptables-persistent:
     title: 4.4.1.1 | Ensure iptables packages are installed | iptables-persistent pkg
-
     installed: true
     meta:
       server: 1

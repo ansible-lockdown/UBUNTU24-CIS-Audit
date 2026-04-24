@@ -5,7 +5,6 @@
 kernel-param:
   net.ipv4.conf.all.send_redirects:
     title: 3.3.2 | Ensure packet redirect sending is disabled | all send_redirect
-
     value: '0'
     meta:
       server: 1
@@ -25,7 +24,6 @@ kernel-param:
       - IA-5
   net.ipv4.conf.default.send_redirects:
     title: 3.3.2 | Ensure packet redirect sending is disabled | default send_redirects
-
     value: '0'
     meta:
       server: 1
@@ -46,7 +44,6 @@ kernel-param:
 command:
   ipv4_disable_all_redirect:
     title: 3.3.2 | Ensure packet redirect sending is disabled | all send_redirect config
-
     exec: grep -E "^\s*net\.ipv4\.conf\.all\.send_redirects" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
@@ -72,7 +69,6 @@ command:
       - IA-5
   ipv4_disable_def_redirect:
     title: 3.3.2 | Ensure packet redirect sending is disabled | default send_redirect config
-
     exec: grep -E "^\s*net\.ipv4\.conf\.default\.send_redirects" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:

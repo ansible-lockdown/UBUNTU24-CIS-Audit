@@ -5,7 +5,6 @@
 command:
   auditd_sessions_cnf:
     title: 6.2.3.11 | Ensure session initiation information is collected | Config
-
     exec: "grep -E '(session|logins)' /etc/audit/rules.d/*.rules"
     exit-status: 0
     stdout:
@@ -26,7 +25,6 @@ command:
       - AU-3
   auditd_session_live:
     title: 6.2.3.11 | Ensure session initiation information is collected | Live
-
     exec: "auditctl -l | grep -E '(session|logins)'"
     exit-status: 0
     stdout:

@@ -5,7 +5,6 @@
 command:
   auditd_logins_cnf:
     title: 6.2.3.12 | Ensure login and logout events are collected | Config
-
     exec: grep -R --include="*.rules" logins /etc/audit/rules.d/
     exit-status: 0
     stdout:
@@ -25,7 +24,6 @@ command:
       - AU-3
   auditd_logins_live:
     title: 6.2.3.12 | Ensure login and logout events are collected | Live
-
     exec: auditctl -l | grep logins
     exit-status: 0
     stdout:

@@ -5,7 +5,6 @@
 file:
   sshd_clientalive:
     title: 5.1.7 | Ensure sshd ClientAliveInterval and ClientAliveCountMax are configured
-
     path: /etc/ssh/sshd_config
     exists: true
     contents:

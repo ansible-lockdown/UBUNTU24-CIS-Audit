@@ -5,7 +5,6 @@
 file:
   etc_issue_perms:
     title: 1.6.5 | Ensure access to /etc/issue is configured
-
     exists: true
     path: /etc/issue
     owner: root

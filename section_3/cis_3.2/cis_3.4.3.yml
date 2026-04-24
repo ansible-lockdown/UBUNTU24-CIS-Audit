@@ -3,7 +3,6 @@
 command:
   modprobe_RDS:
     title: 3.2.3 | Ensure rds kernel module is not available | rds config
-
     exit-status:
       or:
       - 0
@@ -26,7 +25,6 @@ command:
       - SI-4
   lsmod_RDS:
     title: 3.2.3 | Ensure rds kernel module is not available | running rds
-
     exit-status: 1
     exec: lsmod | grep -i rds
     stdout:

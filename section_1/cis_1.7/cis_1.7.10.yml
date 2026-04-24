@@ -6,7 +6,6 @@
 file:
   gdm_xdcmp:
     title: 1.7.10 | Ensure XDMCP is not enabled
-
     path: /etc/gdm3/custom.conf
     exists: true
     contents:

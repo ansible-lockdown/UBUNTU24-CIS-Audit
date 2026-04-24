@@ -5,7 +5,6 @@
 command:
   compress_journald_conf:
     title: 6.1.2.3 | Ensure journald Compress is configured
-
     exec: grep -i Compress= /etc/systemd/journald.conf /etc/systemd/journald.conf.d/*.conf
     exit-status:
       or:

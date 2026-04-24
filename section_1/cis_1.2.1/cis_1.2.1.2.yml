@@ -5,7 +5,6 @@
 command:
   gpg_configd:
     title: 1.2.1.2 | Ensure package manager repositories are configured | Manual
-
     exec: echo "MANUAL - Please check manually that repositories are configured as expected"
     exit-status: 0
     stdout:

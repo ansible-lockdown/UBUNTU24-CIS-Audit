@@ -5,7 +5,6 @@
 command:
   nft_tables:
     title: 4.3.4 | Ensure a nftables table exists | Manual
-
     exec: echo "Manual - Please confirm nfttables table exists and matched site policy"
     exit-status: 0
     stdout:

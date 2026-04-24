@@ -7,7 +7,6 @@
 package:
   tftp_pkg:
     title: 2.1.16 | Ensure tftp server services are not in use | pkg removed
-
     name: tftpd-hpa
     installed: false
     meta:
@@ -27,7 +26,6 @@ package:
 file:
   tftp_service_masked:
     title: 2.1.16 | Ensure tftp server services are not in use | masked
-
     path: /etc/systemd/system/tftpd-hpa.service
     exists: true
     filetype: symlink
@@ -46,7 +44,6 @@ file:
       - CM-7
   tftp_socket_masked:
     title: 2.1.16 | Ensure tftp server services are not in use | masked
-
     path: /etc/systemd/system/tftp.socket
     exists: true
     filetype: symlink

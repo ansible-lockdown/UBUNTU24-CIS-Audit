@@ -5,7 +5,6 @@
 command:
   forward_journald_conf:
     title: 6.1.3.3 | Ensure journald is configured to send logs to rsyslog
-
     exec: grep -i forward /etc/systemd/journald.conf /etc/systemd/journald.conf.d/
     exit-status: 0
     stdout:

@@ -7,7 +7,6 @@
 package:
   ypserv_pkg:
     title: 2.1.10 | Ensure nis server services are not in use | pkg removed
-
     name: ypserv
     installed: false
     meta:
@@ -27,7 +26,6 @@ package:
 file:
   ypserv_service_masked:
     title: 2.1.10 | Ensure nis server services are not in use | masked
-
     path: /etc/systemd/system/ypserv-server.service
     exists: true
     filetype: symlink

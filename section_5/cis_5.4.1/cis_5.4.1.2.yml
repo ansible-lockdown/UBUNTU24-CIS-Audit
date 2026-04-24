@@ -5,7 +5,6 @@
 file:
   login_defs_PASS_MIN_DAYS:
     title: 5.4.1.2 | Ensure minimum password days is configured
-
     path: /etc/login.defs
     exists: true
     contents:
@@ -25,7 +24,6 @@ file:
 command:
   users_min_pw_expire:
     title: 5.4.1.1 | Ensure password expiration is configured | user_check
-
     exec: "awk -F: '(/^[^:]+:[^!*]/) {print $4}' /etc/shadow"
     exit-status:
       or:

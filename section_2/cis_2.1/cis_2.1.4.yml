@@ -7,7 +7,6 @@
 package:
   dns_pkg:
     title: 2.1.4 | Ensure dns server services are not in use | pkg removed
-
     name: bind9
     installed: false
     meta:
@@ -27,7 +26,6 @@ package:
 file:
   dns_service_masked:
     title: 2.1.4 | Ensure dns server services are not in use | masked
-
     path: /etc/systemd/system/bind9.service
     exists: true
     filetype: symlink

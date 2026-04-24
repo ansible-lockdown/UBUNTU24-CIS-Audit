@@ -7,7 +7,6 @@
 package:
   ftp_pkg:
     title: 2.1.6 | Ensure ftp server services are not in use | pkg removed
-
     name: vsftp
     installed: false
     meta:
@@ -27,7 +26,6 @@ package:
 file:
   ftp_service_masked:
     title: 2.1.6 | Ensure ftp server services are not in use | masked
-
     path: /etc/systemd/system/vsftpd.service
     exists: true
     filetype: symlink

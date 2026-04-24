@@ -6,7 +6,6 @@
 package:
   telnet:
     title: 2.2.4 | Ensure telnet client is not installed | telnet
-
     installed: false
     name: telnet
     meta:
@@ -23,7 +22,6 @@ package:
       - CM-11
   inetutils-telnet:
     title: 2.2.4 | Ensure telnet client is not installed | inetutils-telnet
-
     installed: false
     name: inetutils-telnet
     meta:

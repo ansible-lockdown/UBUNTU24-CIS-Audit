@@ -5,7 +5,6 @@
 package:
   libpam-modules:
     title: 5.3.1.2 | Ensure libpam-modules is installed
-
     installed: true
     versions:
       not:

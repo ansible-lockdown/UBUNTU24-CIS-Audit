@@ -5,7 +5,6 @@
 file:
   ssh_empty_passwd:
     title: 5.1.19 | Ensure sshd PermitEmptyPasswords is disabled
-
     path: /etc/ssh/sshd_config
     exists: true
     contents:

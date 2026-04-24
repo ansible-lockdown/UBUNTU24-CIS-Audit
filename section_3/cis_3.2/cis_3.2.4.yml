@@ -3,7 +3,6 @@
 command:
   modprobe_sctp:
     title: 3.2.4 | Ensure sctp kernel module is not available | sctp config
-
     exit-status: 0
     exec: 'modprobe -n -v sctp'
     stdout:
@@ -23,7 +22,6 @@ command:
       - SI-4
   lsmod_sctp:
     title: 3.2.4 | Ensure sctp kernel module is not available | running sctp
-
     exit-status: 1
     exec: lsmod | grep -i sctp
     stdout:

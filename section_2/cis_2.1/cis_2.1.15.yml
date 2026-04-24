@@ -7,7 +7,6 @@
 package:
   snmp_pkg:
     title: 2.1.15 | Ensure snmp services are not in use | pkg removed
-
     name: snmpd
     installed: false
     meta:
@@ -27,7 +26,6 @@ package:
 file:
   snmp_service_masked:
     title: 2.1.15 | Ensure snmp services are not in use | masked
-
     path: /etc/systemd/system/snmpd.service
     exists: true
     filetype: symlink

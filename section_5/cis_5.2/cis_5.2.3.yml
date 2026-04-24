@@ -5,7 +5,6 @@
 command:
   log_sudoers_d:
     title: 5.2.3 | Ensure sudo log file exists | sudoers.d
-
     exec: "grep -Ec '^Defaults logfile=/var/log/*.log' /etc/sudoers /etc/sudoers.d/.*/"
     exit-status:
       lt: 3

@@ -5,7 +5,6 @@
 command:
   bad_dot_files:
     title: 7.2.10 | Ensure local interactive user dot files access is configured | bad dot files
-
     exec: 'find /home/ -name "\.forward" -o -name "\.netrc" -o -name "\.rhosts"'
     exit-status: 0
     stdout:
@@ -27,7 +26,6 @@ command:
       - IA-5
   dot_file_perms:
     title: 7.2.10 | Ensure local interactive user dot files access is configured | dot files permissions
-
     exec: 'find /home/ -name "\.*" -perm /g+w,o+w | grep -v .bash_history'
     exit-status:
       or:
@@ -52,7 +50,6 @@ command:
       - IA-5
   dot_file_bash_history:
     title: 7.2.10 | Ensure local interactive user dot files access is configured | bash_history files permissions
-
     exec: 'find /home/ -name "\.bash_history" -perm /go+rwx'
     exit-status: 0
     stdout:

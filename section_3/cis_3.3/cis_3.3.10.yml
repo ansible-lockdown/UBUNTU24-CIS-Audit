@@ -5,7 +5,6 @@
 kernel-param:
   net.ipv4.tcp_syncookies:
     title: 3.3.10 | Ensure tcp syn cookies is enabled | ipv4 syncookies
-
     value: '1'
     meta:
       server: 1
@@ -26,7 +25,6 @@ kernel-param:
 command:
   ipv4_tcp_syncookies:
     title: 3.3.10 | Ensure tcp syn cookies is enabled | ipv4 syncookies conf
-
     exec: grep "net\.ipv4\.tcp_syncookies" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:

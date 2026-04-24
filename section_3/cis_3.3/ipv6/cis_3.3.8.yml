@@ -5,7 +5,6 @@
 kernel-param:
   net.ipv6.conf.all.accept_source_route:
     title: 3.3.8 | Ensure source routed packets are not accepted | IPv6 all source routed
-
     value: '0'
     meta:
       server: 1
@@ -25,7 +24,6 @@ kernel-param:
       - IA-5
   net.ipv6.conf.default.accept_source_route:
     title: 3.3.8 | Ensure source routed packets are not accepted | IPv6 default source routed
-
     value: '0'
     meta:
       server: 1
@@ -46,7 +44,6 @@ kernel-param:
 command:
   ipv6_all_source_route:
     title: 3.3.8 | Ensure source routed packets are not accepted | IPv6 all source routed conf
-
     exec: grep "net\.ipv6\.conf\.all\.accept_source_route" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
@@ -72,7 +69,6 @@ command:
       - IA-5
   ipv6_def_source_route:
     title: 3.3.8 | Ensure source routed packets are not accepted | IPv6 default source routed conf
-
     exec: grep "net\.ipv6\.conf\.default\.accept_source_route" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:

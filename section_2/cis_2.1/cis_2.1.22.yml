@@ -3,7 +3,6 @@
 command:
   manual_listening_ports:
     title: 2.1.22 | Ensure only approved services are listening on a network interface | Manual Check required
-
     exit-status:
       or:
       - 0

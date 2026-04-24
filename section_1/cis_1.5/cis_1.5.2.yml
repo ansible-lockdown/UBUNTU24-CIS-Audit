@@ -5,7 +5,6 @@
 kernel-param:
   kernel.yama.ptrace_scope:
     title: 1.5.2 | Ensure ptrace_scope is restricted | sysctl_live
-
     value: '1'
     meta:
       server: 1
@@ -20,7 +19,6 @@ kernel-param:
 command:
   ptrace_restrict_2:
     title: 1.5.2 | Ensure ptrace_scope is restricted | sysctl_configured
-
     exit-status:
       or:
       - 0

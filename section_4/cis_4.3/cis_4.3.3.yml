@@ -5,7 +5,6 @@
 command:
   iptables_flushed:
     title: 4.3.3 | Ensure iptables are flushed with nftables | iptable IPv4 flushed
-
     exec: iptables -L
     exit-status:
       or:
@@ -29,7 +28,6 @@ command:
       - SC-7
   ip6tables_flushed:
     title: 4.3.3 | Ensure iptables are flushed with nftables | iptable IPv4 flushed
-
     exec: ip6tables -L
     exit-status:
       or:

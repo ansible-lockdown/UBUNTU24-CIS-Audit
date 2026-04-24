@@ -7,7 +7,6 @@
 package:
   nfs_pkg:
     title: 2.1.9 | Ensure network file system services are not in use | pkg removed
-
     name: nfs-kernel-server
     installed: false
     meta:
@@ -28,7 +27,6 @@ package:
 file:
   nfs_service_masked:
     title: 2.1.9 | Ensure network file system services are not in use | masked
-
     path: /etc/systemd/system/nfs-server.service
     exists: true
     filetype: symlink

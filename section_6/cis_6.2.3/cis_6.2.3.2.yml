@@ -5,7 +5,6 @@
 command:
   auditd_sudo_actions:
     title: 6.2.3.2 | Ensure actions as another user are always logged | Config
-
     exec: grep user_emulation /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -25,7 +24,6 @@ command:
       - AU-3
   auditd_sudo_actions_live:
     title: 6.2.3.2 | Ensure actions as another user are always logged | Live
-
     exec: auditctl -l | grep user_emulation
     exit-status: 0
     stdout:

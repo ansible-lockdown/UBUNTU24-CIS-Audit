@@ -5,7 +5,6 @@
 command:
   auditd_config_match:
     title: 6.2.3.21 | Ensure the running and on disk configuration is the same
-
     exec: augenrules --check
     exit-status: 0
     stdout:

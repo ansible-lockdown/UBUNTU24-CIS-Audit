@@ -7,7 +7,6 @@
 package:
   avahi_pkg:
     title: 2.1.2 | Ensure avahi daemon services are not in use | pkg removed
-
     name: avahi
     installed: false
     meta:
@@ -27,7 +26,6 @@ package:
 file:
   avahi_socket_masked:
     title: 2.1.2 | Ensure avahi daemon services are not in use | masked
-
     path: /etc/systemd/system/avahi-daemon.socket
     exists: true
     filetype: symlink
@@ -46,7 +44,6 @@ file:
       - SI-4
   avahi_service_masked:
     title: 2.1.2 | Ensure avahi daemon services are not in use | masked
-
     path: /etc/systemd/system/avahi-daemon.service
     exists: true
     filetype: symlink

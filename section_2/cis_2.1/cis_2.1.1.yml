@@ -7,7 +7,6 @@
 package:
   autofs_pkg:
     title: 2.1.1 | Ensure autofs services are not in use | pkg removed
-
     name: autofs
     installed: false
     meta:
@@ -28,7 +27,6 @@ package:
 file:
   autofs_masked:
     title: 2.1.1 | Ensure autofs services are not in use | masked
-
     path: /etc/systemd/system/autofs.service
     exists: true
     filetype: symlink

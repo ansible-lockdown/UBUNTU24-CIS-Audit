@@ -5,7 +5,6 @@
 command:
   wireless_disabled:
     title: 3.1.2 | Ensure wireless interfaces are disabled | MANUAL
-
     exit-status: 0
     exec: "if [ $(find /sys/class/net/*/ -type d -name wireless) ]; then echo MANUAL; else echo OK; fi"
     stdout:

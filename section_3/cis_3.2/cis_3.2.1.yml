@@ -5,7 +5,6 @@
 command:
   modprobe_dccp:
     title: 3.2.1 | Ensure dccp kernel module is not available | DCCP config
-
     exit-status: 0
     exec: 'modprobe -n -v dccp'
     stdout:
@@ -25,7 +24,6 @@ command:
       - SI-4
   lsmod_dccp:
     title: 3.2.1 | Ensure dccp kernel module is not available | running dccp
-
     exit-status: 1
     exec: lsmod | grep -i dccp
     stdout:

@@ -3,7 +3,6 @@
 kernel-param:
   net.ipv4.conf.all.secure_redirects:
     title: 3.3.6 | Ensure secure icmp redirects are not accepted | ipv4 all sec redirects
-
     value: '0'
     meta:
       server: 1
@@ -23,7 +22,6 @@ kernel-param:
       - IA-5
   net.ipv4.conf.default.secure_redirects:
     title: 3.3.6 | Ensure secure icmp redirects are not accepted | ipv4 def sec redirects
-
     value: '0'
     meta:
       server: 1
@@ -44,7 +42,6 @@ kernel-param:
 command:
   ipv4_all_sec_redirects:
     title: 3.3.6 | Ensure secure icmp redirects are not accepted | ipv4 all sec redirects conf
-
     exec: grep "net\.ipv4\.conf\.all\.secure_redirects" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
@@ -70,7 +67,6 @@ command:
       - IA-5
   ipv4_def_sec_redirects:
     title: 3.3.6 | Ensure secure icmp redirects are not accepted | ipv4 all def redirects conf
-
     exec: grep "net\.ipv4\.conf\.default\.secure_redirects" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:

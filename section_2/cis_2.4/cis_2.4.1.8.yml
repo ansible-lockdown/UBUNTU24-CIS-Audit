@@ -5,7 +5,6 @@
 file:
   cron_deny_absent:
     title: 2.4.1.8 | Ensure crontab is restricted to authorized users
-
     path: /etc/cron.deny
     exists: false
     meta:
@@ -22,7 +21,6 @@ file:
       - MP-2
   /etc/cron.allow:
     title: 2.4.1.8 | Ensure crontab is restricted to authorized users
-
     exists: true
     owner: root
     group: root

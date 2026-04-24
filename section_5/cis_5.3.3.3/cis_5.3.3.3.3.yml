@@ -3,7 +3,6 @@
 file:
   pwhistory_use_authtok:
     title: 5.3.3.3.2 | Ensure password history is enforced for the root user | common-password
-
     path: /etc/pam.d/common-password
     exists: true
     contents:
@@ -21,7 +20,6 @@ file:
 command:
   pwhistory_use_authtok_pam_configs:
     title: 5.3.3.3.2 | Ensure password history is enforced for the root user | pam_configs
-
     exec: for file in `awk '/Password-Type:/{ f = 1;next } /-Type:/{ f = 0 } f {if (/pam_pwhistory\.so/) print FILENAME}' /usr/share/pam-configs/*`; do grep pam_pwhistory $file | grep -v use_authtok; done
     exit-status:
       or:

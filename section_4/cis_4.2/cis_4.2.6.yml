@@ -5,7 +5,6 @@
 command:
   ufw_open_ports:
     title: 4.2.6 | Ensure ufw firewall rules exist for all open ports | Manual
-
     exec: echo "Manual - Please confirm firewall rules exist for open ports match site policies"
     exit-status: 0
     stdout:
