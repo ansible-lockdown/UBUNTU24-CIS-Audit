@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_5_4_1_4 }}
 file:
   yescrypt_login_defs:
-    title: 5.4.1.4 | Ensure strong password hashing algorithm is configured
+    title: 5.4.1.4 | Ensure strong password hashing algorithm is configured | common password
+
     path: /etc/login.defs
     exists: true
     contents:

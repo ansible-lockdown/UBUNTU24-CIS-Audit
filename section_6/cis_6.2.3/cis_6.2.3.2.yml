@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_6_2_3_2 }}
 command:
   auditd_sudo_actions:
-    title: 6.2.3.2 | Ensure actions as another user are always logged
+    title: 6.2.3.2 | Ensure actions as another user are always logged | Config
+
     exec: grep user_emulation /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
@@ -23,7 +24,9 @@ command:
       NIST800-53R5:
       - AU-3
   auditd_sudo_actions_live:
-    title: 6.2.3.2 | Ensure acEnsure actions as another user are always logged: auditctl -l | grep user_emulation
+    title: 6.2.3.2 | Ensure actions as another user are always logged | Live
+
+    exec: auditctl -l | grep user_emulation
     exit-status: 0
     stdout:
     - '/-a always,exit -F arch=b64 -S execve -C uid!=euid -F auid!=(unset|4294967295|-1) -F key=user_emulation/'

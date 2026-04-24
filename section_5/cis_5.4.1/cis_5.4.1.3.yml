@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_5_4_1_3 }}
 file:
   login_def_PASS_WARN_AGE:
-    title: 5.4.1.3 | Ensure password expiration warning days is configured
+    title: 5.4.1.3 | Ensure password expiration warning days is configured | logins.def
+
     path: /etc/login.defs
     exists: true
     contents:
@@ -22,7 +23,9 @@ file:
       NIST800-53R5: NA
 command:
   user_expire_warn:
-    title: 5.4.1.3 | Ensure passwoEnsure password expiration warning days is configuredwk -F: '(/^[^:]+:[^!*]/) {print $6}' /etc/shadow"
+    title: 5.4.1.3 | Ensure password expiration warning days is configured | user_warning
+
+    exec: "awk -F: '(/^[^:]+:[^!*]/) {print $6}' /etc/shadow"
     exit-status:
       or:
       - 0

@@ -5,6 +5,7 @@
 file:
   sshd_ciphers:
     title: 5.1.6 | Ensure sshd Ciphers are configured
+
     path: /etc/ssh/sshd_config
     exists: true
     contents:

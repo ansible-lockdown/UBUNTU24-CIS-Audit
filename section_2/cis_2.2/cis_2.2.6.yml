@@ -21,7 +21,8 @@ package:
       - CM-7
       - CM-11
   tnftp_client:
-    title: 2.2.6 | Ensure ftp client is not installed
+    title: 2.2.6 | Ensure ftp client is not installed | tnftp
+
     installed: false
     name: tnftp
     meta:

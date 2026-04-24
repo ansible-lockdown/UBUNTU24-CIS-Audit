@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_3_3_3 }}
 kernel-param:
   net.ipv4.icmp_ignore_bogus_error_responses:
-    title: 3.3.3 | Ensure bogus icmp responses are ignored
+    title: 3.3.3 | Ensure bogus icmp responses are ignored | ignore bogus icmp
+
     value: '1'
     meta:
       server: 1
@@ -24,7 +25,9 @@ kernel-param:
       - IA-5
 command:
   ipv4_ignore_bogus:
-    title: 3.3.3 | Ensure bogus ICMP reEnsure bogus icmp responses are ignored.ipv4.icmp_ignore_bogus_error_responses" /etc/sysctl.conf /etc/sysctl.d/*
+    title: 3.3.3 | Ensure bogus icmp responses are ignored | ignore bogus icmp conf
+
+    exec: grep "net.ipv4.icmp_ignore_bogus_error_responses" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0

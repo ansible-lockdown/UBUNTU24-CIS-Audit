@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_1_5_1 }}
 kernel-param:
   kernel.randomize_va_space:
-    title: 1.5.1 | Ensure address space layout randomization is enabled
+    title: 1.5.1 | Ensure address space layout randomization is enabled | sysctl_live
+
     value: '2'
     meta:
       server: 1
@@ -18,7 +19,10 @@ kernel-param:
       NIST800-53R5: CM-6
 command:
   aslr_enabled_2:
-    title: 1.5.1 | Ensure address space Ensure address space layout randomization is enabled   or:
+    title: 1.5.1 | Ensure address space layout randomization is enabled | sysctl_configured
+
+    exit-status:
+      or:
       - 0
       - 2
     exec: 'grep "^kernel\.randomize_va_space" /etc/sysctl.conf /etc/sysctl.d/* | cut -d ":" -f2'

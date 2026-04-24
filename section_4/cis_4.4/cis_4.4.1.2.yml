@@ -5,6 +5,7 @@
 package:
   nftables:
     title: 4.4.1.2 | Ensure nftables is not in use with iptables
+
     installed: false
     meta:
       server: 1

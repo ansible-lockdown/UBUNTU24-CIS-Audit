@@ -3,6 +3,7 @@
 command:
   pam_unix_use_authtok_pam_configs:
     title: 5.3.3.4.4 | Ensure pam_unix includes use_authtok
+
     exec: grep -PH -- '^\s*password\s+([^#\n\r]+)\s+pam_unix\.so\s+([^#\n\r]+\s+)?use_authtok\b' /etc/pam.d/common-password
     exit-status:
       or:

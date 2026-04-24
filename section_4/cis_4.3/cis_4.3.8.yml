@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_4_3_8 }}
 command:
   nft_def_deny:
-    title: 4.3.8 | Ensure nftables default deny firewall policy
+    title: 4.3.8 | Ensure nftables default deny firewall policy | Manual
+
     exec: echo "Manual - Please confirm nfttables default denies are configured and matched site policy"
     exit-status: 0
     stdout:

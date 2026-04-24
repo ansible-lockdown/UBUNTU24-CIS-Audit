@@ -3,6 +3,7 @@
 file:
   sshd_KEX:
     title: 5.1.12 | Ensure sshd KexAlgorithms is configured
+
     path: /etc/ssh/sshd_config
     exists: true
     contents:

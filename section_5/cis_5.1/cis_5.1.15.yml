@@ -5,6 +5,7 @@
 file:
   sshd_MACS:
     title: 5.1.15 | Ensure sshd MACs are configured
+
     path: /etc/ssh/sshd_config
     exists: true
     contents:

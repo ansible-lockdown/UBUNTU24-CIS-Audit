@@ -6,7 +6,8 @@
       {{ if not .Vars.ubtu24cis_xinetd_mask }}
 package:
   xinetd_pkg:
-    title: 2.1.19 | Ensure xinetd services are not in use
+    title: 2.1.19 | Ensure xinetd services are not in use | pkg removed
+
     name: xinetd
     installed: false
     meta:
@@ -25,7 +26,9 @@ package:
       {{ if .Vars.ubtu24cis_xinetd_mask }}
 file:
   xinetd_service_masked:
-    title: 2.1.19 | Ensure xinetd Ensure xinetd services are not in usec/systemd/system/xinetd.service
+    title: 2.1.19 | Ensure xinetd services are not in use | masked
+
+    path: /etc/systemd/system/xinetd.service
     exists: true
     filetype: symlink
     linked-to: /dev/null

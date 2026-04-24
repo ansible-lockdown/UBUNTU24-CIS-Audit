@@ -2,7 +2,8 @@
   {{ if .Vars.ubtu24cis_rule_5_3_3_3_2 }}
 file:
   pwhistory_enforce_for_root:
-    title: 5.3.3.3.2 | Ensure password history is enforced for the root user
+    title: 5.3.3.3.2 | Ensure password history is enforced for the root user | common-password
+
     path: /etc/pam.d/common-password
     exists: true
     contents:
@@ -19,7 +20,9 @@ file:
       NIST800-53R5: IA-5
 command:
   pwhistory_enforce_for_root_pam_configs:
-    title: 5.3.3.3.2 | Ensure password hiEnsure password history is enforced for the root usere in `awk '/Password-Type:/{ f = 1;next } /-Type:/{ f = 0 } f {if (/pam_pwhistory\.so/) print FILENAME}' /usr/share/pam-configs/*`; do grep pam_pwhistory $file | grep -v enforce_for_root; done
+    title: 5.3.3.3.2 | Ensure password history is enforced for the root user | pam_configs
+
+    exec: for file in `awk '/Password-Type:/{ f = 1;next } /-Type:/{ f = 0 } f {if (/pam_pwhistory\.so/) print FILENAME}' /usr/share/pam-configs/*`; do grep pam_pwhistory $file | grep -v enforce_for_root; done
     exit-status:
       or:
       - 0

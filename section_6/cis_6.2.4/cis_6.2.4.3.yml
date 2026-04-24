@@ -23,6 +23,7 @@ command:
       - AU-3
   audit_logfile_group:
     title: 6.2.4.3 | Ensure audit log files group owner is configured
+
     exec: for file in `grep ^log_file /etc/audit/auditd.conf | awk '{ print $NF }'`; do stat -Lc " %n_%G" $file; done
     exit-status: 0
     stdout:

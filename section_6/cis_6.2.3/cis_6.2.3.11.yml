@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_6_2_3_11 }}
 command:
   auditd_sessions_cnf:
-    title: 6.2.3.11 | Ensure session initiation information is collected
+    title: 6.2.3.11 | Ensure session initiation information is collected | Config
+
     exec: "grep -E '(session|logins)' /etc/audit/rules.d/*.rules"
     exit-status: 0
     stdout:
@@ -24,7 +25,9 @@ command:
       NIST800-53R5:
       - AU-3
   auditd_session_live:
-    title: 6.2.3.11 | Ensure seEnsure session initiation information is collected: "auditctl -l | grep -E '(session|logins)'"
+    title: 6.2.3.11 | Ensure session initiation information is collected | Live
+
+    exec: "auditctl -l | grep -E '(session|logins)'"
     exit-status: 0
     stdout:
     - '-w /var/run/utmp -p wa -k session'

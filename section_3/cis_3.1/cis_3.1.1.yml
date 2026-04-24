@@ -6,7 +6,8 @@
      {{ if eq .Vars.ubtu24cis_ipv6_disable "grub" }}
 command:
   grub_ipv6:
-    title: 3.1.1 | Ensure IPv6 status is identified
+    title: 3.1.1 | Ensure IPv6 status is identified | via grub boot
+
     exec: grep -i "^[^#]\s.*ipv6" /boot/grub/grub.cfg
     exit-status: 0
     stdout:
@@ -24,7 +25,9 @@ command:
       NIST800-53R5:
       - CM-7
   ipv6_etc_default_grub:
-    title: 3.1.1 | Ensure IPv6 statEnsure IPv6 status is identified-i "GRUB_CMDLINE_LINUX=.*ipv6" /etc/default/grub
+    title: 3.1.1 | Ensure IPv6 status is identified | default grub
+
+    exec: grep -i "GRUB_CMDLINE_LINUX=.*ipv6" /etc/default/grub
     exit-status: 0
     stdout:
     - '/^GRUB_CMDLINE_LINUX=.*ipv6.disable=1/'
@@ -44,7 +47,9 @@ command:
     {{ if eq .Vars.ubtu24cis_ipv6_disable "sysctl" }}
  file:
   ipv6_disabled:
-    title: 3.1.1 | Ensure IPv6 status is identifieEnsure IPv6 status is identifiedonf/all/disable_ipv6
+    title: 3.1.1 | Ensure IPv6 status is identified | sysctl all disable
+
+    path: /proc/sys/net/ipv6/conf/all/disable_ipv6
     exists: true
     contents:
     - '/^1/'

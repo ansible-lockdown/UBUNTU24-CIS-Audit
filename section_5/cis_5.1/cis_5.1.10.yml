@@ -5,6 +5,7 @@
 file:
   ssh_hostbased_auth:
     title: 5.1.10 | Ensure sshd HostbasedAuthentication is disabled
+
     path: /etc/ssh/sshd_config
     exists: true
     contents:

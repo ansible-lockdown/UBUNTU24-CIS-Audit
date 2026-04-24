@@ -5,6 +5,7 @@
 file:
   ssh_userenv:
     title: 5.1.21 | Ensure sshd PermitUserEnvironment is disabled
+
     path: /etc/ssh/sshd_config
     exists: true
     contents:

@@ -6,6 +6,7 @@
 package:
   gdm3:
     title: 1.7.1 | Ensure GDM is removed
+
     installed: false
     meta:
       server: 2

@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_5_1_5 }}
 file:
   ssh_banner:
-    title: 5.1.5 | Ensure sshd Banner is configured
+    title: 5.1.5 | Ensure sshd Banner is configured | sshd_default
+
     path: /etc/ssh/sshd_config
     exists: true
     contents:
@@ -28,7 +29,9 @@ file:
       - IA-5
 command:
   ssh_configd_banner:
-    title: 5.1.5 | Ensure SSH warnEnsure sshd Banner is configured -Eis '^\s*Banner\s+"?none\b'/etc/ssh/sshd_config.d/*.conf
+    title: 5.1.5 | Ensure sshd Banner is configured | conf.d banner settings
+
+    exec: grep -Eis '^\s*Banner\s+"?none\b'/etc/ssh/sshd_config.d/*.conf
     exit-status:
       or:
       - 0

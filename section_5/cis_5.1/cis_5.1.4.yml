@@ -5,6 +5,7 @@
 file:
   sshd_access_limited:
     title: 5.1.4 | Ensure sshd access is configured
+
     path: /etc/ssh/sshd_config
     exists: true
     contents:

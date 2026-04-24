@@ -5,6 +5,7 @@
 file:
   passwd_fields_not_empty_shadow:
     title: 7.2.2 | Ensure /etc/shadow password fields are not empty
+
     path: /etc/shadow
     exists: true
     contents:

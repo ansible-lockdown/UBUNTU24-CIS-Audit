@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_3_3_11 }}
 kernel-param:
   net.ipv6.conf.all.accept_ra:
-    title: 3.3.11 | Ensure ipv6 router advertisements are not accepted
+    title: 3.3.11 | Ensure ipv6 router advertisements are not accepted | all accept
+
     value: '1'
     meta:
       server: 1
@@ -23,7 +24,9 @@ kernel-param:
       - CM-7
       - IA-5
   net.ipv6.conf.default.accept_ra:
-    title: 3.3.11 | Ensure ipv6 rEnsure ipv6 router advertisements are not accepted1'
+    title: 3.3.11 | Ensure ipv6 router advertisements are not accepted | default accept
+
+    value: '1'
     meta:
       server: 1
       workstation: 1
@@ -42,7 +45,9 @@ kernel-param:
       - IA-5
 command:
   ipv6_all_accept_ra:
-    title: 3.3.11 | Ensure ipv6 router advertisemeEnsure ipv6 router advertisements are not acceptedf\.all\.accept_ra" /etc/sysctl.conf /etc/sysctl.d/*
+    title: 3.3.11 | Ensure ipv6 router advertisements are not accepted | all accept
+
+    exec: grep "net\.ipv6\conf\.all\.accept_ra" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0
@@ -66,7 +71,9 @@ command:
       - CM-7
       - IA-5
   ipv6_all_default_ra:
-    title: 3.3.11 | Ensure ipv6 router advertisements are not acEnsure ipv6 router advertisements are not acceptedcept_ra" /etc/sysctl.conf /etc/sysctl.d/*
+    title: 3.3.11 | Ensure ipv6 router advertisements are not accepted | all accept
+
+    exec: grep "net\.ipv6\conf\.default\.accept_ra" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0

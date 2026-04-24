@@ -2,7 +2,8 @@
   {{ if .Vars.ubtu24cis_rule_3_2_4 }}
 command:
   modprobe_sctp:
-    title: 3.2.4 | Ensure sctp kernel module is not available
+    title: 3.2.4 | Ensure sctp kernel module is not available | sctp config
+
     exit-status: 0
     exec: 'modprobe -n -v sctp'
     stdout:
@@ -21,7 +22,9 @@ command:
       - CM-7
       - SI-4
   lsmod_sctp:
-    title: 3.2.4 | Ensure sctp keEnsure sctp kernel module is not availableus: 1
+    title: 3.2.4 | Ensure sctp kernel module is not available | running sctp
+
+    exit-status: 1
     exec: lsmod | grep -i sctp
     stdout:
     - '!/^.*/'

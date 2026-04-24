@@ -6,7 +6,8 @@
       {{ if not .Vars.ubtu24cis_apache2_mask }}
 package:
   apache2_pkg:
-    title: 2.1.18 | Ensure web server services are not in use
+    title: 2.1.18 | Ensure web server services are not in use | pkg removed
+
     name: apache2
     installed: false
     meta:
@@ -25,7 +26,9 @@ package:
     {{ if .Vars.ubtu24cis_apache2_mask }}
 file:
   apache2_service_masked:
-    title: 2.1.18 | Ensure web serEnsure web server services are not in usec/systemd/system/apache2.service
+    title: 2.1.18 | Ensure web server services are not in use | masked
+
+    path: /etc/systemd/system/apache2.service
     exists: true
     filetype: symlink
     linked-to: /dev/null
@@ -42,7 +45,9 @@ file:
       NIST800-53R5:
       - CM-7
   apache2_socket_masked:
-    title: 2.1.18 | Ensure web server serviEnsure web server services are not in use/system/apache2.socket
+    title: 2.1.18 | Ensure web server services are not in use | masked
+
+    path: /etc/systemd/system/apache2.socket
     exists: true
     filetype: symlink
     linked-to: /dev/null

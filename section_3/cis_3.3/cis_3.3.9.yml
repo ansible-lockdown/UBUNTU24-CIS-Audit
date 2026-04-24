@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_3_3_9 }}
 kernel-param:
   net.ipv4.conf.all.log_martians:
-    title: 3.3.9 | Ensure suspicious packets are logged
+    title: 3.3.9 | Ensure suspicious packets are logged | ipv4 all martians
+
     value: '1'
     meta:
       server: 1
@@ -23,7 +24,10 @@ kernel-param:
       - CM-7
       - IA-5
   net.ipv4.conf.default.log_martians:
-    title: 3.3.9 | Ensure suspicious paEnsure suspicious packets are loggedmeta:
+    title: 3.3.9 | Ensure suspicious packets are logged | ipv4 default martians
+
+    value: '1'
+    meta:
       server: 1
       workstation: 1
       CIS_ID:
@@ -41,7 +45,9 @@ kernel-param:
       - IA-5
 command:
   ipv4_all_martians:
-    title: 3.3.9 | Ensure suspicious packets are logged | ipv4 Ensure suspicious packets are loggedartians" /etc/sysctl.conf /etc/sysctl.d/*
+    title: 3.3.9 | Ensure suspicious packets are logged | ipv4 all martians conf
+
+    exec: grep "net\.ipv4\.conf\.all\.log_martians" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0
@@ -66,7 +72,8 @@ command:
       - IA-5
   ipv4_def_martians:
     title: 3.3.9 | Ensure suspicious packets are logged | ipv4 default martians conf
-   Ensure suspicious packets are loggedconf /etc/sysctl.d/*
+
+    exec: grep "net\.ipv4\.conf\.default\.log_martians" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0

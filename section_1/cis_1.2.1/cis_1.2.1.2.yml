@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_1_2_1_2}}
 command:
   gpg_configd:
-    title: 1.2.1.2 | Ensure package manager repositories are configured
+    title: 1.2.1.2 | Ensure package manager repositories are configured | Manual
+
     exec: echo "MANUAL - Please check manually that repositories are configured as expected"
     exit-status: 0
     stdout:

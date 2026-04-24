@@ -5,7 +5,8 @@
     {{ if .Vars.ubtu24cis_rule_6_3_1 }}
 package:
   aide:
-    title: 6.3.1 | Ensure AIDE is installed
+    title: 6.3.1 | Ensure AIDE is installed | aide pkg
+
     installed: true
     meta:
       server: 1
@@ -18,7 +19,9 @@ package:
       NIST800-53R5:
       - AU-2
   aide-common:
-    title: 6.3.1 | Ensure AIDEEnsure AIDE is installedled: true
+    title: 6.3.1 | Ensure AIDE is installed | aide-common pkg
+
+    installed: true
     meta:
       server: 1
       workstation: 1

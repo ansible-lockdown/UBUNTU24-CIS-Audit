@@ -2,7 +2,8 @@
   {{ if .Vars.ubtu24cis_rule_3_3_8 }}
 kernel-param:
   net.ipv4.conf.all.accept_source_route:
-    title: 3.3.8 | Ensure source routed packets are not accepted
+    title: 3.3.8 | Ensure source routed packets are not accepted | IPv4 all source routed
+
     value: '0'
     meta:
       server: 1
@@ -21,7 +22,10 @@ kernel-param:
       - CM-7
       - IA-5
   net.ipv4.conf.default.accept_source_route:
-    title: 3.3.8 | Ensure source routed packEnsure source routed packets are not accepted
+    title: 3.3.8 | Ensure source routed packets are not accepted | IPv4 default source routed
+
+    value: '0'
+    meta:
       server: 1
       workstation: 1
       CIS_ID:
@@ -39,7 +43,9 @@ kernel-param:
       - IA-5
 command:
   ipv4_all_source_route:
-    title: 3.3.8 | Ensure source routed packets are not accepted | IPv4 aEnsure source routed packets are not acceptedoute" /etc/sysctl.conf /etc/sysctl.d/*
+    title: 3.3.8 | Ensure source routed packets are not accepted | IPv4 all source routed conf
+
+    exec: grep "net\.ipv4\.conf\.all\.accept_source_route" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0
@@ -64,7 +70,8 @@ command:
       - IA-5
   ipv4_def_source_route:
     title: 3.3.8 | Ensure source routed packets are not accepted | IPv4 default source routed conf
-    Ensure source routed packets are not acceptedc/sysctl.d/*
+
+    exec: grep "net\.ipv4\.conf\.default\.accept_source_route" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0

@@ -2,7 +2,8 @@
   {{ if .Vars.ubtu24cis_rule_3_2_3 }}
 command:
   modprobe_RDS:
-    title: 3.2.3 | Ensure rds kernel module is not available
+    title: 3.2.3 | Ensure rds kernel module is not available | rds config
+
     exit-status:
       or:
       - 0
@@ -24,7 +25,9 @@ command:
       - CM-7
       - SI-4
   lsmod_RDS:
-    title: 3.2.3 | Ensure rds keEnsure rds kernel module is not availabletus: 1
+    title: 3.2.3 | Ensure rds kernel module is not available | running rds
+
+    exit-status: 1
     exec: lsmod | grep -i rds
     stdout:
     - '!/^.*/'

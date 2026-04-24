@@ -5,6 +5,7 @@
 service:
   systemd-journald:
     title: 6.2.1.1 | Ensure auditd packages are installed
+
     running: true
     enabled: true
     meta:

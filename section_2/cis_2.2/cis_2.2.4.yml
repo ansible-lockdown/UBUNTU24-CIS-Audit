@@ -5,7 +5,8 @@
     {{ if .Vars.ubtu24cis_rule_2_2_4 }}
 package:
   telnet:
-    title: 2.2.4 | Ensure telnet client is not installed
+    title: 2.2.4 | Ensure telnet client is not installed | telnet
+
     installed: false
     name: telnet
     meta:
@@ -21,7 +22,9 @@ package:
       - CM-7
       - CM-11
   inetutils-telnet:
-    title: 2.2.4 | Ensure teEnsure telnet client is not installedalled: false
+    title: 2.2.4 | Ensure telnet client is not installed | inetutils-telnet
+
+    installed: false
     name: inetutils-telnet
     meta:
       server: 1

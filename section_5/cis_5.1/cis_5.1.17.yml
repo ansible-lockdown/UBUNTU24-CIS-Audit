@@ -3,6 +3,7 @@
 file:
   ssh_maxsessions:
     title: 5.1.17 | Ensure sshd MaxSessions is configured
+
     path: /etc/ssh/sshd_config
     exists: true
     contents:

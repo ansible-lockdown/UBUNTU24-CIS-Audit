@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_1_6_1 }}
 file:
   etc_motd_content:
-    title: 1.6.1 | Ensure message of the day is configured properly
+    title: 1.6.1 | Ensure message of the day is configured properly | motd file correct
+
     path: /etc/motd
     exists: true
     contents:
@@ -27,7 +28,9 @@ file:
       - CM-3
 {{ if .Vars.ubtu24cis_disable_dynamic_motd }}
   disable_dyn_motd:
-    title: 1.6.1 | Ensure message of thEnsure message of the day is configured properlyd/sshd
+    title: 1.6.1 | Ensure message of the day is configured properly | stop dynamic load
+
+    path: /etc/pam.d/sshd
     exists: true
     contents:
     - '/#\s*session\s+optional\s+pam_motd.so\s+motd=/run/motd.dynamic/'
@@ -38,7 +41,9 @@ file:
 {{ if not .Vars.ubtu24cis_disable_dynamic_motd }}
 command:
   check_motd_files:
-    title: 1.6.1 | Ensure message of the day is configured Ensure message of the day is configured properly\\\s|$(grep '^ID=' /etc/os-release | cut -d= -f2 | sed -e 's/\"//g'))\" /etc/update-motd.d/*"
+    title: 1.6.1 | Ensure message of the day is configured properly | dynamic motd files
+
+    exec: "grep -Eis \"(\\\v|\\\r|\\\m|\\\s|$(grep '^ID=' /etc/os-release | cut -d= -f2 | sed -e 's/\"//g'))\" /etc/update-motd.d/*"
     exit-status:
       or:
       - 0

@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_1_5_2 }}
 kernel-param:
   kernel.yama.ptrace_scope:
-    title: 1.5.2 | Ensure ptrace_scope is restricted
+    title: 1.5.2 | Ensure ptrace_scope is restricted | sysctl_live
+
     value: '1'
     meta:
       server: 1
@@ -18,7 +19,9 @@ kernel-param:
       NIST800-53R5: CM-6
 command:
   ptrace_restrict_2:
-    title: 1.5.2 | Ensure ptrace_Ensure ptrace_scope is restrictedus:
+    title: 1.5.2 | Ensure ptrace_scope is restricted | sysctl_configured
+
+    exit-status:
       or:
       - 0
       - 2

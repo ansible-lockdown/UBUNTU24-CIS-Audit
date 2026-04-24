@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_4_3_6 }}
 command:
   nft_loopback:
-    title: 4.3.6 | Ensure nftables loopback traffic is configured
+    title: 4.3.6 | Ensure nftables loopback traffic is configured | Manual
+
     exec: echo "Manual - Please confirm nfttables loopback traffic configured and matched site policy"
     exit-status: 0
     stdout:

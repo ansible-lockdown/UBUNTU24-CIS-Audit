@@ -4,7 +4,8 @@
   {{ if .Vars.ubtu24cis_rule_5_2_2 }}
 file:
   sudoers_use_pty:
-    title: 5.2.2 | Ensure sudo commands use pty
+    title: 5.2.2 | Ensure sudo commands use pty | Config
+
     path: /etc/sudoers
     exists: true
     contents:
@@ -23,7 +24,9 @@ file:
       - AC-6
 command:
   pty_sudoers_d:
-    title: 5.2.2 | Ensure suEnsure sudo commands use pty: "ls -1 /etc/sudoers.d/* > /dev/null 2>&1; if [ '$?' = '0' ]; then grep -c '^Defaults\\s*use_pty' /etc/sudoers.d/*; else echo 99;fi"
+    title: 5.2.2 | Ensure sudo commands use pty | sudoers.d
+
+    exec: "ls -1 /etc/sudoers.d/* > /dev/null 2>&1; if [ '$?' = '0' ]; then grep -c '^Defaults\\s*use_pty' /etc/sudoers.d/*; else echo 99;fi"
     exit-status: 0
     stdout:
     - '/[0-99]/'
