@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_3_3_9 }}
 kernel-param:
   net.ipv6.conf.all.accept_ra:
-    title: 3.3.9 | Ensure IPv6 router advertisements are not accepted | ipv6 all router adverts
+    title: 3.3.9 | Ensure suspicious packets are logged | ipv6 all router adverts
     value: '0'
     meta:
       server: 1
@@ -26,7 +26,7 @@ kernel-param:
       - M1030
       - M1042
   net.ipv6.conf.default.accept_ra:
-    title: 3.3.9 | Ensure IPv6 router advertisements are not accepted  | ipv6 def router adverts
+    title: 3.3.9 | Ensure suspicious packets are logged | ipv6 def router adverts
     value: '0'
     meta:
       server: 1
@@ -49,7 +49,7 @@ kernel-param:
       - M1042
 command:
   ipv6_all_rtr_adverts:
-    title: 3.3.9 | Ensure IPv6 router advertisements are not accepted | ipv6 all router adverts conf
+    title: 3.3.9 | Ensure suspicious packets are logged | ipv6 all router adverts conf
     exec: grep "net\.ipv6\.conf\.all\.accept_ra" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
@@ -77,7 +77,7 @@ command:
       - M1030
       - M1042
   ipv6_def_rtr_adverts:
-    title: 3.3.9 | Ensure IPv6 router advertisements are not accepted | ipv6 default router adverts conf
+    title: 3.3.9 | Ensure suspicious packets are logged | ipv6 default router adverts conf
     exec: grep "net\.ipv6\.conf\.default\.accept_ra" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:

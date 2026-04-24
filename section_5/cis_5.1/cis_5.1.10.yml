@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_5_1_10 }}
 file:
   ssh_hostbased_auth:
-    title: 5.1.10 | Ensure SSH HostbasedAuthentication is disabled
+    title: 5.1.10 | Ensure sshd HostbasedAuthentication is disabled
     path: /etc/ssh/sshd_config
     exists: true
     contents:

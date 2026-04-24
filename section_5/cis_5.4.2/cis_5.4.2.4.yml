@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_5_4_2_4 }}
 command:
   root_passwd_set:
-    title: 5.4.2.4 | Ensure root password is set
+    title: 5.4.2.4 | Ensure root account access is controlled
     exec: "passwd -S root | awk '$2 ~ /^P/ {print \"OK Password\"}'"
     exit-status: 0
     stdout: ['OK Password']

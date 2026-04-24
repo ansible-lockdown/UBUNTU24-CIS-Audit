@@ -4,7 +4,7 @@ gossfile:
   section_1/*/*.yml: {}
   {{ end }}
 
- # Section 2
+# Section 2
   {{ if .Vars.ubtu24cis_section2 }}
   # Special Services
   section_2/cis_2.1/*.yml: {}
@@ -51,7 +51,7 @@ gossfile:
   {{ if .Vars.ubtu24cis_section6 }}
   # Journald
   section_6/cis_6.1.1.x/*.yml: {}
-   {{ if eq .Vars.ubtu24cis_syslog_service "journald" }}
+  {{ if eq .Vars.ubtu24cis_syslog_service "journald" }}
   section_6/cis_6.1.2.x/*.yml: {}
   {{ end }}
   # Rsyslog

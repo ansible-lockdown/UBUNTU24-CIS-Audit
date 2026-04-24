@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_5_1_4 }}
 file:
   sshd_access_limited:
-    title: 5.1.4 | Ensure SSH access is configured
+    title: 5.1.4 | Ensure sshd access is configured
     path: /etc/ssh/sshd_config
     exists: true
     contents:
