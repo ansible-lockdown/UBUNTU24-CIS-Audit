@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_3_3_5 }}
 kernel-param:
   net.ipv4.conf.all.accept_redirects:
-    title: 3.3.5 | Ensure ICMP redirects are not accepted | ipv4 all icmp redirects
+    title: 3.3.5 | Ensure icmp redirects are not accepted | ipv4 all icmp redirects
     value: '0'
     meta:
       server: 1
@@ -23,7 +23,7 @@ kernel-param:
       - CM-7
       - IA-5
   net.ipv4.conf.default.accept_redirects:
-    title: 3.3.5 | Ensure ICMP redirects are not accepted | ipv4 default icmp redirects
+    title: 3.3.5 | Ensure icmp redirects are not accepted | ipv4 default icmp redirects
     value: '0'
     meta:
       server: 1
@@ -43,7 +43,7 @@ kernel-param:
       - IA-5
 command:
   ipv4_all_icmp_redirects:
-    title: 3.3.5 | Ensure ICMP redirects are not accepted | ipv4 all icmp redirects conf
+    title: 3.3.5 | Ensure icmp redirects are not accepted | ipv4 all icmp redirects conf
     exec: grep "net\.ipv4\.conf\.all\.accept_redirects" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
@@ -68,7 +68,7 @@ command:
       - CM-7
       - IA-5
   ipv4_def_icmp_redirects:
-    title: 3.3.5 | Ensure ICMP redirects are not accepted | ipv4 def icmp redirects conf
+    title: 3.3.5 | Ensure icmp redirects are not accepted | ipv4 def icmp redirects conf
     exec: grep "net\.ipv4\.conf\.default\.accept_redirects" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:

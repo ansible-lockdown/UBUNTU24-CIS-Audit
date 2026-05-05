@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_6_1_3_4 }}
 command:
   perms_rsyslog_d:
-    title: 6.1.3.4 | Ensure rsyslog default file permissions configured
+    title: 6.1.3.4 | Ensure rsyslog log file creation mode is configured
     exec: 'grep -s ^\$FileCreateMode /etc/rsyslog.conf /etc/rsyslog.d/*.conf | cut -f2 -d:'
     exit-status: 0
     stdout:

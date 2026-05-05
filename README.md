@@ -38,7 +38,7 @@ If running as part of the ansible playbook, this will pull in the relevant branc
 - e.g. v1.0.0 will pull in branch benchmark-v1.0.0
 
 Devel is normally the latest benchmark version, so maybe different from the version of benchmark you wish to test.
-Details will show in the README as part of the remedation as to the benchmark for the version it is written for.
+Details will show in the README as part of the remediation as to the benchmark for the version it is written for.
 
 ## Usage
 

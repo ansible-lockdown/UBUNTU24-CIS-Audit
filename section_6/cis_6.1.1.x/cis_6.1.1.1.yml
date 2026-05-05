@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_6_2_1_1 }}
 service:
   systemd-journald:
-    title: 6.2.1.1 | Ensure journald service is enabled and active
+    title: 6.2.1.1 | Ensure auditd packages are installed
     running: true
     enabled: true
     meta:

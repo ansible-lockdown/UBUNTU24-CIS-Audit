@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_5_1_21 }}
 file:
   ssh_userenv:
-    title: 5.1.21 | Ensure SSH PermitUserEnvironment is disabled
+    title: 5.1.21 | Ensure sshd PermitUserEnvironment is disabled
     path: /etc/ssh/sshd_config
     exists: true
     contents:

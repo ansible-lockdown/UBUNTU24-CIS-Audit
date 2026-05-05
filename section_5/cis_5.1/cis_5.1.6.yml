@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_5_1_6 }}
 file:
   sshd_ciphers:
-    title: 5.1.6 | Ensure only strong Ciphers are used
+    title: 5.1.6 | Ensure sshd Ciphers are configured
     path: /etc/ssh/sshd_config
     exists: true
     contents:
