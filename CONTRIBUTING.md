@@ -1,5 +1,5 @@
-Contributing to MindPoint Group Projects
-========================================
+Contributing to Ansible-Lockdown Projects
+=========================================
 
 Rules
 -----
