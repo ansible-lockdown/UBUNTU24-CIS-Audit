@@ -1,0 +1,18 @@
+---
+
+{{ if .Vars.ubtu24cis_level_2 }}
+  {{ if .Vars.ubtu24cis_rule_3_2_6 }}
+command:
+  rule_3_2_6_stub:
+    title: 3.2.6 | Ensure network kernel module is not available
+    exec: 'echo "audit stub"'
+    exit-status: 0
+    stdout:
+    - '/.*/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 3.2.6
+  {{ end }}
+{{ end }}

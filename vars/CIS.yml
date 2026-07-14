@@ -1,7 +1,7 @@
 ---
 
 ## metadata for Audit benchmark
-benchmark_version: '1.0.0'
+benchmark_version: '2.0.0'
 
 
 #  timeout for each command to run where set - default = 10seconds/10000ms
@@ -47,6 +47,7 @@ ubtu24cis_rule_1_1_1_7: true
 ubtu24cis_rule_1_1_1_8: true
 ubtu24cis_rule_1_1_1_9: true
 ubtu24cis_rule_1_1_1_10: true
+ubtu24cis_rule_1_1_1_11: true
 
 # 1.1.2 Configure Filesystem Partitions
 # /tmp
@@ -93,6 +94,13 @@ ubtu24cis_rule_1_1_2_7_4: true
 # 1.2.1 Configure Package repositories
 ubtu24cis_rule_1_2_1_1: true
 ubtu24cis_rule_1_2_1_2: true
+ubtu24cis_rule_1_2_1_3: true
+ubtu24cis_rule_1_2_1_4: true
+ubtu24cis_rule_1_2_1_5: true
+ubtu24cis_rule_1_2_1_6: true
+ubtu24cis_rule_1_2_1_7: true
+ubtu24cis_rule_1_2_1_8: true
+ubtu24cis_rule_1_2_1_9: true
 # 1.2.2 Configure Package updates
 ubtu24cis_rule_1_2_2_1: true
 
@@ -113,6 +121,12 @@ ubtu24cis_rule_1_5_2: true
 ubtu24cis_rule_1_5_3: true
 ubtu24cis_rule_1_5_4: true
 ubtu24cis_rule_1_5_5: true
+ubtu24cis_rule_1_5_6: true
+ubtu24cis_rule_1_5_7: true
+ubtu24cis_rule_1_5_8: true
+ubtu24cis_rule_1_5_9: true
+ubtu24cis_rule_1_5_11: true
+ubtu24cis_rule_1_5_12: true
 
 # 1.6 Configure Command Line Warning Banners
 ubtu24cis_rule_1_6_1: true
@@ -121,6 +135,10 @@ ubtu24cis_rule_1_6_3: true
 ubtu24cis_rule_1_6_4: true
 ubtu24cis_rule_1_6_5: true
 ubtu24cis_rule_1_6_6: true
+ubtu24cis_rule_1_6_7: true
+ubtu24cis_rule_1_6_8: true
+ubtu24cis_rule_1_6_9: true
+ubtu24cis_rule_1_6_10: true
 
 # 1.7 Configure GNOME Display Manager
 ubtu24cis_rule_1_7_1: true
@@ -130,9 +148,6 @@ ubtu24cis_rule_1_7_4: true
 ubtu24cis_rule_1_7_5: true
 ubtu24cis_rule_1_7_6: true
 ubtu24cis_rule_1_7_7: true
-ubtu24cis_rule_1_7_8: true
-ubtu24cis_rule_1_7_9: true
-ubtu24cis_rule_1_7_10: true
 
 ## Section 2 Fixes
 # Section 2 is Services (Special Purpose Services, and service clients)
@@ -160,6 +175,7 @@ ubtu24cis_rule_2_1_19: true
 ubtu24cis_rule_2_1_20: true
 ubtu24cis_rule_2_1_21: true
 ubtu24cis_rule_2_1_22: true
+ubtu24cis_rule_2_1_23: true
 
 # 2.2 Configure client services
 ubtu24cis_rule_2_2_1: true
@@ -189,6 +205,7 @@ ubtu24cis_rule_2_4_1_5: true
 ubtu24cis_rule_2_4_1_6: true
 ubtu24cis_rule_2_4_1_7: true
 ubtu24cis_rule_2_4_1_8: true
+ubtu24cis_rule_2_4_1_9: true
 # Configure At
 ubtu24cis_rule_2_4_2_1: true
 
@@ -202,59 +219,49 @@ ubtu24cis_rule_3_2_1: true
 ubtu24cis_rule_3_2_2: true
 ubtu24cis_rule_3_2_3: true
 ubtu24cis_rule_3_2_4: true
-# 3.3 Configure Network Kernel Parameters (Host and Router)
-ubtu24cis_rule_3_3_1: true
-ubtu24cis_rule_3_3_2: true
-ubtu24cis_rule_3_3_3: true
-ubtu24cis_rule_3_3_4: true
-ubtu24cis_rule_3_3_5: true
-ubtu24cis_rule_3_3_6: true
-ubtu24cis_rule_3_3_7: true
-ubtu24cis_rule_3_3_8: true
-ubtu24cis_rule_3_3_9: true
-ubtu24cis_rule_3_3_10: true
-ubtu24cis_rule_3_3_11: true
+ubtu24cis_rule_3_2_5: true
+ubtu24cis_rule_3_2_6: true
+# 3.3 Configure Network Kernel Parameters
+# 3.3.1 Configure IPv4 Kernel Parameters
+ubtu24cis_rule_3_3_1_1: true
+ubtu24cis_rule_3_3_1_2: true
+ubtu24cis_rule_3_3_1_3: true
+ubtu24cis_rule_3_3_1_4: true
+ubtu24cis_rule_3_3_1_5: true
+ubtu24cis_rule_3_3_1_6: true
+ubtu24cis_rule_3_3_1_7: true
+ubtu24cis_rule_3_3_1_8: true
+ubtu24cis_rule_3_3_1_9: true
+ubtu24cis_rule_3_3_1_10: true
+ubtu24cis_rule_3_3_1_11: true
+ubtu24cis_rule_3_3_1_12: true
+ubtu24cis_rule_3_3_1_13: true
+ubtu24cis_rule_3_3_1_14: true
+ubtu24cis_rule_3_3_1_15: true
+ubtu24cis_rule_3_3_1_16: true
+ubtu24cis_rule_3_3_1_17: true
+ubtu24cis_rule_3_3_1_18: true
+# 3.3.2 Configure IPv6 Kernel Parameters
+ubtu24cis_rule_3_3_2_1: true
+ubtu24cis_rule_3_3_2_2: true
+ubtu24cis_rule_3_3_2_3: true
+ubtu24cis_rule_3_3_2_4: true
+ubtu24cis_rule_3_3_2_5: true
+ubtu24cis_rule_3_3_2_6: true
+ubtu24cis_rule_3_3_2_7: true
+ubtu24cis_rule_3_3_2_8: true
 
 ## Section 4 Host Based Firewall
 
 # 4.1 single firewall
 ubtu24cis_rule_4_1_1: true
+ubtu24cis_rule_4_1_2: true
+ubtu24cis_rule_4_1_3: true
+ubtu24cis_rule_4_1_4: true
+ubtu24cis_rule_4_1_5: true
 
-# 4.2 Configure UncomplicatedFirewall
-ubtu24cis_rule_4_2_1: true
-ubtu24cis_rule_4_2_2: true
-ubtu24cis_rule_4_2_3: true
-ubtu24cis_rule_4_2_4: true
-ubtu24cis_rule_4_2_5: true
-ubtu24cis_rule_4_2_6: true
-ubtu24cis_rule_4_2_7: true
-# 4.3 Configure nftables
-ubtu24cis_rule_4_3_1: true
-ubtu24cis_rule_4_3_2: true
-ubtu24cis_rule_4_3_3: true
-ubtu24cis_rule_4_3_4: true
-ubtu24cis_rule_4_3_5: true
-ubtu24cis_rule_4_3_6: true
-ubtu24cis_rule_4_3_7: true
-ubtu24cis_rule_4_3_8: true
-ubtu24cis_rule_4_3_9: true
-ubtu24cis_rule_4_3_10: true
 
-# 4.4.1 Configure iptables software
-ubtu24cis_rule_4_4_1_1: true
-ubtu24cis_rule_4_4_1_2: true
-ubtu24cis_rule_4_4_1_3: true
 
-# 4.4.2 Configure IPv4 iptables
-ubtu24cis_rule_4_4_2_1: true
-ubtu24cis_rule_4_4_2_2: true
-ubtu24cis_rule_4_4_2_3: true
-ubtu24cis_rule_4_4_2_4: true
-# 4.4.3 Configure IPv6 iptables
-ubtu24cis_rule_4_4_3_1: true
-ubtu24cis_rule_4_4_3_2: true
-ubtu24cis_rule_4_4_3_3: true
-ubtu24cis_rule_4_4_3_4: true
 
 ## Section 5 Access Control
 # 5.1 Configure SSH Server
@@ -280,6 +287,8 @@ ubtu24cis_rule_5_1_19: true
 ubtu24cis_rule_5_1_20: true
 ubtu24cis_rule_5_1_21: true
 ubtu24cis_rule_5_1_22: true
+ubtu24cis_rule_5_1_23: true
+ubtu24cis_rule_5_1_24: true
 # 5.2 Configure privilege escalation
 ubtu24cis_rule_5_2_1: true
 ubtu24cis_rule_5_2_2: true
@@ -292,6 +301,7 @@ ubtu24cis_rule_5_2_7: true
 ubtu24cis_rule_5_3_1_1: true
 ubtu24cis_rule_5_3_1_2: true
 ubtu24cis_rule_5_3_1_3: true
+ubtu24cis_rule_5_3_1_4: true
 # 5.3.2 Configure pam-auth-update profiles
 ubtu24cis_rule_5_3_2_1: true
 ubtu24cis_rule_5_3_2_2: true
@@ -344,31 +354,26 @@ ubtu24cis_rule_5_4_3_3: true
 
 ## Section 6
 
-# 6.2.1.x Configure systemd-journald service
-ubtu24cis_rule_6_1_1_1: true
-ubtu24cis_rule_6_1_1_2: true
-ubtu24cis_rule_6_1_1_3: true
-ubtu24cis_rule_6_1_1_4: true
-# 6.1.2.1 Configure journald
-ubtu24cis_rule_6_1_2_1_1: true
-ubtu24cis_rule_6_1_2_1_2: true
-ubtu24cis_rule_6_1_2_1_3: true
-ubtu24cis_rule_6_1_2_1_4: true
+# 6.1.1.1 Configure systemd-journald
+ubtu24cis_rule_6_1_1_1_1: true
+ubtu24cis_rule_6_1_1_1_2: true
+ubtu24cis_rule_6_1_1_1_3: true
+ubtu24cis_rule_6_1_1_1_4: true
+ubtu24cis_rule_6_1_1_1_5: true
+ubtu24cis_rule_6_1_1_1_6: true
+ubtu24cis_rule_6_1_1_1_7: true
+# 6.1.2 Configure rsyslog
+ubtu24cis_rule_6_1_2_1: true
 ubtu24cis_rule_6_1_2_2: true
 ubtu24cis_rule_6_1_2_3: true
 ubtu24cis_rule_6_1_2_4: true
-# 6.1.3 Configure rsyslog
+ubtu24cis_rule_6_1_2_5: true
+ubtu24cis_rule_6_1_2_6: true
+ubtu24cis_rule_6_1_2_7: true
+ubtu24cis_rule_6_1_2_8: true
+ubtu24cis_rule_6_1_2_9: true
+ubtu24cis_rule_6_1_2_10: true
 ubtu24cis_rule_6_1_3_1: true
-ubtu24cis_rule_6_1_3_2: true
-ubtu24cis_rule_6_1_3_3: true
-ubtu24cis_rule_6_1_3_4: true
-ubtu24cis_rule_6_1_3_5: true
-ubtu24cis_rule_6_1_3_6: true
-ubtu24cis_rule_6_1_3_7: true
-# 6.1.3.8 logrotate
-ubtu24cis_rule_6_1_3_8: true
-# 6.1.4.1 configure logfiles
-ubtu24cis_rule_6_1_4_1: true
 # 6.2.1 Configure auditd services
 ubtu24cis_rule_6_2_1_1: true
 ubtu24cis_rule_6_2_1_2: true
@@ -401,6 +406,15 @@ ubtu24cis_rule_6_2_3_18: true
 ubtu24cis_rule_6_2_3_19: true
 ubtu24cis_rule_6_2_3_20: true
 ubtu24cis_rule_6_2_3_21: true
+ubtu24cis_rule_6_2_3_22: true
+ubtu24cis_rule_6_2_3_23: true
+ubtu24cis_rule_6_2_3_24: true
+ubtu24cis_rule_6_2_3_25: true
+ubtu24cis_rule_6_2_3_26: true
+ubtu24cis_rule_6_2_3_27: true
+ubtu24cis_rule_6_2_3_28: true
+ubtu24cis_rule_6_2_3_29: true
+ubtu24cis_rule_6_2_3_30: true
 # 6.2.4 Configure audit file access
 ubtu24cis_rule_6_2_4_1: true
 ubtu24cis_rule_6_2_4_2: true
@@ -463,7 +477,7 @@ ubtu24cis_ipv4_required: true
 
 ## IPv6 requirement toggle
 # This variable governs whether ipv6 is enabled or disabled.
-ubtu24cis_ipv6_required: false
+ubtu24cis_ipv6_required: true
 
 ## Desktop requirement toggle
 # This variable governs, whether CIS rules regarding GDM
@@ -583,7 +597,7 @@ ubtu24cis_ftp_client: false
 ## Control 2.3.1.1
 # This variable choses the tool used for time synchronization
 # The two options are `chrony`and `systemd-timesyncd`.
-ubtu24cis_time_sync_tool: "systemd-timesyncd"
+ubtu24cis_time_sync_tool: "chrony"
 
 ## Controls 2.3.x - Configure time pools & servers for chrony and timesyncd
 # The following variable represents a list of of time server pools used
