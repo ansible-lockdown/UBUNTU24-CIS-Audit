@@ -12,7 +12,8 @@ command:
         - 0
         - 2
     stdout:
-    - '*.* action(type="omfwd" target="{{ .Vars.ubtu24cis_remote_log_host }}" port="{{ .Vars.ubtu24cis_remote_log_port }}"'
+    - *.* action(type="omfwd" target="{{ .Vars.ubtu24cis_remote_log_host }}"
+    - port="{{ .Vars.ubtu24cis_remote_log_port }}"
     - protocol="{{ .Vars.ubtu24cis_remote_log_protocol }}"
     meta:
       server: 1
