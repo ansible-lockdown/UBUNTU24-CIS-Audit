@@ -1,7 +1,7 @@
 ---
 
 ## metadata for Audit benchmark
-benchmark_version: '1.0.0'
+benchmark_version: 'v1.0.0'
 
 
 #  timeout for each command to run where set - default = 10seconds/10000ms
@@ -228,6 +228,7 @@ ubtu24cis_rule_4_2_4: true
 ubtu24cis_rule_4_2_5: true
 ubtu24cis_rule_4_2_6: true
 ubtu24cis_rule_4_2_7: true
+
 # 4.3 Configure nftables
 ubtu24cis_rule_4_3_1: true
 ubtu24cis_rule_4_3_2: true
@@ -665,14 +666,10 @@ ubtu24cis_sshd_deny_groups: 'DenyGroups'
 ubtu24cis_sshd_client_alive_interval: 15
 ubtu24cis_sshd_client_alive_count_max: 3
 
-# choose one of below
-ubtu24cis_pwhistory_so: "14"
-ubtu24cis_passwd_remember: "5"
-
 # logins.def password settings
-ubtu24cis_pass_max_days: "365"
-ubtu24cis_pass_min_days: "1"
-ubtu24cis_pass_warn_age: "7"
+ubtu24cis_pass_max_days: 365
+ubtu24cis_pass_min_days: 1
+ubtu24cis_pass_warn_age: 7
 
 # set sugroup if differs from wheel
 ubtu24cis_sugroup: nosugroup
