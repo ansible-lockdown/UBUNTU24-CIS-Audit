@@ -1,4 +1,3 @@
-
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
