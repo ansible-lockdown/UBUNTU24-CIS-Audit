@@ -17,10 +17,6 @@ command:
       workstation: 1
       CIS_ID:
       - 1.5.3
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       Mitre_Techniques:
       - T1005
       - T1005.000
@@ -37,10 +33,6 @@ command:
       workstation: 1
       CIS_ID:
       - 1.5.3
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5: CM-6
 kernel-param:
   fs.suid_dumpable:
@@ -51,10 +43,6 @@ kernel-param:
       workstation: 1
       CIS_ID:
       - 1.5.3
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5: CM-6
 service:
   coredump:
@@ -67,10 +55,6 @@ service:
       workstation: 1
       CIS_ID:
       - 1.5.3
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5: CM-6
 file:
   coredump_restricted_conf:
@@ -85,10 +69,6 @@ file:
       workstation: 1
       CIS_ID:
       - 1.5.3
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5: CM-6
   {{ end }}
 {{ end }}

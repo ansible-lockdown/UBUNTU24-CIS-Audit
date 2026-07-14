@@ -16,11 +16,6 @@ file:
       server: 2
       workstation: 2
       CIS_ID: 1.1.1.7
-      CISv8:
-      - 4.8
-      CISv8_IG1: false
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5: CM-7
   squashfs_blacklist:
     title: 1.1.1.7 | Ensure squashfs kernel module is not available | blacklist
@@ -35,11 +30,6 @@ file:
       server: 2
       workstation: 2
       CIS_ID: 1.1.1.7
-      CISv8:
-      - 4.8
-      CISv8_IG1: false
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5: CM-7
   {{ end }}
 {{ end }}
