@@ -17,16 +17,16 @@
         END{exit 0}' /etc/passwd /etc/shadow"
       exit-status: 0
       stdout:
-    - '!/./'
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 5.4.2.8
-      NIST800-53R5:
-      - AC-2(5)
-      - AC-3
-      - AC-11
-      - MP-2
+      - '!/./'
+      meta:
+        server: 1
+        workstation: 1
+        CIS_ID:
+        - 5.4.2.8
+        NIST800-53R5:
+        - AC-2(5)
+        - AC-3
+        - AC-11
+        - MP-2
   {{ end }}
 {{ end }}
