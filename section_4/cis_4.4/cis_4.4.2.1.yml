@@ -1,10 +1,10 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_rule_4_3_2_1 }}
+  {{ if .Vars.ubtu24cis_rule_4_4_2_1 }}
 command:
   ipt_def_deny:
-    title: 4.3.2.1 | Ensure iptables default deny firewall policy | Manual
+    title: 4.4.2.1 | Ensure iptables default deny firewall policy | Manual
     exec: echo "Manual - Please confirm iptables default denies are configured and matched site policy"
     exit-status: 0
     stdout:
@@ -13,7 +13,7 @@ command:
       server: 1
       workstation: 1
       CIS_ID:
-      - 4.3.2.1
+      - 4.4.2.1
       NIST800-53R5:
       - CA-9
       - SC-7

@@ -1,10 +1,10 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_rule_4_3_3_2 }}
+  {{ if .Vars.ubtu24cis_rule_4_4_3_2 }}
 command:
   ipt6_loopback:
-    title: 4.3.3.2 | Ensure ip6tables loopback traffic is configured | Manual
+    title: 4.4.3.2 | Ensure ip6tables loopback traffic is configured | Manual
     exec: echo "Manual - Please confirm ip6tables loopback connections are configured and matched site policy"
     exit-status: 0
     stdout:
@@ -13,7 +13,7 @@ command:
       server: 1
       workstation: 1
       CIS_ID:
-      - 4.3.3.2
+      - 4.4.3.2
       NIST800-53R5:
       - CA-9
       - SC-7
