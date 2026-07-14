@@ -2,14 +2,15 @@
 
 # July 26
 
-#26 thanks to @smd75jr level adjustments
-#27 thanks to @CyberiumShadow typo fixes
-run-audit script update
-goss download location and references updated
-contributing.md added
-removed V8 references
-Added missing test 4.1.1
-aligned variable naming wih remediation vars
+- #26 thanks to @smd75jr level adjustments
+- #27 thanks to @CyberiumShadow typo fixes
+- run-audit script update
+- goss download location and references updated
+- contributing.md added
+- removed V8 references
+- Added missing test 4.1.1
+- aligned variable naming wih remediation vars
+- updated sshd_access logic to make it cleaner
 
 # several fixed Oct Nov 25
 alignment
