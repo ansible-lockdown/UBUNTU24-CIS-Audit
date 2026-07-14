@@ -8,7 +8,8 @@ command:
       or:
       - 0
       - 1
-    stdout: '!/.*/'
+    stdout:
+      - '!/.*/'
     meta:
       server: 1
       workstation: 1
