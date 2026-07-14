@@ -7,6 +7,7 @@
 run-audit script update
 goss download location and references updated
 contributing.md added
+removed V8 references
 
 # several fixed Oct Nov 25
 alignment
