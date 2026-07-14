@@ -463,7 +463,7 @@ ubtu24cis_ipv4_required: true
 
 ## IPv6 requirement toggle
 # This variable governs whether ipv6 is enabled or disabled.
-ubtu24cis_ipv6_required: false
+ubtu24cis_ipv6_required: true
 
 ## Desktop requirement toggle
 # This variable governs, whether CIS rules regarding GDM
@@ -471,6 +471,10 @@ ubtu24cis_ipv6_required: false
 ubtu24cis_desktop_required: false
 
 ## Section 1
+
+# A location that can be used as a temporary location to execute scripts
+# note the drive with need exec permissions used by 1.1.1.10
+ubtu24cis_temp_exec_location: /var
 
 # If system uses squashfs e.gf. snap package manager set true
 ubtu24cis_squashfs_skip: false
@@ -583,7 +587,7 @@ ubtu24cis_ftp_client: false
 ## Control 2.3.1.1
 # This variable choses the tool used for time synchronization
 # The two options are `chrony`and `systemd-timesyncd`.
-ubtu24cis_time_sync_tool: "systemd-timesyncd"
+ubtu24cis_time_sync_tool: "chrony"
 
 ## Controls 2.3.x - Configure time pools & servers for chrony and timesyncd
 # The following variable represents a list of of time server pools used
