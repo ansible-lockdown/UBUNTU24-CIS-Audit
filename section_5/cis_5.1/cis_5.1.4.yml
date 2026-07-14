@@ -9,16 +9,16 @@ file:
     exists: true
     contents:
     {{ if .Vars.ubtu24cis_sshd_allow_users }}
-    - AllowUsers {{ .Vars.ubtu24cis_sshd_allow_users }}
+    - {{ .Vars.ubtu24cis_sshd_allow_users }}
     {{ end }}
     {{ if .Vars.ubtu24cis_sshd_allow_groups }}
-    - AllowGroups {{ .Vars.ubtu24cis_sshd_allow_groups }}
+    - {{ .Vars.ubtu24cis_sshd_allow_groups }}
     {{ end }}
     {{ if .Vars.ubtu24cis_sshd_deny_users }}
-    - DenyUsers {{ .Vars.ubtu24cis_sshd_deny_users }}
+    - {{ .Vars.ubtu24cis_sshd_deny_users }}
     {{ end }}
     {{ if .Vars.ubtu24cis_sshd_deny_groups }}
-    - DenyGroups {{ .Vars.ubtu24cis_sshd_deny_groups }}
+    - {{ .Vars.ubtu24cis_sshd_deny_groups }}
     {{ end }}
     meta:
       server: 1
