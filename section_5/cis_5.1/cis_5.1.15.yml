@@ -2,18 +2,15 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_15 }}
-file:
+command:
   sshd_MACS:
-    title: 5.1.15 | Ensure only strong MACs are used
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    {{ range .Vars.ubtu24cis_ssh_strong_macs }}
-    - '/(?i)^MACs.*{{ . }}/'
-    {{ end }}
-    {{ range .Vars.ubtu24cis_ssh_weak_macs }}
-    - '!/(?i)^MACs.*{{ . }}/'
-    {{ end }}
+    title: 5.1.15 | Ensure sshd MACs are configured
+    exec: sshd -T | grep -Pi -- 'macs\h+([^#\n\r]+,)?(hmac-md5|hmac-md5-96|hmac-ripemd160|hmac-sha1-96|umac-64@openssh\.com|hmac-md5-etm@openssh\.com|hmac-md5-96-etm@openssh\.com|hmac-ripemd160-etm@openssh\.com|hmac-sha1-96-etm@openssh\.com|umac-64-etm@openssh\.com|umac-128-etm@openssh\.com)\b'
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout: '!/.*/'
     meta:
       server: 1
       workstation: 1
