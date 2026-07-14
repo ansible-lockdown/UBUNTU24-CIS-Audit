@@ -9,6 +9,7 @@ goss download location and references updated
 contributing.md added
 removed V8 references
 Added missing test 4.1.1
+aligned variable naming wih remediation vars
 
 # several fixed Oct Nov 25
 alignment

@@ -8,7 +8,7 @@ command:
     exec: grep -E "^max_log_file_action" /etc/audit/auditd.conf
     exit-status: 0
     stdout:
-    - 'max_log_file_action = {{ .Vars.ubtu24cis_auditd.max_log_file_action }}'
+    - 'max_log_file_action = {{ .Vars.ubtu24cis_auditd_max_log_file_action }}'
     meta:
       server: 2
       workstation: 2

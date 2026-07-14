@@ -1,6 +1,6 @@
 ---
 
-{{ if not .Vars.ubtu24cis_nis_client_required }}
+{{ if not .Vars.ubtu24cis_nis_server }}
   {{ if .Vars.ubtu24cis_level_1 }}
     {{ if .Vars.ubtu24cis_rule_2_2_1 }}
 package:

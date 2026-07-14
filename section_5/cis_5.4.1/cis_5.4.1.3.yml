@@ -8,7 +8,7 @@ file:
     path: /etc/login.defs
     exists: true
     contents:
-    - '/^PASS_WARN_AGE\s*{{ .Vars.ubtu24cis_pass.warn_age }}/'
+    - '/^PASS_WARN_AGE\s*{{ .Vars.ubtu24cis_pass_warn_age }}/'
     - '!/^PASS_WARN_AGE\s*[1-6]/'
     meta:
       server: 1

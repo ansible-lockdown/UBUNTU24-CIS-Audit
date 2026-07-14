@@ -573,7 +573,7 @@ ubtu24cis_xwindow_server: false  # will remove mask not an option
 ubtu24cis_is_mail_server: false
 
 # Client Services
-ubtu24cis_nis_client_required: false  # Same package as NIS server
+# ubtu24cis_nis_client_required: false  # Same package as use nis_server value
 ubtu24cis_rsh_client: false
 ubtu24cis_talk_client: false
 ubtu24cis_telnet_required: false
@@ -639,18 +639,16 @@ ubtu24cis_sysctl_network_conf: /etc/sysctl.conf
 ubtu24cis_firewall_package: "ufw"
 
 ## auditd settings
-ubtu24cis_auditd:
-  space_left_action: email
-  action_mail_acct: root
-  admin_space_left_action: halt
-  max_log_file_action: keep_logs
-  auditd_backlog_limit: 8192
+ubtu24cis_auditd_space_left_action: email
+ubtu24cis_auditd_admin_space_left_action: halt
+ubtu24cis_auditd_max_log_file_action: keep_logs
+ubtu24cis_auditd_back_log_limit: 8192
 
 ## syslog
 # Set which syslog service
 # journald or rsyslog
 ubtu24cis_syslog_service: 'journald'
-ubtu24cis_is_syslog_server: false
+ubtu24cis_system_is_log_server: false
 
 ### Section 5
 # Note the following to understand precedence and layout
@@ -712,24 +710,17 @@ ubtu24cis_ssh_weak_kex:
   - diffie-hellman-group14-sha1
   - diffie-hellman-group-exchange-sha1
 
-ubtu24cis_ssh_aliveinterval: 300
-ubtu24cis_ssh_countmax: 3
-## PAM
-ubtu24cis_pam_password:
-  minlen: "14"
-  minclass: "4"
-
-ubtu24cis_pam_passwd_retry: "3"
+ubtu24cis_sshd_client_alive_interval: 15
+ubtu24cis_sshd_client_alive_count_max: 3
 
 # choose one of below
 ubtu24cis_pwhistory_so: "14"
 ubtu24cis_passwd_remember: "5"
 
 # logins.def password settings
-ubtu24cis_pass:
-  max_days: "365"
-  min_days: "1"
-  warn_age: "7"
+ubtu24cis_pass_max_days: "365"
+ubtu24cis_pass_min_days: "1"
+ubtu24cis_pass_warn_age: "7"
 
 # set sugroup if differs from wheel
 ubtu24cis_sugroup: nosugroup

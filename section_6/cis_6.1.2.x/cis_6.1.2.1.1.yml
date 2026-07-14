@@ -2,7 +2,7 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_6_1_2_1_1 }}
-    {{ if not .Vars.ubtu24cis_is_syslog_server }}
+    {{ if not .Vars.ubtu24cis_system_is_log_server }}
 package:
   systemd-journal-remote:
     title: 6.1.2.1.1 | Ensure systemd-journal-remote is installed

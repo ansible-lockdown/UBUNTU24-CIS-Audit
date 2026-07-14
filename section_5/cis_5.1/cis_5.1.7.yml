@@ -4,12 +4,12 @@
   {{ if .Vars.ubtu24cis_rule_5_1_7 }}
 file:
   sshd_clientalive:
-    title: 5.1.7 | Ensure sshd ClientAloveInterval and CLientAliveCountMax are configured
+    title: 5.1.7 | Ensure sshd ClientAliveInterval and ClientAliveCountMax are configured
     path: /etc/ssh/sshd_config
     exists: true
     contents:
-    - 'ClientAliveInterval {{ .Vars.ubtu24cis_ssh_aliveinterval }}'
-    - 'ClientAliveCountMax {{ .Vars.ubtu24cis_ssh_countmax }}'
+    - 'ClientAliveInterval {{ .Vars.ubtu24cis_sshd_client_alive_interval }}'
+    - 'ClientAliveCountMax {{ .Vars.ubtu24cis_sshd_client_alive_count_max}}'
     - '/ClientAliveInterval ([1-9]|[1-2][0-9][0-9]|300)/'
     - '/ClientAliveCountMax [0-3]/'
     meta:

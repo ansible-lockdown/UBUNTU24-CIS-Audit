@@ -24,7 +24,7 @@ file:
     path: /etc/default/grub
     exists: true
     contents:
-    - '/GRUB_CMDLINE_LINUX=".*audit_backlog_limit={{ .Vars.ubtu24cis_auditd.auditd_backlog_limit }}/'
+    - '/GRUB_CMDLINE_LINUX=".*audit_backlog_limit={{ .Vars.ubtu24cis_auditd_back_log_limit }}/'
     - '/audit_backlog_limit=(819[2-9]|8[2-9]{2,}|9[0-9]{3,}|[1-9]{5,})/'
     meta:
       server: 2

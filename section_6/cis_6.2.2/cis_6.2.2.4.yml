@@ -8,9 +8,9 @@ command:
     exec: grep -E "action" /etc/audit/auditd.conf
     exit-status: 0
     stdout:
-    - '/space_left_action\s*=\s*{{ .Vars.ubtu24cis_auditd.space_left_action }}/'
+    - '/space_left_action\s*=\s*{{ .Vars.ubtu24cis_auditd_space_left_action }}/'
     - '/space_left_action\s*=\s*(email|exec|single|halt)/'
-    - '/^admin_space_left_action\s*=\s*{{ .Vars.ubtu24cis_auditd.admin_space_left_action }}/'
+    - '/^admin_space_left_action\s*=\s*{{ .Vars.ubtu24cis_auditd_admin_space_left_action }}/'
     - '/^admin_space_left_action\s*=\s*(single|halt)/'
     meta:
       server: 2
