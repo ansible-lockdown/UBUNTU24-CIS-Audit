@@ -63,9 +63,7 @@ gossfile:
   # Auditd and level 2
   # Auditd
     {{ if .Vars.ubtu24cis_level_2 }}
-      {{ if .Vars.ubtu24cis_auditd }}
   section_6/cis_6.2.*/*.yml: {}
-      {{ end }}
     {{ end }}
   # Aide
   section_6/cis_6.3.*/*.yml: {}
