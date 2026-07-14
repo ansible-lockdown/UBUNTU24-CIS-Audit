@@ -12,6 +12,9 @@
 - aligned variable naming wih remediation vars
 - updated sshd_access logic to make it cleaner
 - added missing 1.1.1.10
+- Added 5.4.2.8
+- updated missing vars for rsyslog
+- fixed titles and numbering
 
 # several fixed Oct Nov 25
 alignment
