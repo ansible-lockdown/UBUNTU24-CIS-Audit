@@ -17,10 +17,6 @@ file:
       workstation: 1
       CIS_ID:
       - 1.6.1
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5:
       - CM-6
       - CM-1
@@ -53,10 +49,6 @@ command:
       workstation: 1
       CIS_ID:
       - 1.6.1
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       Mitre_Techniques:
       - T1082
       - T1082.000

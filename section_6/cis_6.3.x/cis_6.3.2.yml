@@ -19,10 +19,6 @@ command:
       workstation: 1
       CIS_ID:
       - 6.3.2
-      CISv8: 8.5
-      CISv8_IG1: false
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5: NA
       {{ end }}
 service:
@@ -38,10 +34,6 @@ service:
       workstation: 1
       CIS_ID:
       - 6.3.2
-      CISv8: 8.5
-      CISv8_IG1: false
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5: NA
   aidecheck.timer:
     title: 6.3.2 | Ensure filesystem integrity is regularly checked | aidecheck timer
@@ -54,10 +46,6 @@ service:
       workstation: 1
       CIS_ID:
       - 6.3.2
-      CISv8: 8.5
-      CISv8_IG1: false
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5: NA
       {{ end }}
     {{ end }}

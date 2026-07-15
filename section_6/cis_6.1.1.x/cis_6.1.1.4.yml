@@ -6,7 +6,7 @@ service:
   {{ if eq .Vars.ubtu24cis_syslog_service "journald" }}
   single_syslog_journald_running:
     title: 6.1.1.4 | Ensure only one logging system is in use | journald running
-    name: systemd-jounald.service
+    name: systemd-journald.service
     running: true
     enabled: true
     meta:
@@ -38,7 +38,7 @@ service:
       - 6.1.1.4
   single_syslog_journald_stopped:
     title: 6.1.1.4 | Ensure only one logging system is in use | journald stopped
-    name: systemd-jounald.service
+    name: systemd-journald.service
     running: false
     enabled: false
     meta:

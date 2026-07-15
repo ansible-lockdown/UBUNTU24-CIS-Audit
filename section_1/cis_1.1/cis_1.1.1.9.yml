@@ -13,11 +13,6 @@ file:
       server: 1
       workstation: 2
       CIS_ID: 1.1.1.9
-      CISv8:
-      - 4.8
-      CISv8_IG1: false
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5: SI-3
   usb-storage_blacklist:
     title: 1.1.1.9 | Ensure usb-storage kernel module is not available | blacklist
@@ -29,11 +24,6 @@ file:
       server: 1
       workstation: 2
       CIS_ID: 1.1.1.9
-      CISv8:
-      - 4.8
-      CISv8_IG1: false
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5: SI-3
   {{ end }}
 {{ end }}

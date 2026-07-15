@@ -8,8 +8,8 @@ file:
     path: /etc/ssh/sshd_config
     exists: true
     contents:
-    - 'ClientAliveInterval {{ .Vars.ubtu24cis_ssh_aliveinterval }}'
-    - 'ClientAliveCountMax {{ .Vars.ubtu24cis_ssh_countmax }}'
+    - 'ClientAliveInterval {{ .Vars.ubtu24cis_sshd_client_alive_interval }}'
+    - 'ClientAliveCountMax {{ .Vars.ubtu24cis_sshd_client_alive_count_max}}'
     - '/ClientAliveInterval ([1-9]|[1-2][0-9][0-9]|300)/'
     - '/ClientAliveCountMax [0-3]/'
     meta:
@@ -17,10 +17,6 @@ file:
       workstation: 1
       CIS_ID:
       - 5.1.7
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5:
       - CM-1
       - CM-2
