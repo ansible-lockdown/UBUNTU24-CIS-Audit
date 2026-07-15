@@ -28,6 +28,7 @@ gossfile:
 
 # Section 4
   {{ if .Vars.ubtu24cis_section4 }}
+  section_4/cis_4.1/*.yml: {}
     # If ufw firewall
     {{ if eq .Vars.ubtu24cis_firewall_package "ufw" }}
   section_4/cis_4.2/*.yml: {}
@@ -63,9 +64,7 @@ gossfile:
   # Auditd and level 2
   # Auditd
     {{ if .Vars.ubtu24cis_level_2 }}
-      {{ if .Vars.ubtu24cis_auditd }}
   section_6/cis_6.2.*/*.yml: {}
-      {{ end }}
     {{ end }}
   # Aide
   section_6/cis_6.3.*/*.yml: {}

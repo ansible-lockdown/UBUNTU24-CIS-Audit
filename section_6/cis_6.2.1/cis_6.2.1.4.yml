@@ -14,11 +14,6 @@ command:
       workstation: 2
       CIS_ID:
       - 6.2.1.4
-      CISv8:
-      - 8.2
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AU-2
       - AU-3
@@ -29,18 +24,13 @@ file:
     path: /etc/default/grub
     exists: true
     contents:
-    - '/GRUB_CMDLINE_LINUX=".*audit_backlog_limit={{ .Vars.ubtu24cis_auditd.auditd_backlog_limit }}/'
+    - '/GRUB_CMDLINE_LINUX=".*audit_backlog_limit={{ .Vars.ubtu24cis_auditd_back_log_limit }}/'
     - '/audit_backlog_limit=(819[2-9]|8[2-9]{2,}|9[0-9]{3,}|[1-9]{5,})/'
     meta:
       server: 2
       workstation: 2
       CIS_ID:
       - 6.2.1.4
-      CISv8:
-      - 8.2
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AU-2
       - AU-3

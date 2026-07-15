@@ -20,10 +20,6 @@ command:
       workstation: 2
       CIS_ID:
       - 6.3.3
-      CISv8: NA
-      CISv8_IG1: NA
-      CISv8_IG2: NA
-      CISv8_IG3: NA
       NIST800-53R5: NA
     {{ end }}
   {{ end }}

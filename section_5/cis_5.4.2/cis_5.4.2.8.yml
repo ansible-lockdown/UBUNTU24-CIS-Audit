@@ -1,0 +1,32 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_5_4_2_8 }}
+  command:
+    test_valid_shells:
+      title: 5.4.2.8 | Ensure accounts without a valid login shell are locked
+      exec: |
+        bash -lc "awk -F: 'NR==FNR{shell[\$1]=\$NF; next}
+        BEGIN{while((getline line < \"/etc/shells\")>0){n=split(line,a,\"/\"); b=a[n]; if(b!=\"\") sh[++ns]=b}}
+        {u=\$1; pw=\$2; s=shell[u];
+         if(u!=\"root\" && s!=\"\"){
+           badShell=1;
+           for(i=1;i<=ns;i++) if(s==sh[i]){badShell=0; break}
+           if(badShell && pw !~ /^[!*]/) exit 1
+         }}
+        END{exit 0}' /etc/passwd /etc/shadow"
+      exit-status: 0
+      stdout:
+      - '!/./'
+      meta:
+        server: 1
+        workstation: 1
+        CIS_ID:
+        - 5.4.2.8
+        NIST800-53R5:
+        - AC-2(5)
+        - AC-3
+        - AC-11
+        - MP-2
+  {{ end }}
+{{ end }}

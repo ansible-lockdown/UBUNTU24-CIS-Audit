@@ -2,7 +2,7 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_6_1_2_1_4 }}
-    {{ if not .Vars.ubtu24cis_is_syslog_server }}
+    {{ if not .Vars.ubtu24cis_system_is_log_server }}
 service:
   systemd-journal-remote.service:
     title: 6.1.2.1.4 | Ensure systemd-journal-remote service is not in use | service
@@ -13,12 +13,6 @@ service:
       workstation: 1
       CIS_ID:
       - 6.1.2.1.4
-      CISv8:
-      - 4.8
-      - 8.2
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AU-2
       - AU-7
@@ -32,12 +26,6 @@ service:
       workstation: 1
       CIS_ID:
       - 6.1.2.1.4
-      CISv8:
-      - 4.8
-      - 8.2
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AU-2
       - AU-7
@@ -54,12 +42,6 @@ command:
       workstation: 1
       CIS_ID:
       - 6.1.2.1.4
-      CISv8:
-      - 4.8
-      - 8.2
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AU-2
       - AU-7
@@ -75,12 +57,6 @@ command:
       workstation: 1
       CIS_ID:
       - 6.1.2.1.4
-      CISv8:
-      - 4.8
-      - 8.2
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AU-2
       - AU-7

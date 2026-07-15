@@ -8,19 +8,23 @@ file:
     path: /etc/ssh/sshd_config
     exists: true
     contents:
-    {{ range .Vars.ubtu24cis_sshd_access }}
-    - {{ . }}
+    {{ if .Vars.ubtu24cis_sshd_allow_users }}
+    - {{ .Vars.ubtu24cis_sshd_allow_users }}
+    {{ end }}
+    {{ if .Vars.ubtu24cis_sshd_allow_groups }}
+    - {{ .Vars.ubtu24cis_sshd_allow_groups }}
+    {{ end }}
+    {{ if .Vars.ubtu24cis_sshd_deny_users }}
+    - {{ .Vars.ubtu24cis_sshd_deny_users }}
+    {{ end }}
+    {{ if .Vars.ubtu24cis_sshd_deny_groups }}
+    - {{ .Vars.ubtu24cis_sshd_deny_groups }}
     {{ end }}
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 5.1.4
-      CISv8:
-      - 3.3
-      CISv8_IG1: true
-      CISv8_IG2: true
-      CISv8_IG3: true
       NIST800-53R5:
       - AC-3
       - MP-2

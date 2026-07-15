@@ -28,7 +28,7 @@ The listed variable for every control/benchmark can be turned on/off or section
 
 ## Requirements
 
-goss >= 0.4.4
+goss >= 0.4.8
 root privileges
 
 ## Branches
@@ -74,10 +74,10 @@ README Links
 [Centre For Internet Security]: https://www.cisecurity.org
 [Read the Docs - Audit]: https://ansible-lockdown.readthedocs.io/en/latest/audit/getting-started-audit.html
 
-[goss documentation]: (https://github.com/goss-org/goss/blob/master/README.md)
+[goss documentation]: (https://github.com/krameff/goss/blob/master/README.md)
 
-[Goss]: https://goss.rocks
-[DISA STIG]: https://public.cyber.mil/stigs
+[Goss]: - [goss documentation](https://github.com/krameff/goss/blob/master/docs/index.md)
+- [CIS standards](https://www.cisecurity.org)
 
 [MindPoint Group]: https://mindpointgroup.com/cybersecurity-consulting/automate/baseline-modernization#GH_LockdownReadMe
 [Discord Community Discussions]: https://www.lockdownenterprise.com/discord

@@ -1,7 +1,7 @@
 ---
 
 ## metadata for Audit benchmark
-benchmark_version: '1.0.0'
+benchmark_version: 'v1.0.0'
 
 
 #  timeout for each command to run where set - default = 10seconds/10000ms
@@ -228,6 +228,7 @@ ubtu24cis_rule_4_2_4: true
 ubtu24cis_rule_4_2_5: true
 ubtu24cis_rule_4_2_6: true
 ubtu24cis_rule_4_2_7: true
+
 # 4.3 Configure nftables
 ubtu24cis_rule_4_3_1: true
 ubtu24cis_rule_4_3_2: true
@@ -463,7 +464,7 @@ ubtu24cis_ipv4_required: true
 
 ## IPv6 requirement toggle
 # This variable governs whether ipv6 is enabled or disabled.
-ubtu24cis_ipv6_required: false
+ubtu24cis_ipv6_required: true
 
 ## Desktop requirement toggle
 # This variable governs, whether CIS rules regarding GDM
@@ -471,6 +472,10 @@ ubtu24cis_ipv6_required: false
 ubtu24cis_desktop_required: false
 
 ## Section 1
+
+# A location that can be used as a temporary location to execute scripts
+# note the drive with need exec permissions used by 1.1.1.10
+ubtu24cis_temp_exec_location: /var
 
 # If system uses squashfs e.gf. snap package manager set true
 ubtu24cis_squashfs_skip: false
@@ -500,7 +505,7 @@ ubtu24cis_bootloader_password_hash: "grub.pbkdf2.sha512.changethispassword"  # p
 # Noe that the banner text must not contain the below items in order to be
 # compliant with CIS: \m, \r, \s, \v or references to the OS platform
 ubtu24cis_warning_banner: |
-        Authorized uses only. All activity may be monitored and reported.
+        Authorized users only. All activity may be monitored and reported.
 
 # This variable governs, whether dynamic motd is disabled (as required by control 1.7.1)
 ubtu24cis_disable_dynamic_motd: true
@@ -573,7 +578,7 @@ ubtu24cis_xwindow_server: false  # will remove mask not an option
 ubtu24cis_is_mail_server: false
 
 # Client Services
-ubtu24cis_nis_client_required: false  # Same package as NIS server
+# ubtu24cis_nis_client_required: false  # Same package as use nis_server value
 ubtu24cis_rsh_client: false
 ubtu24cis_talk_client: false
 ubtu24cis_telnet_required: false
@@ -583,7 +588,7 @@ ubtu24cis_ftp_client: false
 ## Control 2.3.1.1
 # This variable choses the tool used for time synchronization
 # The two options are `chrony`and `systemd-timesyncd`.
-ubtu24cis_time_sync_tool: "systemd-timesyncd"
+ubtu24cis_time_sync_tool: "chrony"
 
 ## Controls 2.3.x - Configure time pools & servers for chrony and timesyncd
 # The following variable represents a list of of time server pools used
@@ -639,97 +644,32 @@ ubtu24cis_sysctl_network_conf: /etc/sysctl.conf
 ubtu24cis_firewall_package: "ufw"
 
 ## auditd settings
-ubtu24cis_auditd:
-  space_left_action: email
-  action_mail_acct: root
-  admin_space_left_action: halt
-  max_log_file_action: keep_logs
-  auditd_backlog_limit: 8192
+ubtu24cis_auditd_space_left_action: email
+ubtu24cis_auditd_admin_space_left_action: halt
+ubtu24cis_auditd_max_log_file_action: keep_logs
+ubtu24cis_auditd_back_log_limit: 8192
 
 ## syslog
 # Set which syslog service
 # journald or rsyslog
 ubtu24cis_syslog_service: 'journald'
-ubtu24cis_is_syslog_server: false
+ubtu24cis_system_is_log_server: false
 
 ### Section 5
 # Note the following to understand precedence and layout
-ubtu24cis_sshd_access:
-  - AllowUser
-  - AllowGroup
-  - DenyUser
-  - DenyGroup
 
-ubtu24cis_ssh_strong_ciphers:
-  - aes256-gcm@openssh.com
-  - aes128-gcm@openssh.com
-  - aes256-ctr
-  - aes192-ctr
-  - aes128-ctr
-ubtu24cis_ssh_weak_ciphers:
-  - 3des-cbc
-  - aes128-cbc
-  - aes192-cbc
-  - aes256-cbc
-  - arcfour
-  - chacha20-poly1305@openssh.com
-  - arcfour128
-  - arcfour256
-  - blowfish-cbc
-  - cast128-cbc
-  - rijndael-cbc@lysator.liu.se
+ubtu24cis_sshd_allow_users: 'AllowUsers'
+ubtu24cis_sshd_allow_groups: 'AllowGroups'
+ubtu24cis_sshd_deny_users: 'DenyUsers'
+ubtu24cis_sshd_deny_groups: 'DenyGroups'
 
-ubtu24cis_ssh_strong_macs:
-  - HMAC-SHA1
-  - hmac-sha2-256
-  - hmac-sha2-512
-ubtu24cis_ssh_weak_macs:
-  - hmac-md5
-  - hmac-md5-96
-  - hmac-ripemd160
-  - hmac-sha1-96
-  - umac-64@openssh.com
-  - umac-128@openssh.com
-  - hmac-md5-etm@openssh.com
-  - hmac-md5-96-etm@openssh.com
-  - hmac-ripemd160-etm@openssh.com
-  - hmac-sha1-etm@openssh.com
-  - hmac-sha1-96-etm@openssh.com
-  - umac-64-etm@openssh.com
-  - umac-128-etm@openssh.com
-  - hmac-sha2-512-etm@openssh.com
-  - hmac-sha2-256-etm@openssh.com
-
-ubtu24cis_ssh_strong_kex:
-  - ecdh-sha2-nistp256
-  - ecdh-sha2-nistp521
-  - diffie-hellman-group-exchange-sha256
-  - diffie-hellman-group14-sha256
-  - diffie-hellman-group16-sha512
-  - diffie-hellman-group18-sha512
-ubtu24cis_ssh_weak_kex:
-  - diffie-hellman-group1-sha1
-  - diffie-hellman-group14-sha1
-  - diffie-hellman-group-exchange-sha1
-
-ubtu24cis_ssh_aliveinterval: 300
-ubtu24cis_ssh_countmax: 3
-## PAM
-ubtu24cis_pam_password:
-  minlen: "14"
-  minclass: "4"
-
-ubtu24cis_pam_passwd_retry: "3"
-
-# choose one of below
-ubtu24cis_pwhistory_so: "14"
-ubtu24cis_passwd_remember: "5"
+ubtu24cis_sshd_client_alive_interval: 15
+ubtu24cis_sshd_client_alive_count_max: 3
 
 # logins.def password settings
-ubtu24cis_pass:
-  max_days: "365"
-  min_days: "1"
-  warn_age: "7"
+ubtu24cis_pass_max_days: 365
+ubtu24cis_pass_min_days: 1
+ubtu24cis_pass_warn_age: 7
 
 # set sugroup if differs from wheel
 ubtu24cis_sugroup: nosugroup
@@ -739,6 +679,12 @@ ubtu24cis_varlog_location: "/var/log/sudo.log"
 
 # Section 6
 ubtu24cis_config_aide: true
+
+# 6.1.3.6 rsyslog remote offload server settings
+# change as appropriate
+ubtu24cis_remote_log_server: 10.10.10.10
+ubtu24cis_remote_log_port: 514
+ubtu24cis_remote_log_protocol: tcp
 
 # 6.1.2
 # aide setup via - cron, timer

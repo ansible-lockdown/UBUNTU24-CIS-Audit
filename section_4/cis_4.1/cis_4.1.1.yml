@@ -1,0 +1,26 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_4_1_1 }}
+command:
+  single_firewall_utility:
+    title: 4.1.1 | Ensure a single firewall configuration utility is in use
+    exec: |
+      active=0
+      dpkg -s ufw 2>/dev/null | grep -q 'Status: install ok installed' && ufw status | grep -q 'Status: active' && active=$((active+1))
+      dpkg -s nftables 2>/dev/null | grep -q 'Status: install ok installed' && systemctl is-active nftables 2>/dev/null | grep -q '^active' && active=$((active+1))
+      dpkg -s iptables 2>/dev/null | grep -q 'Status: install ok installed' && iptables -L -n 2>/dev/null | grep -qv '^$' && active=$((active+1))
+      if [ "$active" -le 1 ]; then echo "PASS: $active firewall utility active"; else echo "FAIL: $active firewall utilities active"; fi
+    exit-status: 0
+    stdout:
+    - 'PASS'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.1.1
+      NIST800-53R5:
+      - CA-9
+      - SC-7
+  {{ end }}
+{{ end }}
