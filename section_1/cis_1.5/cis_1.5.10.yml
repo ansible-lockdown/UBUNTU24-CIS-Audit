@@ -1,0 +1,21 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_5_10 }}
+command:
+  core_file_size_limits:
+    title: 1.5.10 | Ensure core file size is configured | security/limits.conf
+    exit-status:
+      or:
+      - 0
+      - 2
+    exec: 'grep -E "\*.*hard.*core.*0" /etc/security/limits.conf /etc/security/limits.d/*'
+    stdout:
+    - '/^\/*.*\shard.*core.*0/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 1.5.10
+      NIST800-53R5: CM-6
+  {{ end }}
+{{ end }}

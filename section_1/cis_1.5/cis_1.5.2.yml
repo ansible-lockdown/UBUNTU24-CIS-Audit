@@ -3,30 +3,28 @@
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_5_2 }}
 kernel-param:
-  kernel.yama.ptrace_scope:
-    title: 1.5.2 | Ensure ptrace_scope is restricted | sysctl_live
+  fs.protected_symlinks:
+    title: 1.5.2 | Ensure fs.protected_symlinks is configured | sysctl_live
     value: '1'
     meta:
       server: 1
       workstation: 1
-      CIS_ID:
-      - 1.5.2
+      CIS_ID: 1.5.2
       NIST800-53R5: CM-6
 command:
-  ptrace_restrict_2:
-    title: 1.5.2 | Ensure ptrace_scope is restricted | sysctl_configured
+  protected_symlinks_configured:
+    title: 1.5.2 | Ensure fs.protected_symlinks is configured | sysctl_configured
     exit-status:
       or:
       - 0
       - 2
-    exec: 'grep "^kernel\.yama.ptrace_scope" /etc/sysctl.conf /etc/sysctl.d/* | cut -d ":" -f2'
+    exec: 'grep "^fs\.protected_symlinks" /etc/sysctl.conf /etc/sysctl.d/* | cut -d ":" -f2'
     stdout:
-    - '/kernel.yama.ptrace_scope\s*=\s*1/'
+    - '/fs.protected_symlinks\s*=\s*1/'
     meta:
       server: 1
       workstation: 1
-      CIS_ID:
-      - 1.5.2
+      CIS_ID: 1.5.2
       NIST800-53R5: CM-6
   {{ end }}
 {{ end }}

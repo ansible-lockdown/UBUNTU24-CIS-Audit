@@ -2,12 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_9 }}
-    {{ if not .Vars.ubtu24cis_nfs_server }}
-      {{ if not .Vars.ubtu24cis_nfs_mask }}
+    {{ if not .Vars.ubtu24cis_dnsmasq_server }}
+      {{ if not .Vars.ubtu24cis_dnsmasq_mask }}
 package:
-  nfs_pkg:
-    title: 2.1.9 | Ensure network file system services are not in use | pkg removed
-    name: nfs-kernel-server
+  dnsmasq_pkg:
+    title: 2.1.9 | Ensure dnsmasq services are not in use | pkg removed
+    name: dnsmasq
     installed: false
     meta:
       server: 1
@@ -15,14 +15,13 @@ package:
       CIS_ID:
       - 2.1.9
       NIST800-53R5:
-      - CM-6
       - CM-7
       {{ end }}
-      {{ if .Vars.ubtu24cis_nfs_mask }}
+      {{ if .Vars.ubtu24cis_dnsmasq_mask }}
 file:
-  nfs_service_masked:
-    title: 2.1.9 | Ensure network file system services are not in use | masked
-    path: /etc/systemd/system/nfs-server.service
+  dnsmasq_service_masked:
+    title: 2.1.9 | Ensure dnsmasq services are not in use | masked
+    path: /etc/systemd/system/dnsmasq.service
     exists: true
     filetype: symlink
     linked-to: /dev/null
@@ -32,7 +31,6 @@ file:
       CIS_ID:
       - 2.1.9
       NIST800-53R5:
-      - CM-6
       - CM-7
       {{ end }}
     {{ end }}

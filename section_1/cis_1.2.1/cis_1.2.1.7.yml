@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_2_1_7 }}
+file:
+  usr_share_keyrings:
+    title: 1.2.1.7 | Ensure access to /usr/share/keyrings directory is configured
+    path: /usr/share/keyrings
+    exists: true
+    filetype: directory
+    owner: root
+    group: root
+    mode: "0755"
+    meta:
+      server: 1
+      workstation: 2
+      CIS_ID: 1.2.1.7
+      NIST800-53R5: AC-6
+  {{ end }}
+{{ end }}

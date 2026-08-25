@@ -1,0 +1,18 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_5_12 }}
+file:
+  coredump_storage:
+    title: 1.5.12 | Ensure systemd-coredump Storage is configured
+    exists: true
+    path: /etc/systemd/coredump.conf
+    contents:
+    - '/^Storage=none/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 1.5.12
+      NIST800-53R5: CM-6
+  {{ end }}
+{{ end }}

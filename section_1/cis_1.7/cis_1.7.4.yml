@@ -4,20 +4,25 @@
   {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_4 }}
 file:
-  gdm_screensaver:
-    title: 1.7.4 | Ensure GDM screen locks when the user is idle
-    path: /etc/dconf/db/local.d/00-screensaver
+  gnome_automount_disable:
+    title: 1.7.4 | Ensure GDM automount is configured
+    path: /etc/dconf/db/local.d/00-media-automount
     exists: true
     contents:
-    - '/^[org/gnome/desktop/session]/'
-    - '/^idle-delay=uint32 (1|[1-9]|[1-7][0-9]{1,2}|900)$/'
-    - '/^lock-delay=uint32 [0-5]$/'
+    - '/^[org/gnome/desktop/media-handling]/'
+    - '/^automount=false/'
+    - '/^automount-open=false/'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 1.7.4
-      NIST800-53R5: NA
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
     {{ end }}
   {{ end }}
 {{ end }}

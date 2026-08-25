@@ -19,7 +19,7 @@ file:
       NIST800-53R5: NA
 command:
   users_min_pw_expire:
-    title: 5.4.1.1 | Ensure password expiration is configured | user_check
+    title: 5.4.1.2 | Ensure minimum password days is configured | user_check
     exec: "awk -F: '(/^[^:]+:[^!*]/) {print $4}' /etc/shadow"
     exit-status:
       or:
@@ -29,10 +29,10 @@ command:
     - '/^([1-9]|[1-9][0-9]{2,})$/'
     - '!/^0/'
     meta:
-      server: 1
-      workstation: 1
+      server: 2
+      workstation: 2
       CIS_ID:
-      - 5.4.1.1
-      NIST800-53R5:
+      - 5.4.1.2
+      NIST800-53R5: NA
   {{ end }}
 {{ end }}

@@ -2,12 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_14 }}
-    {{ if not .Vars.ubtu24cis_samba_server }}
-      {{ if not .Vars.ubtu24cis_samba_mask }}
+    {{ if not .Vars.ubtu24cis_print_server }}
+      {{ if not .Vars.ubtu24cis_print_mask }}
 package:
-  samba_pkg:
-    title: 2.1.14 | Ensure samba file server services are not in use | pkg removed
-    name: samba
+  cups_pkg:
+    title: 2.1.14 | Ensure print server services are not in use | pkg removed
+    name: cups
     installed: false
     meta:
       server: 1
@@ -15,14 +15,13 @@ package:
       CIS_ID:
       - 2.1.14
       NIST800-53R5:
-      - CM-6
       - CM-7
       {{ end }}
-      {{ if .Vars.ubtu24cis_samba_mask }}
+      {{ if .Vars.ubtu24cis_print_mask }}
 file:
-  samba_service_masked:
-    title: 2.1.14 | Ensure samba file server services are not in use | masked
-    path: /etc/systemd/system/smbd.service
+  cups_service_masked:
+    title: 2.1.14 | Ensure print server services are not in use | masked
+    path: /etc/systemd/system/cups.service
     exists: true
     filetype: symlink
     linked-to: /dev/null
@@ -32,7 +31,19 @@ file:
       CIS_ID:
       - 2.1.14
       NIST800-53R5:
-      - CM-6
+      - CM-7
+  cups_socket_masked:
+    title: 2.1.14 | Ensure print server services are not in use | masked
+    path: /etc/systemd/system/cups.socket
+    exists: true
+    filetype: symlink
+    linked-to: /dev/null
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 2.1.14
+      NIST800-53R5:
       - CM-7
       {{ end }}
     {{ end }}

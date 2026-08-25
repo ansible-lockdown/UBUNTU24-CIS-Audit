@@ -2,12 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_17 }}
-    {{ if not .Vars.ubtu24cis_squid_server }}
-      {{ if not .Vars.ubtu24cis_squid_mask }}
+    {{ if not .Vars.ubtu24cis_samba_server }}
+      {{ if not .Vars.ubtu24cis_samba_mask }}
 package:
-  squid_pkg:
-    title: 2.1.17 | Ensure web proxy server services are not in use | pkg removed
-    name: squid
+  samba_pkg:
+    title: 2.1.17 | Ensure samba file server services are not in use | pkg removed
+    name: samba
     installed: false
     meta:
       server: 1
@@ -18,11 +18,11 @@ package:
       - CM-6
       - CM-7
       {{ end }}
-      {{ if .Vars.ubtu24cis_squid_mask }}
+      {{ if .Vars.ubtu24cis_samba_mask }}
 file:
-  squid_service_masked:
-    title: 2.1.17 | Ensure web proxy server services are not in use | masked
-    path: /etc/systemd/system/squid.service
+  samba_service_masked:
+    title: 2.1.17 | Ensure samba file server services are not in use | masked
+    path: /etc/systemd/system/smbd.service
     exists: true
     filetype: symlink
     linked-to: /dev/null

@@ -3,13 +3,10 @@
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_3_2_3 }}
 command:
-  modprobe_RDS:
-    title: 3.2.3 | Ensure rds kernel module is not available | rds config
-    exit-status:
-      or:
-      - 0
-      - 1
-    exec: 'modprobe -n -v rds'
+  modprobe_dccp:
+    title: 3.2.3 | Ensure dccp kernel module is not available | DCCP config
+    exit-status: 0
+    exec: 'modprobe -n -v dccp'
     stdout:
       - '/install /bin/(true|false)/'
     meta:
@@ -20,10 +17,10 @@ command:
       NIST800-53R5:
       - CM-7
       - SI-4
-  lsmod_RDS:
-    title: 3.2.3 | Ensure rds kernel module is not available | running rds
+  lsmod_dccp:
+    title: 3.2.3 | Ensure dccp kernel module is not available | running dccp
     exit-status: 1
-    exec: lsmod | grep -i rds
+    exec: lsmod | grep -i dccp
     stdout:
     - '!/^.*/'
     meta:

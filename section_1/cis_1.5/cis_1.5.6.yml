@@ -1,0 +1,19 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_5_6 }}
+package:
+  prelink:
+    title: 1.5.6 | Ensure prelink is not installed
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.6
+      NIST800-53R5:
+      - CM-6
+      - CM-1
+      - CM-3
+  {{ end }}
+{{ end }}

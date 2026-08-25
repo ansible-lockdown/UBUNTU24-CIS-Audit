@@ -1,51 +1,36 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_rule_2_1_2 }}
-    {{ if not .Vars.ubtu24cis_avahi_server }}
-      {{ if not .Vars.ubtu24cis_avahi_mask }}
-package:
-  avahi_pkg:
-    title: 2.1.2 | Ensure avahi daemon services are not in use | pkg removed
-    name: avahi
-    installed: false
+{{ if .Vars.ubtu24cis_level_2 }}
+  {{ if .Vars.ubtu24cis_is_mail_server }}
+    {{ if .Vars.ubtu24cis_rule_2_1_2 }}
+command:
+  mta_listening_port25:
+    title: 2.1.2 Ensure mail transfer agent is configured for local-only mode
+    exit-status: 1
+    exec: 'ss -lntu | grep -E ":25\s" | grep -E -v "\s(127.0.0.1|\[?::1\]?):25\s"'
+    stdout: ['!/./']
     meta:
       server: 1
       workstation: 2
       CIS_ID:
       - 2.1.2
       NIST800-53R5:
-      - SI-4
-      {{ end }}
-      {{ if .Vars.ubtu24cis_avahi_mask }}
+      - CM-7
 file:
-  avahi_socket_masked:
-    title: 2.1.2 | Ensure avahi daemon services are not in use | masked
-    path: /etc/systemd/system/avahi-daemon.socket
+  /etc/postfix/main.conf:
+    title: 2.1.2 | Ensure mail transfer agents are configured for local-only mode
     exists: true
-    filetype: symlink
-    linked-to: /dev/null
+    contents:
+    - '/^inet_interfaces\s*=\s*loopback-only/'
+    - '!/^inet_interfaces\s*=\s*all/'
+    - '!/^(?i)inet_interfaces\s*=\s*ipv4/'
     meta:
       server: 1
       workstation: 2
       CIS_ID:
       - 2.1.2
       NIST800-53R5:
-      - SI-4
-  avahi_service_masked:
-    title: 2.1.2 | Ensure avahi daemon services are not in use | masked
-    path: /etc/systemd/system/avahi-daemon.service
-    exists: true
-    filetype: symlink
-    linked-to: /dev/null
-    meta:
-      server: 1
-      workstation: 2
-      CIS_ID:
-      - 2.1.2
-      NIST800-53R5:
-      - SI-4
-      {{ end }}
+      - CM-7
     {{ end }}
   {{ end }}
 {{ end }}

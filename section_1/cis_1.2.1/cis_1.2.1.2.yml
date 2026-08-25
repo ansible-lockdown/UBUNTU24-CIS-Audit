@@ -1,18 +1,19 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_rule_1_2_1_2}}
-command:
-  gpg_configd:
-    title: 1.2.1.2 | Ensure package manager repositories are configured | Manual
-    exec: echo "MANUAL - Please check manually that repositories are configured as expected"
-    exit-status: 0
-    stdout:
-    - '!/^MANUAL.*/'
+  {{ if .Vars.ubtu24cis_rule_1_2_1_2 }}
+file:
+  apt_weak_dependencies:
+    title: 1.2.1.2 | Ensure weak dependencies are configured
+    path: /etc/apt/apt.conf.d/60-no-weak-dependencies
+    exists: true
+    contents:
+    - '/APT::Install-Recommends\s+"0";/'
+    - '/APT::Install-Suggests\s+"0";/'
     meta:
       server: 1
-      workstation: 2
+      workstation: 1
       CIS_ID: 1.2.1.2
-      NIST800-53R5: SI-2
+      NIST800-53R5: CM-7
   {{ end }}
 {{ end }}

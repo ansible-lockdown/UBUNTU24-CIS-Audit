@@ -1,0 +1,32 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_5_9 }}
+kernel-param:
+  kernel.randomize_va_space:
+    title: 1.5.9 | Ensure kernel.randomize_va_space is configured | sysctl_live
+    value: '2'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.9
+      NIST800-53R5: CM-6
+command:
+  aslr_enabled_2:
+    title: 1.5.9 | Ensure kernel.randomize_va_space is configured | sysctl_configured
+    exit-status:
+      or:
+      - 0
+      - 2
+    exec: 'grep "^kernel\.randomize_va_space" /etc/sysctl.conf /etc/sysctl.d/* | cut -d ":" -f2'
+    stdout:
+    - '/kernel.randomize_va_space(\s|)=(\s|)2/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.9
+      NIST800-53R5: CM-6
+  {{ end }}
+{{ end }}

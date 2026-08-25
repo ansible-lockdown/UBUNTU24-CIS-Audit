@@ -1,29 +1,29 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_1_1_1_9 }}
 file:
-  usb-storage_disabled:
-    title: 1.1.1.9 | Ensure usb-storage kernel module is not available | modprobe
+  firewire-core_disabled:
+    title: 1.1.1.9 | Ensure firewire-core kernel module is not available | modprobe
     path: /etc/modprobe.d/CIS.conf
     exists: true
     contents:
-    - '/^install usb-storage /bin/(true|false)/'
+    - '/^install firewire-core /bin/(true|false)/'
     meta:
       server: 1
       workstation: 2
       CIS_ID: 1.1.1.9
-      NIST800-53R5: SI-3
-  usb-storage_blacklist:
-    title: 1.1.1.9 | Ensure usb-storage kernel module is not available | blacklist
+      NIST800-53R5: CM-7
+  firewire-core_blacklist:
+    title: 1.1.1.9 | Ensure firewire-core kernel module is not available | blacklist
     path: /etc/modprobe.d/blacklist.conf
     exists: true
     contents:
-    - '/^blacklist usb-storage/'
+    - '/^blacklist firewire-core/'
     meta:
       server: 1
       workstation: 2
       CIS_ID: 1.1.1.9
-      NIST800-53R5: SI-3
+      NIST800-53R5: CM-7
   {{ end }}
 {{ end }}

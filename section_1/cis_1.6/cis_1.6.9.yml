@@ -1,0 +1,22 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_6_9 }}
+file:
+  pam_motd_perms:
+    title: 1.6.9 | Ensure access to pam_motd file is configured
+    path: /run/motd.dynamic
+    exists: true
+    owner: root
+    group: root
+    mode: '0644'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 1.6.9
+      NIST800-53R5:
+      - CM-6
+      - CM-1
+      - CM-3
+  {{ end }}
+{{ end }}

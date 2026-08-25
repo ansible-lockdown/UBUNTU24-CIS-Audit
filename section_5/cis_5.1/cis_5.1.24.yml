@@ -1,0 +1,23 @@
+---
+
+{{ if .Vars.ubtu24cis_level_2 }}
+  {{ if .Vars.ubtu24cis_rule_5_1_24 }}
+    {{ if .Vars.ubtu24cis_sshd_listen_address }}
+file:
+  ssh_listenaddress:
+    title: 5.1.24 | Ensure sshd ListenAddress is configured
+    path: /etc/ssh/sshd_config
+    exists: true
+    contents:
+    - '/^\s*ListenAddress\s+\S+/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 5.1.24
+      NIST800-53R5:
+      - CM-6
+      - CM-7
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,30 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_5_8 }}
+kernel-param:
+  kernel.kptr_restrict:
+    title: 1.5.8 | Ensure kernel.kptr_restrict is configured | sysctl_live
+    value: '1'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 1.5.8
+      NIST800-53R5: CM-6
+command:
+  kptr_restrict_configured:
+    title: 1.5.8 | Ensure kernel.kptr_restrict is configured | sysctl_configured
+    exit-status:
+      or:
+      - 0
+      - 2
+    exec: 'grep "^kernel\.kptr_restrict" /etc/sysctl.conf /etc/sysctl.d/* | cut -d ":" -f2'
+    stdout:
+    - '/kernel.kptr_restrict\s*=\s*(1|2)/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 1.5.8
+      NIST800-53R5: CM-6
+  {{ end }}
+{{ end }}

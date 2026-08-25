@@ -1,0 +1,28 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_5_7 }}
+package:
+  apport:
+    title: 1.5.7 | Ensure Automatic Error Reporting is configured | Package
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.7
+file:
+  error_report_apport_disable:
+    title: 1.5.7 | Ensure Automatic Error Reporting is configured | disabled
+    exists: true
+    path: /etc/default/apport
+    contents:
+    - 'enabled=0'
+    - '!/enabled=1/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.7
+  {{ end }}
+{{ end }}

@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_5_3_1_2 }}
 package:
   libpam-modules:
-    title: 5.3.1.2 | Ensure libpam-modules is installed
+    title: 5.3.1.2 | Ensure latest version of libpam-modules is installed
     installed: true
     versions:
       not:

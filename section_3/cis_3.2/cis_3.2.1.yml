@@ -3,10 +3,13 @@
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_3_2_1 }}
 command:
-  modprobe_dccp:
-    title: 3.2.1 | Ensure dccp kernel module is not available | DCCP config
-    exit-status: 0
-    exec: 'modprobe -n -v dccp'
+  modprobe_atm:
+    title: 3.2.1 | Ensure atm kernel module is not available | atm config
+    exit-status:
+      or:
+      - 0
+      - 1
+    exec: 'modprobe -n -v atm'
     stdout:
       - '/install /bin/(true|false)/'
     meta:
@@ -17,10 +20,10 @@ command:
       NIST800-53R5:
       - CM-7
       - SI-4
-  lsmod_dccp:
-    title: 3.2.1 | Ensure dccp kernel module is not available | running dccp
+  lsmod_atm:
+    title: 3.2.1 | Ensure atm kernel module is not available | running atm
     exit-status: 1
-    exec: lsmod | grep -i dccp
+    exec: lsmod | grep -i atm
     stdout:
     - '!/^.*/'
     meta:

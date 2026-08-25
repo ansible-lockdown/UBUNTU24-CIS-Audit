@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_2_1_4 }}
+file:
+  apt_trusted_gpg_d:
+    title: 1.2.1.4 | Ensure access to /etc/apt/trusted.gpg.d directory is configured
+    path: /etc/apt/trusted.gpg.d
+    exists: true
+    filetype: directory
+    owner: root
+    group: root
+    mode: "0755"
+    meta:
+      server: 1
+      workstation: 2
+      CIS_ID: 1.2.1.4
+      NIST800-53R5: AC-6
+  {{ end }}
+{{ end }}

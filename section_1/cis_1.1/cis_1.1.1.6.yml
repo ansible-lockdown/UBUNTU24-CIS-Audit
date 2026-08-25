@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_1_1_1_6 }}
 file:
   overlayfs_disabled:
-    title: 1.1.1.6 | Ensure overlayfs kernel module is not available | modprobe
+    title: 1.1.1.6 | Ensure overlay kernel module is not available | modprobe
     path: /etc/modprobe.d/CIS.conf
     exists: true
     contents:
@@ -15,7 +15,7 @@ file:
       CIS_ID: 1.1.1.6
       NIST800-53R5: CM-7
   overlayfs_blacklist:
-    title: 1.1.1.6 | Ensure overlayfs kernel module is not available | blacklist
+    title: 1.1.1.6 | Ensure overlay kernel module is not available | blacklist
     path: /etc/modprobe.d/blacklist.conf
     exists: true
     contents:

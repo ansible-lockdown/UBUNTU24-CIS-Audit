@@ -1,0 +1,44 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_ipv6_required }}
+    {{ if .Vars.ubtu24cis_rule_3_3_2_3 }}
+      kernel-param:
+        net.ipv6.conf.all.accept_redirects:
+          title: 3.3.2.3 | Ensure net.ipv6.conf.all.accept_redirects is configured
+          value: '0'
+          meta:
+            server: 1
+            workstation: 1
+            CIS_ID:
+            - 3.3.2.3
+            NIST800-53R5:
+            - CM-1
+            - CM-2
+            - CM-6
+            - CM-7
+            - IA-5
+      command:
+        ipv6_all_accept_redirects:
+          title: 3.3.2.3 | Ensure net.ipv6.conf.all.accept_redirects is configured | conf
+          exec: grep "net\.ipv6\.conf\.all\.accept_redirects" /etc/sysctl.conf /etc/sysctl.d/*
+          exit-status:
+            or:
+            - 0
+            - 1
+          stdout:
+          - '/net\.ipv6\.conf\.all\.accept_redirects\s*=\s*0/'
+          meta:
+            server: 1
+            workstation: 1
+            CIS_ID:
+            - 3.3.2.3
+            NIST800-53R5:
+            - CM-1
+            - CM-2
+            - CM-6
+            - CM-7
+            - IA-5
+      {{ end }}
+    {{ end }}
+{{ end }}

@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_4_1_3 }}
+command:
+  ufw_incoming_default:
+    title: 4.1.3 | Ensure ufw incoming default is configured
+    exec: 'ufw status verbose | grep Default:'
+    exit-status: 0
+    stdout:
+    - '/deny \(incoming\)/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.1.3
+      NIST800-53R5:
+      - SC-7
+  {{ end }}
+{{ end }}

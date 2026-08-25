@@ -1,18 +1,28 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_2 }}
-  {{ if not .Vars.ubtu24cis_desktop_required }}
+  {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_1 }}
-package:
-  gdm3:
-    title: 1.7.1 | Ensure GDM is removed
-    installed: false
+file:
+  gdm_banner:
+    title: 1.7.1 | Ensure GDM login banner is configured
+    path: /etc/gdm3/greeter.dconf-defaults
+    exists: true
+    contents:
+    - '/^[org/gnome/login-screen]/'
+    - '/^banner-message-enable=true/'
+    - '/^banner-message-text='{{ .Vars.ubtu24cis_warning_banner }}'/'
     meta:
       server: 2
       workstation: NA
       CIS_ID:
       - 1.7.1
-      NIST800-53R5: CM-11
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
     {{ end }}
   {{ end }}
 {{ end }}

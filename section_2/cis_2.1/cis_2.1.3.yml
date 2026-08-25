@@ -2,12 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_3 }}
-    {{ if not .Vars.ubtu24cis_dhcp_server }}
-      {{ if not .Vars.ubtu24cis_dhcp_mask }}
+    {{ if not .Vars.ubtu24cis_avahi_server }}
+      {{ if not .Vars.ubtu24cis_avahi_mask }}
 package:
-  dhcp_pkg:
-    title: 2.1.3 | Ensure dhcp server services are not in use | pkg removed
-    name: isc-dhcp-server
+  avahi_pkg:
+    title: 2.1.3 | Ensure avahi daemon services are not in use | pkg removed
+    name: avahi
     installed: false
     meta:
       server: 1
@@ -15,13 +15,13 @@ package:
       CIS_ID:
       - 2.1.3
       NIST800-53R5:
-      - CM-7
+      - SI-4
       {{ end }}
-      {{ if .Vars.ubtu24cis_dhcp_mask }}
+      {{ if .Vars.ubtu24cis_avahi_mask }}
 file:
-  dhcp_service_masked:
-    title: 2.1.3 | Ensure dhcp server services are not in use | masked
-    path: /etc/systemd/system/isc-dhcp-server.service
+  avahi_socket_masked:
+    title: 2.1.3 | Ensure avahi daemon services are not in use | masked
+    path: /etc/systemd/system/avahi-daemon.socket
     exists: true
     filetype: symlink
     linked-to: /dev/null
@@ -31,10 +31,10 @@ file:
       CIS_ID:
       - 2.1.3
       NIST800-53R5:
-      - CM-7
-  dhcp6_service_masked:
-    title: 2.1.3 | Ensure dhcp server services are not in use | masked
-    path: /etc/systemd/system/isc-dhcp-server6.service
+      - SI-4
+  avahi_service_masked:
+    title: 2.1.3 | Ensure avahi daemon services are not in use | masked
+    path: /etc/systemd/system/avahi-daemon.service
     exists: true
     filetype: symlink
     linked-to: /dev/null
@@ -44,7 +44,7 @@ file:
       CIS_ID:
       - 2.1.3
       NIST800-53R5:
-      - CM-7
+      - SI-4
       {{ end }}
     {{ end }}
   {{ end }}

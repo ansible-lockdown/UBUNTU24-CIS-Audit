@@ -1,0 +1,18 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_2_1_9 }}
+command:
+  apt_sources_list_d_files:
+    title: 1.2.1.9 | Ensure access to files in /etc/apt/sources.list.d are configured
+    exit-status: 0
+    exec: find /etc/apt/sources.list.d/ -type f 2>/dev/null | xargs -r stat -c '%U:%G:%a:%n' | grep -Pv -- '^root:root:0[0-6]{3}:' ; true
+    stdout:
+    - '/^$/'
+    meta:
+      server: 1
+      workstation: 2
+      CIS_ID: 1.2.1.9
+      NIST800-53R5: AC-6
+  {{ end }}
+{{ end }}

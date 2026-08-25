@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_5_1_23 }}
+command:
+  sshd_pqc_kex:
+    title: 5.1.23 | Ensure sshd post-quantum cryptography key exchange algorithms are configured
+    exec: sshd -T | grep -i kexalgorithms
+    exit-status: 0
+    stdout:
+    - '/sntrup761x25519|mlkem768x25519/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.1.23
+      NIST800-53R5:
+      - SC-8
+  {{ end }}
+{{ end }}

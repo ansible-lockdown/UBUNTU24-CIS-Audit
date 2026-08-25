@@ -1,16 +1,14 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-    {{ if .Vars.ubtu24cis_rule_2_1_22 }}
-command:
-  manual_listening_ports:
-    title: 2.1.22 | Ensure only approved services are listening on a network interface | Manual Check required
-    exit-status:
-      or:
-      - 0
-      - 1
-    exec: echo "Manual!! - Please check only approved services are listening"
-    stdout: ['!/./']
+  {{ if .Vars.ubtu24cis_rule_2_1_22 }}
+    {{ if not .Vars.ubtu24cis_xinetd_server }}
+      {{ if not .Vars.ubtu24cis_xinetd_mask }}
+package:
+  xinetd_pkg:
+    title: 2.1.22 | Ensure xinetd services are not in use | pkg removed
+    name: xinetd
+    installed: false
     meta:
       server: 1
       workstation: 1
@@ -18,5 +16,23 @@ command:
       - 2.1.22
       NIST800-53R5:
       - CM-7
+      {{ end }}
+      {{ if .Vars.ubtu24cis_xinetd_mask }}
+file:
+  xinetd_service_masked:
+    title: 2.1.22 | Ensure xinetd services are not in use | masked
+    path: /etc/systemd/system/xinetd.service
+    exists: true
+    filetype: symlink
+    linked-to: /dev/null
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 2.1.22
+      NIST800-53R5:
+      - CM-7
+      {{ end }}
+    {{ end }}
   {{ end }}
 {{ end }}

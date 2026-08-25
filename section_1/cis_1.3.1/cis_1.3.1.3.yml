@@ -4,12 +4,12 @@
 {{ if not .Vars.ubtu24cis_apparmor_disable }}
   {{ if .Vars.ubtu24cis_rule_1_3_1_3 }}
 command:
-  apparmor_enf_or_comp:
-    title: 1.3.1.3 | Ensure all AppArmor Profiles are in enforce or complain mode | profile
-    exec: LOADED=`apparmor_status | grep 'profiles are loaded' | awk '{print $1}'` && ENFORCE=`apparmor_status | grep 'profiles are in enforce mode.' | awk '{print $1}'` && COMPLAIN=`apparmor_status | grep 'profiles are in complain mode.' | awk '{print $1}'` && if [ $((ENFORCE + COMPLAIN)) != "$LOADED" ]; then echo "Profiles Error";fi
+  apparmor_enf_only:
+    title: 1.3.1.3 | Ensure all AppArmor Profiles are enforcing
+    exec: if [ `apparmor_status | grep 'profiles are in complain mode.' | awk '{print $1}'` == 0 ]; then echo "Not Enforcing" ;fi
     exit-status: 0
     stdout:
-    - '!/Profiles Error/'
+    - '!/Not Enforcing/'
     meta:
       server: 1
       workstation: 1

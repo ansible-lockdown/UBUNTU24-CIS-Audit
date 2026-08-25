@@ -1,28 +1,21 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_6 }}
 file:
-  gnome_automount_disable:
-    title: 1.7.6 | Ensure GDM automatic mounting of removable media is disabled
-    path: /etc/dconf/db/local.d/00-media-automount
+  gdm_xdcmp:
+    title: 1.7.6 | Ensure XDMCP is not enabled
+    path: /etc/gdm3/custom.conf
     exists: true
     contents:
-    - '/^[org/gnome/desktop/media-handling]/'
-    - '/^automount=false/'
-    - '/^automount-open=false/'
+    - '!/^Enable=true/'
     meta:
       server: 1
-      workstation: 1
+      workstation: 2
       CIS_ID:
       - 1.7.6
-      NIST800-53R5:
-      - CM-1
-      - CM-2
-      - CM-6
-      - CM-7
-      - IA-5
+      NIST800-53R5: SI-4
     {{ end }}
   {{ end }}
 {{ end }}

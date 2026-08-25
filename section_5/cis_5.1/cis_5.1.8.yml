@@ -12,7 +12,7 @@ file:
     - '!/^DisableForwarding no/'
     meta:
       server: 2
-      workstation: 2
+      workstation: 1
       CIS_ID:
       - 5.1.8
       NIST800-53R5:

@@ -1,0 +1,18 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_2_1_6 }}
+command:
+  apt_auth_conf_d_files:
+    title: 1.2.1.6 | Ensure access to files in the /etc/apt/auth.conf.d/ directory is configured
+    exit-status: 0
+    exec: find /etc/apt/auth.conf.d/ -type f 2>/dev/null | xargs -r stat -c '%U:%G:%a:%n' | grep -Pv -- '^root:root:0?640:' ; true
+    stdout:
+    - '/^$/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 1.2.1.6
+      NIST800-53R5: AC-6
+  {{ end }}
+{{ end }}

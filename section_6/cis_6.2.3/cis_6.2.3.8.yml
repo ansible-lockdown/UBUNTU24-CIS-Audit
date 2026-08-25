@@ -3,19 +3,13 @@
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_6_2_3_8 }}
 command:
-  auditd_identity_cnf:
-    title: 6.2.3.8 | Ensure events that modify user/group information are collected | Config
-    exec: grep identity /etc/audit/rules.d/*.rules
+  auditd_8_config:
+    title: 6.2.3.8 | Ensure events that modify /etc/network and /etc/networks are collected | Config
+    exec: grep system-locale /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
-    - '-w /etc/group -p wa -k identity'
-    - '-w /etc/passwd -p wa -k identity'
-    - '-w /etc/gshadow -p wa -k identity'
-    - '-w /etc/shadow -p wa -k identity'
-    - '-w /etc/nsswitch.conf -p wa -k identity'
-    - '-w /etc/pam.conf -p wa -k identity'
-    - '-w /etc/pam.d -p wa -k identity'
-    - '-w /etc/security/opasswd -p wa -k identity'
+    - '-w /etc/network -p wa -k system-locale'
+    - '-w /etc/networks -p wa -k system-locale'
     meta:
       server: 2
       workstation: 2
@@ -23,25 +17,6 @@ command:
       - 6.2.3.8
       NIST800-53R5:
       - AU-3
-  auditd_identity_live:
-    title: 6.2.3.8 | Ensure events that modify user/group information are collected | Live
-    exec: auditctl -l | grep identity
-    exit-status: 0
-    stdout:
-    - '-w /etc/group -p wa -k identity'
-    - '-w /etc/passwd -p wa -k identity'
-    - '-w /etc/gshadow -p wa -k identity'
-    - '-w /etc/nsswitch.conf -p wa -k identity'
-    - '-w /etc/pam.conf -p wa -k identity'
-    - '-w /etc/pam.d -p wa -k identity'
-    - '-w /etc/shadow -p wa -k identity'
-    - '-w /etc/security/opasswd -p wa -k identity'
-    meta:
-      server: 2
-      workstation: 2
-      CIS_ID:
-      - 6.2.3.8
-      NIST800-53R5:
-      - AU-3
+      - CM-6
   {{ end }}
 {{ end }}

@@ -1,20 +1,51 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_2_1_20 }}
-    {{ if not .Vars.ubtu24cis_xwindow_server }}
+    {{ if not .Vars.ubtu24cis_tftp_server }}
+      {{ if not .Vars.ubtu24cis_tftp_mask }}
 package:
-  xwindow_pkg:
-    title: 2.1.20 | Ensure X window server services are not in use | pkg removed
-    name: xserver-common
+  tftp_pkg:
+    title: 2.1.20 | Ensure tftp server services are not in use | pkg removed
+    name: tftpd-hpa
     installed: false
     meta:
-      server: 1
-      workstation: 1
+      server: 2
+      workstation: NA
       CIS_ID:
       - 2.1.20
       NIST800-53R5:
-      - CM-11
+      - CM-7
+      {{ end }}
+      {{ if .Vars.ubtu24cis_tftp_mask }}
+file:
+  tftp_service_masked:
+    title: 2.1.20 | Ensure tftp server services are not in use | masked
+    path: /etc/systemd/system/tftpd-hpa.service
+    exists: true
+    filetype: symlink
+    linked-to: /dev/null
+    meta:
+      server: 2
+      workstation: NA
+      CIS_ID:
+      - 2.1.20
+      NIST800-53R5:
+      - CM-7
+  tftp_socket_masked:
+    title: 2.1.20 | Ensure tftp server services are not in use | masked
+    path: /etc/systemd/system/tftp.socket
+    exists: true
+    filetype: symlink
+    linked-to: /dev/null
+    meta:
+      server: 2
+      workstation: NA
+      CIS_ID:
+      - 2.1.20
+      NIST800-53R5:
+      - CM-7
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

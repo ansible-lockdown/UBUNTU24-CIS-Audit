@@ -3,13 +3,13 @@
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_6_5 }}
 file:
-  etc_issue_perms:
-    title: 1.6.5 | Ensure access to /etc/issue is configured
+  sshd_warning_banner_content:
+    title: 1.6.5 | Ensure sshd warning Banner is configured
+    path: {{ .Vars.ubtu24cis_sshd_banner_file }}
     exists: true
-    path: /etc/issue
-    owner: root
-    group: root
-    mode: '0644'
+    contents:
+    - '!/(\\v|\\r|\\m|\\s)/'
+    - '!/(?i)ubuntu/'
     meta:
       server: 1
       workstation: 1

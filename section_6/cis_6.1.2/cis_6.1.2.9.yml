@@ -1,0 +1,24 @@
+---
+
+{{ if .Vars.ubtu24cis_level_2 }}
+  {{ if .Vars.ubtu24cis_rule_6_1_2_9 }}
+    {{ if not .Vars.ubtu24cis_system_is_log_server }}
+file:
+  rsyslog_forward_gtls:
+    path: /etc/rsyslog.d/40-forward.conf
+    title: 6.1.2.9 | Ensure rsyslog forwarding uses gtls
+    exists: true
+    contents:
+    - '/StreamDriver="gtls"/'
+    - '/StreamDriverMode="1"/'
+    - '/StreamDriverAuthMode="x509\/name"/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.1.2.9
+      NIST800-53R5:
+      - AU-6
+    {{ end }}
+  {{ end }}
+{{ end }}

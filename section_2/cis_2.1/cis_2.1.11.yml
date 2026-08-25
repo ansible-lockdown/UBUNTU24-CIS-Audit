@@ -1,46 +1,57 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_2_1_11 }}
-    {{ if not .Vars.ubtu24cis_print_server }}
-      {{ if not .Vars.ubtu24cis_print_mask }}
+    {{ if not .Vars.ubtu24cis_message_server }}
+      {{ if not .Vars.ubtu24cis_message_mask }}
 package:
-  cups_pkg:
-    title: 2.1.11 | Ensure print server services are not in use | pkg removed
-    name: cups
+  dovecot_imapd_pkg:
+    title: 2.1.11 | Ensure message access server services are not in use | pkg removed
+    name: dovecot-imapd
     installed: false
     meta:
       server: 1
-      workstation: 1
+      workstation: 2
+      CIS_ID:
+      - 2.1.11
+      NIST800-53R5:
+      - CM-7
+  dovecot_pop3d_pkg:
+    title: 2.1.11 | Ensure message access server services are not in use | pkg removed
+    name: dovecot-pop3d
+    installed: false
+    meta:
+      server: 1
+      workstation: 2
       CIS_ID:
       - 2.1.11
       NIST800-53R5:
       - CM-7
       {{ end }}
-      {{ if .Vars.ubtu24cis_print_mask }}
+      {{ if .Vars.ubtu24cis_message_mask }}
 file:
-  cups_service_masked:
-    title: 2.1.11 | Ensure print server services are not in use | masked
-    path: /etc/systemd/system/cups.service
+  dovecot_service_masked:
+    title: 2.1.11 | Ensure message access server services are not in use | masked
+    path: /etc/systemd/system/dovecot.service
     exists: true
     filetype: symlink
     linked-to: /dev/null
     meta:
       server: 1
-      workstation: 1
+      workstation: 2
       CIS_ID:
       - 2.1.11
       NIST800-53R5:
       - CM-7
-  cups_socket_masked:
-    title: 2.1.11 | Ensure print server services are not in use | masked
-    path: /etc/systemd/system/cups.socket
+  dovecot_socket_masked:
+    title: 2.1.11 | Ensure message access server services are not in use | masked
+    path: /etc/systemd/system/dovecot.socket
     exists: true
     filetype: symlink
     linked-to: /dev/null
     meta:
       server: 1
-      workstation: 1
+      workstation: 2
       CIS_ID:
       - 2.1.11
       NIST800-53R5:

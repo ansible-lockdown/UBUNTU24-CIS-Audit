@@ -1,21 +1,18 @@
 ---
 
-{{ if .Vars.run_heavy_tests }}
-  {{ if .Vars.ubtu24cis_level_1 }}
-    {{ if .Vars.ubtu24cis_rule_1_2_1_1 }}
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_2_1_1 }}
 command:
-  gpg_keys_list:
-    title: 1.2.1.1 | Ensure GPG keys are configured | Manual
+  apt_signed_by:
+    title: 1.2.1.1 | Ensure the source.list and .source files use the Signed-By option | Manual
     exit-status: 0
-    exec: echo "MANUAL - Please check manually for gpg keys"
+    exec: echo "MANUAL - Please check manually that sources use the Signed-By option"
     stdout:
     - '!/^MANUAL.*/'
     meta:
       server: 1
       workstation: 1
-      CIS_ID:
-      - 1.2.1.1
+      CIS_ID: 1.2.1.1
       NIST800-53R5: SI-2
-    {{ end }}
   {{ end }}
 {{ end }}

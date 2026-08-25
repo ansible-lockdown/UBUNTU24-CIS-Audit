@@ -2,27 +2,29 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_5_5 }}
-package:
-  apport:
-    title: 1.5.5 | Ensure Automatic Error Reporting is not enabled | Package
-    installed: false
+kernel-param:
+  kernel.dmesg_restrict:
+    title: 1.5.5 | Ensure kernel.dmesg_restrict is configured | sysctl_live
+    value: '1'
     meta:
       server: 1
       workstation: 1
-      CIS_ID:
-      - 1.5.5
-file:
-  error_report_apport_disable:
-    title: 1.5.5 | Ensure Automatic Error Reporting is not enabled | disabled
-    exists: true
-    path: /etc/default/apport
-    contents:
-    - 'enabled=0'
-    - '!/enabled=1/'
+      CIS_ID: 1.5.5
+      NIST800-53R5: CM-6
+command:
+  dmesg_restrict_configured:
+    title: 1.5.5 | Ensure kernel.dmesg_restrict is configured | sysctl_configured
+    exit-status:
+      or:
+      - 0
+      - 2
+    exec: 'grep "^kernel\.dmesg_restrict" /etc/sysctl.conf /etc/sysctl.d/* | cut -d ":" -f2'
+    stdout:
+    - '/kernel.dmesg_restrict\s*=\s*1/'
     meta:
       server: 1
       workstation: 1
-      CIS_ID:
-      - 1.5.5
+      CIS_ID: 1.5.5
+      NIST800-53R5: CM-6
   {{ end }}
 {{ end }}

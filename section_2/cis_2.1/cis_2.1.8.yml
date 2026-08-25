@@ -2,23 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_8 }}
-    {{ if not .Vars.ubtu24cis_message_server }}
-      {{ if not .Vars.ubtu24cis_message_mask }}
+    {{ if not .Vars.ubtu24cis_ftp_server }}
+      {{ if not .Vars.ubtu24cis_ftp_mask }}
 package:
-  dovecot_imapd_pkg:
-    title: 2.1.8 | Ensure message access server services are not in use | pkg removed
-    name: dovecot-imapd
-    installed: false
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 2.1.8
-      NIST800-53R5:
-      - CM-7
-  dovecot_pop3d_pkg:
-    title: 2.1.8 | Ensure message access server services are not in use | pkg removed
-    name: dovecot-pop3d
+  ftp_pkg:
+    title: 2.1.8 | Ensure ftp server services are not in use | pkg removed
+    name: vsftp
     installed: false
     meta:
       server: 1
@@ -28,24 +17,11 @@ package:
       NIST800-53R5:
       - CM-7
       {{ end }}
-      {{ if .Vars.ubtu24cis_message_mask }}
+      {{ if .Vars.ubtu24cis_ftp_mask }}
 file:
-  dovecot_service_masked:
-    title: 2.1.8 | Ensure message access server services are not in use | masked
-    path: /etc/systemd/system/dovecot.service
-    exists: true
-    filetype: symlink
-    linked-to: /dev/null
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 2.1.8
-      NIST800-53R5:
-      - CM-7
-  dovecot_socket_masked:
-    title: 2.1.8 | Ensure message access server services are not in use | masked
-    path: /etc/systemd/system/dovecot.socket
+  ftp_service_masked:
+    title: 2.1.8 | Ensure ftp server services are not in use | masked
+    path: /etc/systemd/system/vsftpd.service
     exists: true
     filetype: symlink
     linked-to: /dev/null

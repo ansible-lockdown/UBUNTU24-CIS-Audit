@@ -2,12 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_7 }}
-    {{ if not .Vars.ubtu24cis_ldap_server }}
-      {{ if not .Vars.ubtu24cis_ldap_mask }}
+    {{ if not .Vars.ubtu24cis_dns_server }}
+      {{ if not .Vars.ubtu24cis_dns_mask }}
 package:
-  ldap_pkg:
-    title: 2.1.7 | Ensure ldap server services are not in use | pkg removed
-    name: slapd
+  dns_pkg:
+    title: 2.1.7 | Ensure dns server services are not in use | pkg removed
+    name: bind9
     installed: false
     meta:
       server: 1
@@ -17,11 +17,11 @@ package:
       NIST800-53R5:
       - CM-7
       {{ end }}
-      {{ if .Vars.ubtu24cis_ldap_mask }}
+      {{ if .Vars.ubtu24cis_dns_mask }}
 file:
-  ldap_service_masked:
-    title: 2.1.7 | Ensure ldap server services are not in use | masked
-    path: /etc/systemd/system/slapd.service
+  dns_service_masked:
+    title: 2.1.7 | Ensure dns server services are not in use | masked
+    path: /etc/systemd/system/bind9.service
     exists: true
     filetype: symlink
     linked-to: /dev/null

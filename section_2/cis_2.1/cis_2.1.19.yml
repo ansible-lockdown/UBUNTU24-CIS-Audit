@@ -2,12 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_19 }}
-    {{ if not .Vars.ubtu24cis_xinetd_server }}
-      {{ if not .Vars.ubtu24cis_xinetd_mask }}
+    {{ if not .Vars.ubtu24cis_telnet_server }}
+      {{ if not .Vars.ubtu24cis_telnet_mask }}
 package:
-  xinetd_pkg:
-    title: 2.1.19 | Ensure xinetd services are not in use | pkg removed
-    name: xinetd
+  telnetd_pkg:
+    title: 2.1.19 | Ensure telnet server services are not in use | pkg removed
+    name: telnetd
     installed: false
     meta:
       server: 1
@@ -17,11 +17,11 @@ package:
       NIST800-53R5:
       - CM-7
       {{ end }}
-      {{ if .Vars.ubtu24cis_xinetd_mask }}
+      {{ if .Vars.ubtu24cis_telnet_mask }}
 file:
-  xinetd_service_masked:
-    title: 2.1.19 | Ensure xinetd services are not in use | masked
-    path: /etc/systemd/system/xinetd.service
+  telnet_service_masked:
+    title: 2.1.19 | Ensure telnet server services are not in use | masked
+    path: /etc/systemd/system/inetd.service
     exists: true
     filetype: symlink
     linked-to: /dev/null

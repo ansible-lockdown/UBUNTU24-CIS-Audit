@@ -1,0 +1,23 @@
+---
+
+{{ if .Vars.ubtu24cis_level_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_6_7 }}
+file:
+  etc_issue_perms:
+    title: 1.6.7 | Ensure access to /etc/issue is configured
+    exists: true
+    path: /etc/issue
+    owner: root
+    group: root
+    mode: '0644'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.6.7
+      NIST800-53R5:
+      - CM-6
+      - CM-1
+      - CM-3
+  {{ end }}
+{{ end }}

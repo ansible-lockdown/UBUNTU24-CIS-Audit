@@ -3,13 +3,12 @@
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_17 }}
 file:
-  ssh_maxsessions:
-    title: 5.1.17 | Ensure sshd MaxSessions is configured
+  ssh_maxstartups:
+    title: 5.1.17 | Ensure sshd MaxStartups is configured
     path: /etc/ssh/sshd_config
     exists: true
     contents:
-    - '/^(?i)MaxSessions ([2-9]|10)/'
-    - '!/^MaxSessions (1|1[1-9]|[2-9][0-9]|[1-9]{3,})/'
+    - 'MaxStartups 10:30:60'
     meta:
       server: 1
       workstation: 1

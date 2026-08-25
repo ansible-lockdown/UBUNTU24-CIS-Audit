@@ -1,10 +1,15 @@
+---
+
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_3_2_4 }}
 command:
-  modprobe_sctp:
-    title: 3.2.4 | Ensure sctp kernel module is not available | sctp config
-    exit-status: 0
-    exec: 'modprobe -n -v sctp'
+  modprobe_RDS:
+    title: 3.2.4 | Ensure rds kernel module is not available | rds config
+    exit-status:
+      or:
+      - 0
+      - 1
+    exec: 'modprobe -n -v rds'
     stdout:
       - '/install /bin/(true|false)/'
     meta:
@@ -15,10 +20,10 @@ command:
       NIST800-53R5:
       - CM-7
       - SI-4
-  lsmod_sctp:
-    title: 3.2.4 | Ensure sctp kernel module is not available | running sctp
+  lsmod_RDS:
+    title: 3.2.4 | Ensure rds kernel module is not available | running rds
     exit-status: 1
-    exec: lsmod | grep -i sctp
+    exec: lsmod | grep -i rds
     stdout:
     - '!/^.*/'
     meta:

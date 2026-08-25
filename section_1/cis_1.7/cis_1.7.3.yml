@@ -3,25 +3,21 @@
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_3 }}
-command:
-  gdm_disable_user:
-    title: 1.7.3 | Ensure GDM disable-user-list option is enabled
-    exec: grep -E "^disable-user-list" /etc/gdm3/greeter.dconf-defaults
-    exit-status: 0
-    stdout:
-    - '/^disable-user-list=true/'
-    - '!/^disable-user-list=false/'
+file:
+  gdm_screensaver:
+    title: 1.7.3 | Ensure GDM screen lock is configured
+    path: /etc/dconf/db/local.d/00-screensaver
+    exists: true
+    contents:
+    - '/^[org/gnome/desktop/session]/'
+    - '/^idle-delay=uint32 (1|[1-9]|[1-7][0-9]{1,2}|900)$/'
+    - '/^lock-delay=uint32 [0-5]$/'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 1.7.3
-      NIST800-53R5:
-      - CM-1
-      - CM-2
-      - CM-6
-      - CM-7
-      - IA-5
+      NIST800-53R5: NA
     {{ end }}
   {{ end }}
 {{ end }}

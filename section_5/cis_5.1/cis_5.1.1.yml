@@ -4,7 +4,7 @@
   {{ if .Vars.ubtu24cis_rule_5_1_1 }}
 file:
   sshd_config_perms:
-    title: 5.1.1 | Ensure permissions on /etc/ssh/sshd_config are configured
+    title: 5.1.1 | Ensure access to /etc/ssh/sshd_config is configured
     path: /etc/ssh/sshd_config
     exists: true
     mode: "0600"

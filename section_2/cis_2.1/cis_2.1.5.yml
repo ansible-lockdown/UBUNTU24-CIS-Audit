@@ -2,12 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_5 }}
-    {{ if not .Vars.ubtu24cis_dnsmasq_server }}
-      {{ if not .Vars.ubtu24cis_dnsmasq_mask }}
+    {{ if not .Vars.ubtu24cis_dhcp_server }}
+      {{ if not .Vars.ubtu24cis_dhcp_mask }}
 package:
-  dnsmasq_pkg:
-    title: 2.1.5 | Ensure dnsmasq services are not in use | pkg removed
-    name: dnsmasq
+  dhcp_pkg:
+    title: 2.1.5 | Ensure dhcp server services are not in use | pkg removed
+    name: isc-dhcp-server
     installed: false
     meta:
       server: 1
@@ -17,11 +17,24 @@ package:
       NIST800-53R5:
       - CM-7
       {{ end }}
-      {{ if .Vars.ubtu24cis_dnsmasq_mask }}
+      {{ if .Vars.ubtu24cis_dhcp_mask }}
 file:
-  dnsmasq_service_masked:
-    title: 2.1.5 | Ensure dnsmasq services are not in use | masked
-    path: /etc/systemd/system/dnsmasq.service
+  dhcp_service_masked:
+    title: 2.1.5 | Ensure dhcp server services are not in use | masked
+    path: /etc/systemd/system/isc-dhcp-server.service
+    exists: true
+    filetype: symlink
+    linked-to: /dev/null
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 2.1.5
+      NIST800-53R5:
+      - CM-7
+  dhcp6_service_masked:
+    title: 2.1.5 | Ensure dhcp server services are not in use | masked
+    path: /etc/systemd/system/isc-dhcp-server6.service
     exists: true
     filetype: symlink
     linked-to: /dev/null

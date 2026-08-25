@@ -1,7 +1,7 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_rule_1_1_2_7_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_1_2_7_3 }}
 mount:
   var_log_audit_options:
     title: 1.1.2.7.3 | Ensure nosuid option set on /var/log/audit partition

@@ -2,19 +2,28 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_1_1_10 }}
-command:
-  cve_fs:
-    title: 1.1.1.10 | Ensure unused filesystems kernel modules are not available
-    exit-status: 0
-    exec: {{ .Vars.ubtu24cis_temp_exec_location }}/fs_with_cves.sh
-    stdout:
-    - '!/.*<- CVE exists!/'
+file:
+  usb-storage_disabled:
+    title: 1.1.1.10 | Ensure usb-storage kernel module is not available | modprobe
+    path: /etc/modprobe.d/CIS.conf
+    exists: true
+    contents:
+    - '/^install usb-storage /bin/(true|false)/'
     meta:
       server: 1
-      workstation: 2
-      CIS_ID:
-      - 1.1.1.10
-      NIST800-53R5: NA
-      CCI: NA
+      workstation: 1
+      CIS_ID: 1.1.1.10
+      NIST800-53R5: SI-3
+  usb-storage_blacklist:
+    title: 1.1.1.10 | Ensure usb-storage kernel module is not available | blacklist
+    path: /etc/modprobe.d/blacklist.conf
+    exists: true
+    contents:
+    - '/^blacklist usb-storage/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 1.1.1.10
+      NIST800-53R5: SI-3
   {{ end }}
 {{ end }}

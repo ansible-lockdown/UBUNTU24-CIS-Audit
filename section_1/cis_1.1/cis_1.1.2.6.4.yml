@@ -1,7 +1,7 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_rule_1_1_2_6_1 }}
+  {{ if .Vars.ubtu24cis_rule_1_1_2_6_4 }}
 mount:
   var_log_noexec_options:
     title: 1.1.2.6.4 | Ensure noexec option set on /var/log partition

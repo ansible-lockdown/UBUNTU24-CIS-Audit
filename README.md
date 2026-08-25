@@ -2,7 +2,7 @@
 
 ## Overview
 
-### Based on CIS Benchmark for Ubuntu 24.04 LTS Benchmark v1.0.0
+### Based on CIS Benchmark for Ubuntu 24.04 LTS Benchmark v2.0.0
 
 [Centre For Internet Security]
 
@@ -35,7 +35,7 @@ root privileges
 
 If running as part of the ansible playbook, this will pull in the relevant branch for the version of benchmark you are remediating.
 
-- e.g. v1.0.0 will pull in branch benchmark-v1.0.0
+- e.g. v2.0.0 will pull in branch benchmark-v2.0.0
 
 Devel is normally the latest benchmark version, so maybe different from the version of benchmark you wish to test.
 Details will show in the README as part of the remediation as to the benchmark for the version it is written for.

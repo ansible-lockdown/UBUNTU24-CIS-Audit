@@ -3,29 +3,17 @@
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_4_1_8 }}
 file:
-  cron_deny_absent:
-    title: 2.4.1.8 | Ensure crontab is restricted to authorized users
-    path: /etc/cron.deny
-    exists: false
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 2.4.1.8
-      NIST800-53R5:
-      - AC-3
-      - MP-2
-  /etc/cron.allow:
-    title: 2.4.1.8 | Ensure crontab is restricted to authorized users
+  cron_d_perms:
+    title: 2.4.1.8 | Ensure access to /etc/cron.d is configured
+    path: /etc/cron.d
     exists: true
     owner: root
     group: root
-    mode: "0640"
+    mode: "0700"
     meta:
       server: 1
       workstation: 1
       CIS_ID:
-      - 2.4.1.8
       - 2.4.1.8
       NIST800-53R5:
       - AC-3
