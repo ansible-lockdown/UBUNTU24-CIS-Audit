@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_4_1_4 }}
 command:
   ufw_outgoing_default:
@@ -10,8 +10,8 @@ command:
     stdout:
     - '/deny \(outgoing\)/'
     meta:
-      server: 1
-      workstation: 1
+      server: 2
+      workstation: 2
       CIS_ID:
       - 4.1.4
       NIST800-53R5:

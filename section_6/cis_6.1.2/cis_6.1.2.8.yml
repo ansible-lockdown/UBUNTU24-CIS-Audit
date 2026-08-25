@@ -1,14 +1,14 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_6_1_2_8 }}
 package:
   rsyslog-gnutls:
     title: 6.1.2.8 | Ensure rsyslog-gnutls is installed
     installed: true
     meta:
-      server: 1
-      workstation: 1
+      server: 2
+      workstation: 2
       CIS_ID:
       - 6.1.2.8
       NIST800-53R5:

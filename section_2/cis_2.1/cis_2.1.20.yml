@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_20 }}
     {{ if not .Vars.ubtu24cis_tftp_server }}
       {{ if not .Vars.ubtu24cis_tftp_mask }}
@@ -10,8 +10,8 @@ package:
     name: tftpd-hpa
     installed: false
     meta:
-      server: 2
-      workstation: NA
+      server: 1
+      workstation: 1
       CIS_ID:
       - 2.1.20
       NIST800-53R5:
@@ -26,8 +26,8 @@ file:
     filetype: symlink
     linked-to: /dev/null
     meta:
-      server: 2
-      workstation: NA
+      server: 1
+      workstation: 1
       CIS_ID:
       - 2.1.20
       NIST800-53R5:
@@ -39,8 +39,8 @@ file:
     filetype: symlink
     linked-to: /dev/null
     meta:
-      server: 2
-      workstation: NA
+      server: 1
+      workstation: 1
       CIS_ID:
       - 2.1.20
       NIST800-53R5:

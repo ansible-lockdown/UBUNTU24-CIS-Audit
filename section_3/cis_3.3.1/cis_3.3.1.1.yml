@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if not .Vars.ubtu24cis_is_router }}
     {{ if .Vars.ubtu24cis_rule_3_3_1_1 }}
       kernel-param:
@@ -8,7 +8,7 @@
           title: 3.3.1.1 | Ensure net.ipv4.ip_forward is configured
           value: '0'
           meta:
-            server: 1
+            server: 2
             workstation: 1
             CIS_ID:
             - 3.3.1.1
@@ -29,7 +29,7 @@
           stdout:
           - '/net\.ipv4\.ip_forward\s*=\s*0/'
           meta:
-            server: 1
+            server: 2
             workstation: 1
             CIS_ID:
             - 3.3.1.1

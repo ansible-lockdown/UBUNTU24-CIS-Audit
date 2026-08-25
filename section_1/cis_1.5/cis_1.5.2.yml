@@ -1,14 +1,14 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_1_5_2 }}
 kernel-param:
   fs.protected_symlinks:
     title: 1.5.2 | Ensure fs.protected_symlinks is configured | sysctl_live
     value: '1'
     meta:
-      server: 1
-      workstation: 1
+      server: 2
+      workstation: 2
       CIS_ID: 1.5.2
       NIST800-53R5: CM-6
 command:
@@ -22,8 +22,8 @@ command:
     stdout:
     - '/fs.protected_symlinks\s*=\s*1/'
     meta:
-      server: 1
-      workstation: 1
+      server: 2
+      workstation: 2
       CIS_ID: 1.5.2
       NIST800-53R5: CM-6
   {{ end }}

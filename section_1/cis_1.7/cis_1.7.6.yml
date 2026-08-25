@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_6 }}
 file:
@@ -12,7 +12,7 @@ file:
     - '!/^Enable=true/'
     meta:
       server: 1
-      workstation: 2
+      workstation: 1
       CIS_ID:
       - 1.7.6
       NIST800-53R5: SI-4

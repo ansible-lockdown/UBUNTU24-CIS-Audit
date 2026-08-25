@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_1_2_1_2 }}
 file:
   apt_weak_dependencies:
@@ -11,8 +11,8 @@ file:
     - '/APT::Install-Recommends\s+"0";/'
     - '/APT::Install-Suggests\s+"0";/'
     meta:
-      server: 1
-      workstation: 1
+      server: 2
+      workstation: 2
       CIS_ID: 1.2.1.2
       NIST800-53R5: CM-7
   {{ end }}

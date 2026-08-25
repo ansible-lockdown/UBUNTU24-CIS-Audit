@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_1 }}
 file:
@@ -13,8 +13,8 @@ file:
     - '/^banner-message-enable=true/'
     - '/^banner-message-text='{{ .Vars.ubtu24cis_warning_banner }}'/'
     meta:
-      server: 2
-      workstation: NA
+      server: 1
+      workstation: 1
       CIS_ID:
       - 1.7.1
       NIST800-53R5:

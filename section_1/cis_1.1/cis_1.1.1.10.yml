@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_1_1_1_10 }}
 file:
   usb-storage_disabled:
@@ -11,7 +11,7 @@ file:
     - '/^install usb-storage /bin/(true|false)/'
     meta:
       server: 1
-      workstation: 1
+      workstation: 2
       CIS_ID: 1.1.1.10
       NIST800-53R5: SI-3
   usb-storage_blacklist:
@@ -22,7 +22,7 @@ file:
     - '/^blacklist usb-storage/'
     meta:
       server: 1
-      workstation: 1
+      workstation: 2
       CIS_ID: 1.1.1.10
       NIST800-53R5: SI-3
   {{ end }}

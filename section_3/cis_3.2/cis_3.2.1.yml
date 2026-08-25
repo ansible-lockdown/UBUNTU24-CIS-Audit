@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_3_2_1 }}
 command:
   modprobe_atm:
@@ -13,8 +13,8 @@ command:
     stdout:
       - '/install /bin/(true|false)/'
     meta:
-      server: 2
-      workstation: 2
+      server: 1
+      workstation: 1
       CIS_ID:
       - 3.2.1
       NIST800-53R5:
@@ -27,8 +27,8 @@ command:
     stdout:
     - '!/^.*/'
     meta:
-      server: 2
-      workstation: 2
+      server: 1
+      workstation: 1
       CIS_ID:
       - 3.2.1
       NIST800-53R5:

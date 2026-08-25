@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_2_1_23 }}
     {{ if not .Vars.ubtu24cis_xwindow_server }}
 package:
@@ -9,8 +9,8 @@ package:
     name: xserver-common
     installed: false
     meta:
-      server: 1
-      workstation: 1
+      server: 2
+      workstation: NA
       CIS_ID:
       - 2.1.23
       NIST800-53R5:

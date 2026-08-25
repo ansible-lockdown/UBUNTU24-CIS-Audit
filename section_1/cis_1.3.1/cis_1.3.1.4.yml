@@ -1,14 +1,14 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_3_1_4 }}
 kernel-param:
   kernel.apparmor_restrict_unprivileged_unconfined:
     title: 1.3.1.4 | Ensure apparmor_restrict_unprivileged_unconfined is enabled
     value: '1'
     meta:
-      server: 2
-      workstation: 2
+      server: 1
+      workstation: 1
       CIS_ID:
       - 1.3.1.4
       NIST800-53R5: AC-3
@@ -23,8 +23,8 @@ command:
     stdout:
     - '/kernel\.apparmor_restrict_unprivileged_unconfined\s*=\s*1/'
     meta:
-      server: 2
-      workstation: 2
+      server: 1
+      workstation: 1
       CIS_ID:
       - 1.3.1.4
       NIST800-53R5: AC-3

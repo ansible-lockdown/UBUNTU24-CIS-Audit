@@ -11,7 +11,7 @@ file:
     contents:
     - '/^WaylandEnable=false/'
     meta:
-      server: 1
+      server: 2
       workstation: 2
       CIS_ID:
       - 1.7.7
