@@ -51,6 +51,8 @@
 - 4.1.1 counts a firewall only when its service is enabled and active
 - 1.1.1.6 accepts the overlay module name
 - 2.1.21 and 5.3.3.3.3 title separators fixed
+- 6.2.3.20 grep reads -e 2 as a pattern, not an option
+- 5.4.1.1, 5.4.1.2, 5.4.1.3 and 5.4.1.5 per-user checks skipped unless ubtu24cis_disruption_high
 
 ## Based on CIS v1.0.0 - July 26
 

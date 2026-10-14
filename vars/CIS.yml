@@ -671,6 +671,9 @@ ubtu24cis_pass_max_days: 365
 ubtu24cis_pass_min_days: 1
 ubtu24cis_pass_warn_age: 7
 
+# existing users only changed when disruption_high is true
+ubtu24cis_disruption_high: true
+
 # set sugroup if differs from wheel
 ubtu24cis_sugroup: nosugroup
 
