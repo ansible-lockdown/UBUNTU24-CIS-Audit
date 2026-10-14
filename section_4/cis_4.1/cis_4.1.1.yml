@@ -7,10 +7,11 @@ command:
     title: 4.1.1 | Ensure a single firewall configuration utility is in use
     exec: |
       active=0
-      dpkg -s ufw 2>/dev/null | grep -q 'Status: install ok installed' && ufw status | grep -q 'Status: active' && active=$((active+1))
-      dpkg -s nftables 2>/dev/null | grep -q 'Status: install ok installed' && systemctl is-active nftables 2>/dev/null | grep -q '^active' && active=$((active+1))
-      dpkg -s iptables 2>/dev/null | grep -q 'Status: install ok installed' && iptables -L -n 2>/dev/null | grep -qv '^$' && active=$((active+1))
-      if [ "$active" -le 1 ]; then echo "PASS: $active firewall utility active"; else echo "FAIL: $active firewall utilities active"; fi
+      for fw in ufw nftables iptables; do
+        cmd=$fw; [ "$fw" = nftables ] && cmd=nft
+        command -v $cmd >/dev/null 2>&1 && systemctl is-enabled --quiet $fw 2>/dev/null && systemctl is-active --quiet $fw 2>/dev/null && active=$((active+1))
+      done
+      if [ "$active" -eq 1 ]; then echo "PASS: $active firewall utility active"; else echo "FAIL: $active firewall utilities active"; fi
     exit-status: 0
     stdout:
     - 'PASS'

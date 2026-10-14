@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_2_1_1 }}
     {{ if not .Vars.ubtu24cis_autofs_services }}
       {{ if not .Vars.ubtu24cis_autofs_mask }}
