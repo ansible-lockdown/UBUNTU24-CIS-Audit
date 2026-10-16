@@ -6,7 +6,7 @@
 command:
   gdm_profile_1_7_1:
     title: 1.7.1 | Ensure GDM login banner is configured | dconf profile
-    exec: grep -PHs '^\h*(user-db|system-db):' /etc/dconf/profile/*
+    exec: grep -PHs '^\h*(user-db|system-db):' /etc/dconf/profile/user
     exit-status: 0
     stdout:
     - '/:user-db:user$/'
@@ -30,6 +30,25 @@ command:
     - '/^banner-message-enable=true$/'
     - '!/^\s*banner-message-enable\s*=\s*false/'
     - '/^banner-message-text=''.+''$/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.7.1
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
+file:
+  gdm_banner_locks:
+    title: 1.7.1 | Ensure GDM login banner is configured | locked
+    path: /etc/dconf/db/{{ .Vars.ubtu24cis_dconf_db_name }}.d/locks/00-banner-message
+    exists: true
+    contents:
+    - '/^\/org\/gnome\/login-screen\/banner-message-enable$/'
+    - '/^\/org\/gnome\/login-screen\/banner-message-text$/'
     meta:
       server: 1
       workstation: 1

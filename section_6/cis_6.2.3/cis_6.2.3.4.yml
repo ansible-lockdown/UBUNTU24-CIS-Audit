@@ -8,8 +8,10 @@ command:
     exec: grep time-change /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
-    - '-a always,exit -F arch=b64 -S adjtimex,settimeofday,clock_settime -k time-change'
-    - '-a always,exit -F arch=b32 -S adjtimex,settimeofday,clock_settime -k time-change'
+    - '/-a always,exit -F arch=b64 -S adjtimex,settimeofday -(k |F key=)time-change$/'
+    - '/-a always,exit -F arch=b32 -S adjtimex,settimeofday -(k |F key=)time-change$/'
+    - '/-a always,exit -F arch=b64 -S clock_settime -F a0=0x0 -(k |F key=)time-change$/'
+    - '/-a always,exit -F arch=b32 -S clock_settime -F a0=0x0 -(k |F key=)time-change$/'
     - '-w /etc/localtime -p wa -k time-change'
     meta:
       server: 2
@@ -24,8 +26,10 @@ command:
     exec: auditctl -l | grep time-change
     exit-status: 0
     stdout:
-    - '-a always,exit -F arch=b64 -S adjtimex,settimeofday,clock_settime -F key=time-change'
-    - '-a always,exit -F arch=b32 -S settimeofday,adjtimex,clock_settime -F key=time-change'
+    - '/^-a always,exit -F arch=b64 -S adjtimex,settimeofday -F key=time-change$/'
+    - '/^-a always,exit -F arch=b32 -S settimeofday,adjtimex -F key=time-change$/'
+    - '/^-a always,exit -F arch=b64 -S clock_settime -F a0=0x0 -F key=time-change$/'
+    - '/^-a always,exit -F arch=b32 -S clock_settime -F a0=0x0 -F key=time-change$/'
     - '-w /etc/localtime -p wa -k time-change'
     meta:
       server: 2

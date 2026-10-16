@@ -6,8 +6,9 @@ file:
   coredump_storage:
     title: 1.5.12 | Ensure systemd-coredump Storage is configured
     exists: true
-    path: /etc/systemd/coredump.conf
+    path: /etc/systemd/coredump.conf.d/60-coredump.conf
     contents:
+    - '/^\[Coredump\]/'
     - '/^Storage=none/'
     meta:
       server: 1

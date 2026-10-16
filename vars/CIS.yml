@@ -575,7 +575,7 @@ ubtu24cis_message_server: false  # This is for messaging dovecot and dovecot-pop
 ubtu24cis_message_mask: false
 ubtu24cis_nfs_server: true
 ubtu24cis_nfs_mask: true
-ubtu24cis_nis_server: true  # set to mask if nis client required
+ubtu24cis_nis_server: true
 ubtu24cis_nis_mask: false
 ubtu24cis_print_server: false  # replaces cups
 ubtu24cis_print_mask: false
@@ -603,7 +603,7 @@ ubtu24cis_xwindow_server: false  # will remove mask not an option
 ubtu24cis_is_mail_server: false
 
 # Client Services
-# ubtu24cis_nis_client_required: false  # Same package as use nis_server value
+ubtu24cis_nis_client_required: false
 ubtu24cis_rsh_client: false
 ubtu24cis_talk_client: false
 ubtu24cis_telnet_required: false
@@ -660,12 +660,8 @@ ubtu24cis_sysctl_network_conf: /etc/sysctl.conf
 #
 ### Section 4
 #
-## Controls 4.1.x, 4.2.x, and 4.3.x - Firewall configuration
-# This variable represents the toggle for which firewall package is used.
-# The options that have an effect on the system are `ufw` and `iptables`.
-# The option `nftables` is also possible, but will only result in a message,
-# that `nftables` has been chosen; all settings have to be carried out manually.
-# Any other value, e.g. `none` will skip all firewall-related controls.
+## Controls 4.1.x - Firewall configuration
+# Benchmark v2.0.0 configures ufw only; there is no nftables or iptables choice.
 ubtu24cis_firewall_package: "ufw"
 
 ## auditd settings
@@ -688,6 +684,7 @@ ubtu24cis_sshd_allow_groups: 'AllowGroups'
 ubtu24cis_sshd_deny_users: 'DenyUsers'
 ubtu24cis_sshd_deny_groups: 'DenyGroups'
 
+ubtu24cis_sshd_cis_conf: /etc/ssh/sshd_config.d/00-cis-sshd.conf
 ubtu24cis_sshd_banner_file: /etc/issue.net
 ubtu24cis_sshd_listen_address: ''
 ubtu24cis_sshd_client_alive_interval: 15

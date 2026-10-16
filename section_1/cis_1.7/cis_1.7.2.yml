@@ -6,7 +6,7 @@
 command:
   gdm_profile_1_7_2:
     title: 1.7.2 | Ensure GDM disable-user-list is configured | dconf profile
-    exec: grep -PHs '^\h*(user-db|system-db):' /etc/dconf/profile/*
+    exec: grep -PHs '^\h*(user-db|system-db):' /etc/dconf/profile/user
     exit-status: 0
     stdout:
     - '/:user-db:user$/'
@@ -29,6 +29,24 @@ command:
     stdout:
     - '/^disable-user-list=true$/'
     - '!/^\s*disable-user-list\s*=\s*false/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.7.2
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
+file:
+  gdm_disable_user_locks:
+    title: 1.7.2 | Ensure GDM disable-user-list is configured | locked
+    path: /etc/dconf/db/{{ .Vars.ubtu24cis_dconf_db_name }}.d/locks/00-login-screen
+    exists: true
+    contents:
+    - '/^\/org\/gnome\/login-screen\/disable-user-list$/'
     meta:
       server: 1
       workstation: 1

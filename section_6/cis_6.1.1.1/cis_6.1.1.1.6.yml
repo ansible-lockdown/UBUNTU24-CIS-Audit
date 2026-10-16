@@ -1,6 +1,5 @@
 ---
 
-{{ if eq .Vars.ubtu24cis_syslog_service "journald" }}
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_6_1_1_1_6 }}
 command:
@@ -19,5 +18,4 @@ command:
       - AU-3
       - AU-12
   {{ end }}
-{{ end }}
 {{ end }}

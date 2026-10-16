@@ -49,6 +49,20 @@
 - 7.1.2 checks /etc/passwd-
 - 7.2.1, 7.2.2 and 7.2.4 checks fixed
 - vars/CIS.yml: aide_scan timer, screensaver delays added
+- 1.5.11 and 1.5.12 check the coredump.conf.d drop-in
+- 1.7.1 and 1.7.2 check the user profile and lock files
+- 2.1.19 checks inetutils-inetd.service
+- 2.2.1 gated on ubtu24cis_nis_client_required
+- 5.1.x check the effective config with sshd -T
+- 5.2.6 fails any negative timestamp_timeout
+- 5.3.3.1.3 accepts root_unlock_time 0
+- 5.3.3.3.1 accepts remember of 100 or more
+- 5.4.3.3 fails weak umask values, accepts 0027
+- 6.1.1.1.2, 6.1.1.1.6 and 6.1.1.1.7 journald gate removed
+- 6.1.3.1 owner and group check added
+- 6.2.3.4, 6.2.3.22 and 6.2.3.28 require the v2 rules
+- vars/CIS.yml: ubtu24cis_sshd_cis_conf and ubtu24cis_nis_client_required added
+
 
 ## Based on CIS v2.0.0 - August 2026
 

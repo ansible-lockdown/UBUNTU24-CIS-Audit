@@ -9,7 +9,7 @@ file:
     exists: true
     contents:
     - '/^\s*(even_deny_root|root_unlock_time\s*=\s*([6-9][0-9]|[1-9][0-9]{2,}))\b/'
-    - '!/^\s*root_unlock_time\s*=\s*([0-9]|[1-5][0-9])\s*$/'
+    - '!/^\s*root_unlock_time\s*=\s*([1-9]|[1-5][0-9])\s*$/'
     meta:
       server: 2
       workstation: 2

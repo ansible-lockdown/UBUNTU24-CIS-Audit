@@ -2,13 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_13 }}
-file:
+command:
   ssh_logingrace:
     title: 5.1.13 | Ensure sshd LoginGraceTime is configured
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - '/^(?i)LoginGraceTime ([1-9]|[1-5][0-9]|60)$/'
+    exec: sshd -T 2>/dev/null | grep -Ei '^(logingracetime) '
+    exit-status: 0
+    stdout:
+    - '/^logingracetime ([1-9]|[1-5][0-9]|60)$/'
     meta:
       server: 1
       workstation: 1

@@ -1,6 +1,5 @@
 ---
 
-{{ if eq .Vars.ubtu24cis_syslog_service "journald" }}
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_6_1_1_1_7 }}
 command:
@@ -18,5 +17,4 @@ command:
       NIST800-53R5:
       - AU-4
   {{ end }}
-{{ end }}
 {{ end }}

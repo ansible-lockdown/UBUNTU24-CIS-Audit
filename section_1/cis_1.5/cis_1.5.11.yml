@@ -6,8 +6,9 @@ file:
   coredump_processsizemax:
     title: 1.5.11 | Ensure systemd-coredump ProcessSizeMax is configured
     exists: true
-    path: /etc/systemd/coredump.conf
+    path: /etc/systemd/coredump.conf.d/60-coredump.conf
     contents:
+    - '/^\[Coredump\]/'
     - '/^ProcessSizeMax=0/'
     meta:
       server: 1
