@@ -8,7 +8,9 @@ file:
     path: /etc/motd
     exists: true
     contents:
-    - {{ .Vars.ubtu24cis_warning_banner }}
+{{- range splitList "\n" (trim .Vars.ubtu24cis_warning_banner) }}
+    - {{ toJson . }}
+{{- end }}
     - '!/(\\v|\\r|\\m|\\s)/'
     - '!/\/etc\/os-release/'
     - '!/(?i)ubuntu/'

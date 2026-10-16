@@ -4,6 +4,15 @@
 
 ## October 2026 - QA fixes
 
+- 1.5.2 live ptrace value uses ubtu24cis_ptrace_value
+- 1.6.1 banner check handles multi-line banners
+- 6.1.3.6 runs only when a remote log server is set
+- 6.1.3.7 gated on ubtu24cis_system_is_log_server
+- 5.2.3 uses the benchmark logfile check
+- 5.4.2.4 accepts a locked root account
+- 5.4.2.8 uses the benchmark valid shell check
+- 3.3.11 expects accept_ra 0
+- 6.1.2.1.2 and 6.1.2.1.3 run only when a remote log server is set
 - LICENSE: company name updated to MindPoint Group - A Quantum Sky Company
 - 1.1.2.6.4 and 1.1.2.7.3 gated on their own rule toggles
 - 1.3.1.4 complain mode test made dash-compatible and corrected
