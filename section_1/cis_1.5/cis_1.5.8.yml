@@ -18,9 +18,10 @@ command:
       or:
       - 0
       - 2
-    exec: 'grep "^kernel\.kptr_restrict" /etc/sysctl.conf /etc/sysctl.d/* | cut -d ":" -f2'
+    exec: 'grep "kernel\.kptr_restrict" /etc/sysctl.conf /etc/sysctl.d/*'
     stdout:
-    - '/kernel.kptr_restrict\s*=\s*(1|2)/'
+    - '/^\/etc\/sysctl\.(conf|d\/[^:]+\.conf):kernel\.kptr_restrict\s*=\s*[12]$/'
+    - '!/:\s*kernel\.kptr_restrict\s*=\s*([^12\s]|[12]\S)/'
     meta:
       server: 1
       workstation: 1

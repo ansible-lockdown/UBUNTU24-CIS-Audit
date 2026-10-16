@@ -5,10 +5,10 @@
 command:
   auditd_immutable:
     title: 6.2.3.29 | Ensure the audit configuration is immutable
-    exec: 'grep "-e 2" /etc/audit/rules.d/*.rules | cut -d ":" -f2'
+    exec: grep -Ph -- '^\h*-e\h+2\b' /etc/audit/rules.d/*.rules | tail -1
     exit-status: 0
     stdout:
-    - '-e 2'
+    - '/^\s*-e\s+2\b/'
     meta:
       server: 2
       workstation: 2

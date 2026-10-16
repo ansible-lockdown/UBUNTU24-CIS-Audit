@@ -8,8 +8,8 @@ file:
     path: /etc/ssh/sshd_config
     exists: true
     contents:
-    - '/(?i)maxauthtries [1-4]/'
-    - '!/(?i)maxauthtries ([5-9]|[1-9]{2,})/'
+    - '/^(?i)MaxAuthTries [1-4]\s*$/'
+    - '!/^(?i)MaxAuthTries ([5-9]|[1-9][0-9]+)\s*$/'
     meta:
       server: 1
       workstation: 1

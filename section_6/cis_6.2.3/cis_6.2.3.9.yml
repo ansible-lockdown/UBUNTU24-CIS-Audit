@@ -17,5 +17,19 @@ command:
       NIST800-53R5:
       - AU-3
       - CM-6
+  auditd_9_live:
+    title: 6.2.3.9 | Ensure events that modify /etc/netplan are collected | Live
+    exec: auditctl -l | grep system-locale
+    exit-status: 0
+    stdout:
+    - '-w /etc/netplan -p wa -k system-locale'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.9
+      NIST800-53R5:
+      - AU-3
+      - CM-6
   {{ end }}
 {{ end }}

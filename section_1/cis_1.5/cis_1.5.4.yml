@@ -3,31 +3,16 @@
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_5_4 }}
 command:
-  core_dumps_limits:
-    title: 1.5.4 | Ensure fs.suid_dumpable is configured | security/limits.conf
+  suid_dumpable_2:
+    title: 1.5.4 | Ensure fs.suid_dumpable is configured | sysctl_configured
     exit-status:
       or:
       - 0
       - 2
-    exec: 'grep -E "\*.*hard.*core.*0" /etc/security/limits.conf /etc/security/limits.d/*'
-    stdout:
-    - '/^\/*.*\shard.*core.*0/'
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 1.5.4
-      Mitre_Techniques:
-      - T1005
-      - T1005.000
-      Mitre_Tactics: TA0007
-      Mitre_Mitigations: NA
-  suid_dumpable_2:
-    title: 1.5.4 | Ensure fs.suid_dumpable is configured | sysctl.conf
-    exit-status: 0
     exec: 'grep "fs\.suid_dumpable" /etc/sysctl.conf /etc/sysctl.d/*'
     stdout:
-    - fs.suid_dumpable=0
+    - '/^\/etc\/sysctl\.(conf|d\/[^:]+\.conf):fs\.suid_dumpable\s*=\s*0$/'
+    - '!/:\s*fs\.suid_dumpable\s*=\s*([^0\s]|0\S)/'
     meta:
       server: 1
       workstation: 1
@@ -36,34 +21,8 @@ command:
       NIST800-53R5: CM-6
 kernel-param:
   fs.suid_dumpable:
-    title: 1.5.4 | Ensure fs.suid_dumpable is configured | kernel_sysctl
+    title: 1.5.4 | Ensure fs.suid_dumpable is configured | sysctl_live
     value: '0'
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 1.5.4
-      NIST800-53R5: CM-6
-service:
-  coredump:
-    title: 1.5.4 | Ensure fs.suid_dumpable is configured | coredump service
-    enabled: false
-    running: false
-    skip: false
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 1.5.4
-      NIST800-53R5: CM-6
-file:
-  coredump_restricted_conf:
-    title: 1.5.4 | Ensure fs.suid_dumpable is configured | coredump.conf
-    exists: true
-    path: /etc/systemd/coredump.conf
-    contents:
-    - '/^Storage=none/'
-    - '/^ProcessSizeMax=0/'
     meta:
       server: 1
       workstation: 1

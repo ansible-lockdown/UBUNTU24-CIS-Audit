@@ -17,5 +17,19 @@ command:
       - 6.2.3.13
       NIST800-53R5:
       - AU-3
+  auditd_14_live:
+    title: 6.2.3.13 | Ensure events that modify /etc/shadow and /etc/gshadow are collected | Live
+    exec: auditctl -l | grep identity
+    exit-status: 0
+    stdout:
+    - '-w /etc/gshadow -p wa -k identity'
+    - '-w /etc/shadow -p wa -k identity'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.13
+      NIST800-53R5:
+      - AU-3
   {{ end }}
 {{ end }}

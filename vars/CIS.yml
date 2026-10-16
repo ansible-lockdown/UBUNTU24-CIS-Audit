@@ -467,6 +467,7 @@ ubtu24cis_rule_7_2_9: true
 ubtu24cis_rule_7_2_10: true
 
 ## System functionality configuration variables
+ubtu24cis_ptrace_value: 1
 ##
 ## There are certain functionalities of a system
 ## that may require either to skip certain CIS rules
@@ -536,6 +537,9 @@ ubtu24cis_disable_dynamic_motd: true
 # (See https://help.gnome.org/admin/system-admin-guide/stable/dconf-keyfiles.html.en)
 # The default database is `local`.
 ubtu24cis_dconf_db_name: local
+# Screen lock timings written to the dconf screensaver keyfile (control 1.7.3)
+ubtu24cis_screensaver_idle_delay: 900
+ubtu24cis_screensaver_lock_delay: 5
 
 ##
 # Section 2
@@ -694,6 +698,9 @@ ubtu24cis_pass_max_days: 365
 ubtu24cis_pass_min_days: 1
 ubtu24cis_pass_warn_age: 7
 
+# existing users only changed when disruption_high is true
+ubtu24cis_disruption_high: true
+
 # set sugroup if differs from wheel
 ubtu24cis_sugroup: nosugroup
 
@@ -705,10 +712,10 @@ ubtu24cis_config_aide: true
 
 # 6.1.2.5 rsyslog remote offload server settings
 # change as appropriate
-ubtu24cis_remote_log_server: 10.10.10.10
+ubtu24cis_remote_log_server: ""
 ubtu24cis_remote_log_port: 514
 ubtu24cis_remote_log_protocol: tcp
 
 # 6.1.2
 # aide setup via - cron, timer
-ubtu24cis_aide_scan: cron
+ubtu24cis_aide_scan: timer

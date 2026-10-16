@@ -2,15 +2,28 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_6_4 }}
-    {{ if .Vars.ubtu24cis_disable_dynamic_motd }}
-file:
+command:
   pam_motd_configured:
     title: 1.6.4 | Ensure pam_motd is configured
-    path: /etc/pam.d/sshd
-    exists: true
-    contents:
-    - '!/^session\s+optional\s+pam_motd.so\s+motd=\/run\/motd.dynamic/'
-    - '!/^session\s+optional\s+pam_motd.so noupdate/'
+    exec: |
+      os_id="$(grep '^ID=' /etc/os-release | cut -d= -f2 | sed -e 's/"//g')"
+      for svc in sshd login su gdm-password; do
+        if [ -f "/etc/pam.d/$svc" ]; then file="/etc/pam.d/$svc"
+        elif [ -f "/usr/lib/pam.d/$svc" ]; then file="/usr/lib/pam.d/$svc"
+        else continue
+        fi
+        grep -Pi '^\h*session\h+(required|optional)\h+pam_motd\.so\b.*\bmotd=' "$file" 2>/dev/null | grep -oP '\bmotd=\K\S+' | tr -d "\"'" | while IFS= read -r motd_path; do
+          [ -r "$motd_path" ] || continue
+          grep -Pqi -- "(\\\v|\\\r|\\\m|\\\s|\b${os_id}\b)" "$motd_path" && printf '%s: motd=%s\n' "$file" "$motd_path"
+        done
+      done
+      true
+    exit-status: 0
+    stdout:
+    - '!/./'
+    {{ if not .Vars.ubtu24cis_disable_dynamic_motd }}
+    skip: true
+    {{ end }}
     meta:
       server: 1
       workstation: 1
@@ -20,6 +33,5 @@ file:
       - CM-6
       - CM-1
       - CM-3
-    {{ end }}
   {{ end }}
 {{ end }}

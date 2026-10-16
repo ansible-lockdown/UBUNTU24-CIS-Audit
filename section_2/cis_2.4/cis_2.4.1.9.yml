@@ -19,13 +19,19 @@ file:
     title: 2.4.1.9 | Ensure access to crontab is configured
     exists: true
     owner: root
-    group: root
-    mode: "0640"
+    group:
+      or:
+      - root
+      - crontab
+    mode:
+      or:
+      - "0640"
+      - "0600"
+      - "0400"
     meta:
       server: 1
       workstation: 1
       CIS_ID:
-      - 2.4.1.9
       - 2.4.1.9
       NIST800-53R5:
       - AC-3

@@ -2,14 +2,15 @@
 
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_1_2_1_2 }}
-file:
+command:
   apt_weak_dependencies:
     title: 1.2.1.2 | Ensure weak dependencies are configured
-    path: /etc/apt/apt.conf.d/60-no-weak-dependencies
-    exists: true
-    contents:
-    - '/APT::Install-Recommends\s+"0";/'
-    - '/APT::Install-Suggests\s+"0";/'
+    exec: /usr/bin/apt-config dump | /usr/bin/grep "APT::Install-"
+    exit-status: 0
+    stdout:
+    - '/^APT::Install-Recommends "0";$/'
+    - '/^APT::Install-Suggests "0";$/'
+    - '!/^APT::Install-(Recommends|Suggests) "(1|[Tt]rue|[Yy]es)";/'
     meta:
       server: 2
       workstation: 2

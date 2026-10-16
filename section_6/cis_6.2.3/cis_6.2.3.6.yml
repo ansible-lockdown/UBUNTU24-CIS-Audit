@@ -18,5 +18,20 @@ command:
       NIST800-53R5:
       - AU-3
       - CM-6
+  auditd_6_live:
+    title: 6.2.3.6 | Ensure events that modify /etc/issue and /etc/issue.net are collected | Live
+    exec: auditctl -l | grep system-locale
+    exit-status: 0
+    stdout:
+    - '-w /etc/issue -p wa -k system-locale'
+    - '-w /etc/issue.net -p wa -k system-locale'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.6
+      NIST800-53R5:
+      - AU-3
+      - CM-6
   {{ end }}
 {{ end }}

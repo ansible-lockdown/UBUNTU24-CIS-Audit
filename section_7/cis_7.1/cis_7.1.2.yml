@@ -5,7 +5,7 @@
 file:
   passwd-_perms:
     title: 7.1.2 | Ensure access to /etc/passwd- is configured
-    path: /etc/passwd
+    path: /etc/passwd-
     exists: true
     owner: root
     group: root

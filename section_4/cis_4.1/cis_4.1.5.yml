@@ -8,7 +8,7 @@ command:
     exec: 'ufw status verbose | grep Default:'
     exit-status: 0
     stdout:
-    - '/deny \(routed\)/'
+    - '/(disabled|deny) \(routed\)/'
     meta:
       server: 1
       workstation: 1

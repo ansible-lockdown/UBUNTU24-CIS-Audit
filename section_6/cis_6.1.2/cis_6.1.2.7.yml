@@ -1,18 +1,16 @@
 ---
 
+{{ if eq .Vars.ubtu24cis_syslog_service "rsyslog" }}
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_6_1_2_7 }}
-command:
+file:
   rsyslog_logrotate:
     title: 6.1.2.7 | Ensure logrotate is configured
-    exec: grep -A9 "rsyslog/*.log" /etc/logrotate.conf /etc/logrotate.d/*
-    exit-status:
-      or:
-      - 0
-      - 1
-      - 2
-    stdout:
-    - '/.*: rotate/'
+    path: /etc/logrotate.conf
+    exists: true
+    contents:
+    - '/^\s*(daily|weekly|monthly|yearly)\s*$/'
+    - '/^\s*rotate\s+\d+/'
     meta:
       server: 1
       workstation: 1
@@ -21,4 +19,5 @@ command:
       NIST800-53R5:
       - AU-8
   {{ end }}
+{{ end }}
 {{ end }}

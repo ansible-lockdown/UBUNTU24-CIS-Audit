@@ -4,11 +4,17 @@
   {{ if .Vars.ubtu24cis_rule_1_2_1_1 }}
 command:
   apt_signed_by:
-    title: 1.2.1.1 | Ensure the source.list and .source files use the Signed-By option | Manual
+    title: 1.2.1.1 | Ensure the source.list and .source files use the Signed-By option
     exit-status: 0
-    exec: echo "MANUAL - Please check manually that sources use the Signed-By option"
+    exec: |
+      for f in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+        [ -f "$f" ] || continue
+        grep -Pqs -- '^\h*(deb|deb-src|Types:)\b' "$f" || continue
+        grep -PiLs -- '^([^#\n\r]+)?\bSigned-By\b' "$f"
+      done
+      true
     stdout:
-    - '!/^MANUAL.*/'
+    - '!/./'
     meta:
       server: 1
       workstation: 1

@@ -18,5 +18,23 @@ file:
       NIST800-53R5:
       - AC-3
       - MP-2
+command:
+  sshd_config_d_perms:
+    title: 5.1.1 | Ensure access to /etc/ssh/sshd_config is configured | sshd_config.d conf files
+    exec: find /etc/ssh/sshd_config.d/ -xdev -type f -name '*.conf' \( -perm /077 -o ! -user root -o ! -group root \) 2>/dev/null
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - '!/./'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.1.1
+      NIST800-53R5:
+      - AC-3
+      - MP-2
   {{ end }}
 {{ end }}

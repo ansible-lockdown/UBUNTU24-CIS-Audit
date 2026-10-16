@@ -6,12 +6,26 @@
 file:
   gdm_screensaver:
     title: 1.7.3 | Ensure GDM screen lock is configured
-    path: /etc/dconf/db/local.d/00-screensaver
+    path: /etc/dconf/db/{{ .Vars.ubtu24cis_dconf_db_name }}.d/00-screensaver
     exists: true
     contents:
-    - '/^[org/gnome/desktop/session]/'
-    - '/^idle-delay=uint32 (1|[1-9]|[1-7][0-9]{1,2}|900)$/'
+    - '/^\[org\/gnome\/desktop\/session\]/'
+    - '/^\[org\/gnome\/desktop\/screensaver\]/'
+    - '/^idle-delay=uint32 ([1-9]|[1-9][0-9]|[1-8][0-9]{2}|900)$/'
     - '/^lock-delay=uint32 [0-5]$/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.7.3
+      NIST800-53R5: NA
+  gdm_screensaver_locks:
+    title: 1.7.3 | Ensure GDM screen lock is configured | locked
+    path: /etc/dconf/db/{{ .Vars.ubtu24cis_dconf_db_name }}.d/locks/00-screensaver
+    exists: true
+    contents:
+    - '/^\/org\/gnome\/desktop\/session\/idle-delay$/'
+    - '/^\/org\/gnome\/desktop\/screensaver\/lock-delay$/'
     meta:
       server: 1
       workstation: 1

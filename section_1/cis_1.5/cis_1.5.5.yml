@@ -18,9 +18,10 @@ command:
       or:
       - 0
       - 2
-    exec: 'grep "^kernel\.dmesg_restrict" /etc/sysctl.conf /etc/sysctl.d/* | cut -d ":" -f2'
+    exec: 'grep "kernel\.dmesg_restrict" /etc/sysctl.conf /etc/sysctl.d/*'
     stdout:
-    - '/kernel.dmesg_restrict\s*=\s*1/'
+    - '/^\/etc\/sysctl\.(conf|d\/[^:]+\.conf):kernel\.dmesg_restrict\s*=\s*1$/'
+    - '!/:\s*kernel\.dmesg_restrict\s*=\s*([^1\s]|1\S)/'
     meta:
       server: 1
       workstation: 1

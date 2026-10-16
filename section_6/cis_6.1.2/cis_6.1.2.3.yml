@@ -1,15 +1,33 @@
 ---
 
+{{ if eq .Vars.ubtu24cis_syslog_service "rsyslog" }}
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_6_1_2_3 }}
 command:
   perms_rsyslog_d:
     title: 6.1.2.3 | Ensure rsyslog log file creation mode is configured
-    exec: 'grep -s ^\$FileCreateMode /etc/rsyslog.conf /etc/rsyslog.d/*.conf | cut -f2 -d:'
+    exec: grep -Phs -- '^\h*\$FileCreateMode\h+' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
     exit-status: 0
     stdout:
-    - '/\$FileCreateMode 06[0-4]0/'
-    - '!/\$FileCreateMode 06[6-7][0-7]/'
+    - '/^\s*\$FileCreateMode\s+0[0246][024]0\b/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.2.3
+      NIST800-53R5:
+      - AC-3
+      - AC-6
+      - MP-2
+  perms_rsyslog_d_permissive:
+    title: 6.1.2.3 | Ensure rsyslog log file creation mode is configured | no less restrictive mode set
+    exec: grep -Phs -- '^\h*\$FileCreateMode\h+' /etc/rsyslog.conf /etc/rsyslog.d/*.conf | grep -Pv -- '^\h*\$FileCreateMode\h+0[0246][024]0\b'
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - '!/./'
     meta:
       server: 1
       workstation: 1
@@ -20,4 +38,5 @@ command:
       - AC-6
       - MP-2
   {{ end }}
+{{ end }}
 {{ end }}

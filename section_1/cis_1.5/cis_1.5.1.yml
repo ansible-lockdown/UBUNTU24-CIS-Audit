@@ -18,9 +18,10 @@ command:
       or:
       - 0
       - 2
-    exec: 'grep "^fs\.protected_hardlinks" /etc/sysctl.conf /etc/sysctl.d/* | cut -d ":" -f2'
+    exec: 'grep "fs\.protected_hardlinks" /etc/sysctl.conf /etc/sysctl.d/*'
     stdout:
-    - '/fs.protected_hardlinks\s*=\s*1/'
+    - '/^\/etc\/sysctl\.(conf|d\/[^:]+\.conf):fs\.protected_hardlinks\s*=\s*1$/'
+    - '!/:\s*fs\.protected_hardlinks\s*=\s*([^1\s]|1\S)/'
     meta:
       server: 1
       workstation: 1

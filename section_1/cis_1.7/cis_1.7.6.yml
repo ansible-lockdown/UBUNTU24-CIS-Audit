@@ -9,7 +9,7 @@ file:
     path: /etc/gdm3/custom.conf
     exists: true
     contents:
-    - '!/^Enable=true/'
+    - '!/^\s*Enable\s*=\s*true/'
     meta:
       server: 1
       workstation: 1

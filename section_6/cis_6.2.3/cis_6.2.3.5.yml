@@ -18,5 +18,20 @@ command:
       NIST800-53R5:
       - AU-3
       - CM-6
+  auditd_5_live:
+    title: 6.2.3.5 | Ensure events that modify sethostname and setdomainname are collected | Live
+    exec: auditctl -l | grep system-locale
+    exit-status: 0
+    stdout:
+    - '-a always,exit -F arch=b64 -S sethostname,setdomainname -F key=system-locale'
+    - '-a always,exit -F arch=b32 -S sethostname,setdomainname -F key=system-locale'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.5
+      NIST800-53R5:
+      - AU-3
+      - CM-6
   {{ end }}
 {{ end }}
