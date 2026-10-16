@@ -8,7 +8,7 @@ file:
     path: /etc/modprobe.d/CIS.conf
     exists: true
     contents:
-    - '/^install usb-storage /bin/(true|false)/'
+    - '/^install usb[-_]storage /bin/(true|false)/'
     meta:
       server: 1
       workstation: 2
@@ -19,7 +19,7 @@ file:
     path: /etc/modprobe.d/blacklist.conf
     exists: true
     contents:
-    - '/^blacklist usb-storage/'
+    - '/^blacklist usb[-_]storage$/'
     meta:
       server: 1
       workstation: 2

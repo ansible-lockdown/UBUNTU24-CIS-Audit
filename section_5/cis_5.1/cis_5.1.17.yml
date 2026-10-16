@@ -2,13 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_17 }}
-file:
+command:
   ssh_maxstartups:
     title: 5.1.17 | Ensure sshd MaxStartups is configured
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - 'MaxStartups 10:30:60'
+    exec: sshd -T 2>/dev/null | grep -Ei '^(maxstartups) '
+    exit-status: 0
+    stdout:
+    - '/^maxstartups ([1-9]|10):([1-9]|[12][0-9]|30):([1-9]|[1-5][0-9]|60)$/'
     meta:
       server: 1
       workstation: 1

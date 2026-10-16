@@ -7,7 +7,7 @@
 package:
   ftp_pkg:
     title: 2.1.8 | Ensure ftp server services are not in use | pkg removed
-    name: vsftp
+    name: vsftpd
     installed: false
     meta:
       server: 1

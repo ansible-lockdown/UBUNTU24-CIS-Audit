@@ -18,11 +18,15 @@ file:
       - AC-6
 command:
   pty_sudoers_d:
-    title: 5.2.2 | Ensure sudo commands use pty | sudoers.d
-    exec: "ls -1 /etc/sudoers.d/* > /dev/null 2>&1; if [ '$?' = '0' ]; then grep -c '^Defaults\\s*use_pty' /etc/sudoers.d/*; else echo 99;fi"
-    exit-status: 0
+    title: 5.2.2 | Ensure sudo commands use pty | !use_pty not set
+    exec: grep -rPi -- '^\h*Defaults\h+([^#\n\r]+,\h*)?!use_pty\b' /etc/sudoers /etc/sudoers.d/
+    exit-status:
+      or:
+      - 0
+      - 1
+      - 2
     stdout:
-    - '/[0-99]/'
+    - '!/./'
     meta:
       server: 1
       workstation: 1

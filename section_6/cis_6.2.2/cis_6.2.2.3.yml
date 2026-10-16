@@ -8,8 +8,8 @@ file:
     path: /etc/audit/auditd.conf
     exists: true
     contents:
-    - '/disk_full_action\s*=\s*(halt|single)/'
-    - '/disk_error_action\s*=\s*(syslog|single|halt)/'
+    - '/(?i)^\s*disk_full_action\s*=\s*(halt|single)\b/'
+    - '/(?i)^\s*disk_error_action\s*=\s*(syslog|single|halt)\b/'
     meta:
       server: 2
       workstation: 2

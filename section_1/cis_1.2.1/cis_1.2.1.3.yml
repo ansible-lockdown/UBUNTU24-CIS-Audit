@@ -6,9 +6,12 @@ command:
   apt_gpg_key_perms:
     title: 1.2.1.3 | Ensure access to gpg key files are configured
     exit-status: 0
-    exec: find /etc/apt/trusted.gpg.d /usr/share/keyrings -type f \( -name "*.gpg" -o -name "*.asc" \) 2>/dev/null | xargs -r stat -c '%U:%G:%a:%n' | grep -Pv -- '^root:root:0[0-6]{2}:' ; true
+    exec: |
+      find -L /usr/share/keyrings/ /etc/apt/trusted.gpg.d/ -mount -xdev -type f \( ! -user root -o ! -group root -o -perm /133 \) -name '*gpg' 2>/dev/null
+      find -L /etc/apt/sources.list.d/ -mount -xdev -type f \( ! -user root -o ! -group root -o -perm /133 \) \( -name '*.list' -o -name '*.sources' \) -exec grep -PiLs -- '^([^#\n\r]+)?\bSigned-By\b' {} + 2>/dev/null
+      true
     stdout:
-    - '/^$/'
+    - '!/./'
     meta:
       server: 1
       workstation: 1

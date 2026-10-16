@@ -16,5 +16,18 @@ command:
       - 6.2.3.15
       NIST800-53R5:
       - AU-3
+  auditd_16_live:
+    title: 6.2.3.15 | Ensure events that modify /etc/nsswitch.conf file are collected | Live
+    exec: auditctl -l | grep identity
+    exit-status: 0
+    stdout:
+    - '-w /etc/nsswitch.conf -p wa -k identity'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.15
+      NIST800-53R5:
+      - AU-3
   {{ end }}
 {{ end }}

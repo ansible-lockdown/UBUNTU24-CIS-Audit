@@ -3,13 +3,14 @@
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_5_1_24 }}
     {{ if .Vars.ubtu24cis_sshd_listen_address }}
-file:
+command:
   ssh_listenaddress:
     title: 5.1.24 | Ensure sshd ListenAddress is configured
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - '/^\s*ListenAddress\s+\S+/'
+    exec: sshd -T 2>/dev/null | grep -Ei '^(listenaddress) '
+    exit-status: 0
+    stdout:
+    - '/^listenaddress \S+/'
+    - '!/^listenaddress (0\.0\.0\.0|\[::\]):[0-9]+$/'
     meta:
       server: 2
       workstation: 2

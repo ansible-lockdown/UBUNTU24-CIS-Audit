@@ -18,5 +18,20 @@ command:
       NIST800-53R5:
       - AU-3
       - CM-6
+  auditd_7_live:
+    title: 6.2.3.7 | Ensure events that modify /etc/hosts and /etc/hostname are collected | Live
+    exec: auditctl -l | grep system-locale
+    exit-status: 0
+    stdout:
+    - '-w /etc/hosts -p wa -k system-locale'
+    - '-w /etc/hostname -p wa -k system-locale'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.7
+      NIST800-53R5:
+      - AU-3
+      - CM-6
   {{ end }}
 {{ end }}

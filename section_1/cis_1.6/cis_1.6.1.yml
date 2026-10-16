@@ -8,7 +8,9 @@ file:
     path: /etc/motd
     exists: true
     contents:
-    - {{ .Vars.ubtu24cis_warning_banner }}
+{{- range splitList "\n" (trim .Vars.ubtu24cis_warning_banner) }}
+    - {{ toJson . }}
+{{- end }}
     - '!/(\\v|\\r|\\m|\\s)/'
     - '!/\/etc\/os-release/'
     - '!/(?i)ubuntu/'
@@ -22,40 +24,109 @@ file:
       - CM-1
       - CM-3
 {{ if .Vars.ubtu24cis_disable_dynamic_motd }}
-  disable_dyn_motd:
-    title: 1.6.1 | Ensure /etc/motd is configured | stop dynamic load
+  pam_motd_dynamic_disabled_sshd:
+    title: 1.6.1 | Ensure /etc/motd is configured | dynamic motd not shown | sshd
     path: /etc/pam.d/sshd
     exists: true
     contents:
-    - '/#\s*session\s+optional\s+pam_motd.so\s+motd=/run/motd.dynamic/'
-    - '/#\s*session\s+optional\s+pam_motd.so noupdate/'
-    - '!/^session\s+optional\s+pam_motd.so noupdate/'
-    - '!/^session\s+optional\s+pam_motd.so\s+motd=/run/motd.dynamic/'
-{{ end }}
-{{ if not .Vars.ubtu24cis_disable_dynamic_motd }}
-command:
-  check_motd_files:
-    title: 1.6.1 | Ensure /etc/motd is configured | dynamic motd files
-    exec: "grep -Eis \"(\\\v|\\\r|\\\m|\\\s|$(grep '^ID=' /etc/os-release | cut -d= -f2 | sed -e 's/\"//g'))\" /etc/update-motd.d/*"
-    exit-status:
-      or:
-      - 0
-      - 1
-      - 2
-    stdout:
-    - '!/.*/'
+    - '!/^\s*session\s+(required|optional)\s+pam_motd\.so\s+.*\bmotd=\/run\/motd\.dynamic\b/'
+    - '!/^\s*session\s+(required|optional)\s+pam_motd\.so\s+noupdate\b/'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 1.6.1
-      Mitre_Techniques:
-      - T1082
-      - T1082.000
-      - T1592
-      - T1592.004
-      Mitre_Tactics: TA0007
-      Mitre_Mitigations: NA
-    {{ end }}
+      NIST800-53R5:
+      - CM-6
+      - CM-1
+      - CM-3
+  pam_motd_dynamic_disabled_login:
+    title: 1.6.1 | Ensure /etc/motd is configured | dynamic motd not shown | login
+    path: /etc/pam.d/login
+    exists: true
+    contents:
+    - '!/^\s*session\s+(required|optional)\s+pam_motd\.so\s+.*\bmotd=\/run\/motd\.dynamic\b/'
+    - '!/^\s*session\s+(required|optional)\s+pam_motd\.so\s+noupdate\b/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.6.1
+      NIST800-53R5:
+      - CM-6
+      - CM-1
+      - CM-3
+  pam_motd_dynamic_disabled_su:
+    title: 1.6.1 | Ensure /etc/motd is configured | dynamic motd not shown | su
+    path: /etc/pam.d/su
+    exists: true
+    contents:
+    - '!/^\s*session\s+(required|optional)\s+pam_motd\.so\s+.*\bmotd=\/run\/motd\.dynamic\b/'
+    - '!/^\s*session\s+(required|optional)\s+pam_motd\.so\s+noupdate\b/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.6.1
+      NIST800-53R5:
+      - CM-6
+      - CM-1
+      - CM-3
+  {{ if .Vars.ubtu24cis_desktop_required }}
+  pam_motd_dynamic_disabled_gdm:
+    title: 1.6.1 | Ensure /etc/motd is configured | dynamic motd not shown | gdm-password
+    path: /etc/pam.d/gdm-password
+    exists: true
+    contents:
+    - '!/^\s*session\s+(required|optional)\s+pam_motd\.so\s+.*\bmotd=\/run\/motd\.dynamic\b/'
+    - '!/^\s*session\s+(required|optional)\s+pam_motd\.so\s+noupdate\b/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.6.1
+      NIST800-53R5:
+      - CM-6
+      - CM-1
+      - CM-3
+  {{ end }}
+{{ end }}
+command:
+  motd_static_files_content:
+    title: 1.6.1 | Ensure /etc/motd is configured | motd files contain no system information
+    exec: |
+      grep -Psi -- "(\\\v|\\\r|\\\m|\\\s|\b$(grep '^ID=' /etc/os-release | cut -d= -f2 | sed -e 's/"//g')\b)" /etc/motd /run/motd /usr/lib/motd /etc/motd.d/* /run/motd.d/* /usr/lib/motd.d/* 2>/dev/null
+      true
+    exit-status: 0
+    stdout:
+    - '!/./'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.6.1
+      NIST800-53R5:
+      - CM-6
+      - CM-1
+      - CM-3
+{{ if not .Vars.ubtu24cis_disable_dynamic_motd }}
+  check_motd_files:
+    title: 1.6.1 | Ensure /etc/motd is configured | dynamic motd files
+    exec: |
+      grep -Psi -- "(\\\v|\\\r|\\\m|\\\s|\b$(grep '^ID=' /etc/os-release | cut -d= -f2 | sed -e 's/"//g')\b)" /etc/update-motd.d/* 2>/dev/null
+      true
+    exit-status: 0
+    stdout:
+    - '!/./'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.6.1
+      NIST800-53R5:
+      - CM-6
+      - CM-1
+      - CM-3
+{{ end }}
   {{ end }}
 {{ end }}

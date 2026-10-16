@@ -2,14 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_22 }}
-file:
+command:
   ssh_usepam:
     title: 5.1.22 | Ensure sshd UsePAM is enabled
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - 'UsePAM yes'
-    - '!/^UsePAM no/'
+    exec: sshd -T 2>/dev/null | grep -Ei '^(usepam) '
+    exit-status: 0
+    stdout:
+    - '/^usepam yes$/'
     meta:
       server: 1
       workstation: 1

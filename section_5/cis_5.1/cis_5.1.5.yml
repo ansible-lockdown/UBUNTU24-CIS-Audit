@@ -2,14 +2,14 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_5 }}
-file:
+command:
   ssh_banner:
     title: 5.1.5 | Ensure sshd Banner is configured | sshd_default
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - 'Banner /etc/issue.net'
-    - '!/^Banner none/'
+    exec: sshd -T 2>/dev/null | grep -Ei '^(banner) '
+    exit-status: 0
+    stdout:
+    - '/^banner {{ .Vars.ubtu24cis_sshd_banner_file }}$/'
+    - '!/^banner\s+none$/'
     meta:
       server: 1
       workstation: 1
@@ -21,10 +21,9 @@ file:
       - CM-6
       - CM-7
       - IA-5
-command:
   ssh_configd_banner:
     title: 5.1.5 | Ensure sshd Banner is configured | conf.d banner settings
-    exec: grep -Eis '^\s*Banner\s+"?none\b'/etc/ssh/sshd_config.d/*.conf
+    exec: grep -Eis '^\s*Banner\s+"?none\b' /etc/ssh/sshd_config.d/*.conf
     exit-status:
       or:
       - 0

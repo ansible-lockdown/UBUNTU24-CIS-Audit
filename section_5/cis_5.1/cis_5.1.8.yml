@@ -2,14 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_5_1_8 }}
-file:
+command:
   sshd_disableforwarding:
     title: 5.1.8 | Ensure sshd DisableForwarding is enabled
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - 'DisableForwarding yes'
-    - '!/^DisableForwarding no/'
+    exec: sshd -T 2>/dev/null | grep -Ei '^(disableforwarding) '
+    exit-status: 0
+    stdout:
+    - '/^disableforwarding yes$/'
     meta:
       server: 2
       workstation: 1

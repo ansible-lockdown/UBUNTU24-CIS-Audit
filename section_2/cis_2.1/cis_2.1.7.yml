@@ -21,7 +21,7 @@ package:
 file:
   dns_service_masked:
     title: 2.1.7 | Ensure dns server services are not in use | masked
-    path: /etc/systemd/system/bind9.service
+    path: /etc/systemd/system/named.service
     exists: true
     filetype: symlink
     linked-to: /dev/null

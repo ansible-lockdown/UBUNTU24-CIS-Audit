@@ -6,7 +6,48 @@ command:
   logfile_configured:
     title: 6.1.3.1 | Ensure access to all logfiles has been configured
     exec: |
-      find /var/log/ -type f \( -name 'lastlog' -o -name 'wtmp' -o -name 'btmp' \) -perm /g+x,o+wx -exec ls -l "{}" + ; find /var/log/ -type f \( -name 'secure' -o -name 'auth*' -o -name 'syslog' -o -name 'messages' \) -perm /u+x,g+wx,o+rwx -exec ls -l "{}" +; find /var/log/ -type f \( -name 'SSSD' -o -name 'sssd' -o -name 'gdm*' \) -perm /ug+x,o+rwx -exec ls -l "{}" +
+      find -L /var/log -type f \( \
+        \( -path '/var/log/apt/*' -perm /0133 \) -o \
+        \( ! -path '/var/log/apt/*' \( -name lastlog -o -name 'lastlog.*' -o -name wtmp -o -name 'wtmp.*' -o -name 'wtmp-*' -o -name btmp -o -name 'btmp.*' -o -name 'btmp-*' -o -name README \) -perm /0113 \) -o \
+        \( ! -path '/var/log/apt/*' \( -name 'cloud-init.log*' -o -name 'localmessages*' -o -name 'waagent.log*' \) -perm /0133 \) -o \
+        \( ! -path '/var/log/apt/*' \( -name SSSD -o -name sssd -o -name gdm -o -name gdm3 \) -perm /0117 \) -o \
+        \( ! -path '/var/log/apt/*' ! \( -name lastlog -o -name 'lastlog.*' -o -name wtmp -o -name 'wtmp.*' -o -name 'wtmp-*' -o -name btmp -o -name 'btmp.*' -o -name 'btmp-*' -o -name README -o -name 'cloud-init.log*' -o -name 'localmessages*' -o -name 'waagent.log*' -o -name SSSD -o -name sssd -o -name gdm -o -name gdm3 \) -perm /0137 \) \
+        \) -exec ls -l {} +
+    exit-status: 0
+    stdout: ['!/./']
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.1.3.1
+      NIST800-53R5:
+      - AC-3
+      - MP-2
+  logfile_ownership_configured:
+    title: 6.1.3.1 | Ensure access to all logfiles has been configured | owner and group
+    exec: |
+      bash -c 'find -L /var/log -type f \( ! -user root -o ! -group root \) -print0 | while IFS= read -r -d "" f; do
+        IFS=: read -r u g <<< "$(stat -Lc "%U:%G" "$f")"
+        n="$(basename "$f")"
+        if [[ "$(dirname "$f")" =~ /apt$ ]]; then
+          au="^root$"; ag="^(root|adm)$"
+        else
+          case "$n" in
+            lastlog | lastlog.* | wtmp | wtmp.* | wtmp-* | btmp | btmp.* | btmp-* | README) au="^root$"; ag="^(root|utmp)$" ;;
+            cloud-init.log* | localmessages* | waagent.log* | secure | secure.* | secure-* | auth.log | syslog | messages) au="^(root|syslog)$"; ag="^(root|adm)$" ;;
+            SSSD | sssd) au="^(root|SSSD)$"; ag="^(root|SSSD)$" ;;
+            gdm | gdm3) au="^root$"; ag="^(root|gdm|gdm3)$" ;;
+            *.journal | *.journal~) au="^root$"; ag="^(root|systemd-journal)$" ;;
+            *)
+              au="^(root|syslog)$"; ag="^(root|adm)$"
+              s="$(awk -F: -v x="$u" "\$1==x {print \$7}" /etc/passwd)"
+              if [ "$u" = "root" ] || [ -z "$s" ] || ! grep -Pq -- "^\h*${s}\b" /etc/shells; then
+                au="^(root|syslog|${u})$"; ag="^(root|adm|${g})$"
+              fi ;;
+          esac
+        fi
+        [[ "$u" =~ $au ]] && [[ "$g" =~ $ag ]] || echo "$f $u:$g"
+      done'
     exit-status: 0
     stdout: ['!/./']
     meta:

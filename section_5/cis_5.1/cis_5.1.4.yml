@@ -5,7 +5,7 @@
 file:
   sshd_access_limited:
     title: 5.1.4 | Ensure sshd access is configured
-    path: /etc/ssh/sshd_config
+    path: {{ .Vars.ubtu24cis_sshd_cis_conf }}
     exists: true
     contents:
     {{ if .Vars.ubtu24cis_sshd_allow_users }}

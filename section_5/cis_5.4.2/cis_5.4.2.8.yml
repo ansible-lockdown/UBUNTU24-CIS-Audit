@@ -5,16 +5,13 @@
   command:
     test_valid_shells:
       title: 5.4.2.8 | Ensure accounts without a valid login shell are locked
+      skip: {{ not .Vars.ubtu24cis_disruption_high }}
       exec: |
-        bash -lc "awk -F: 'NR==FNR{shell[\$1]=\$NF; next}
-        BEGIN{while((getline line < \"/etc/shells\")>0){n=split(line,a,\"/\"); b=a[n]; if(b!=\"\") sh[++ns]=b}}
-        {u=\$1; pw=\$2; s=shell[u];
-         if(u!=\"root\" && s!=\"\"){
-           badShell=1;
-           for(i=1;i<=ns;i++) if(s==sh[i]){badShell=0; break}
-           if(badShell && pw !~ /^[!*]/) exit 1
-         }}
-        END{exit 0}' /etc/passwd /etc/shadow"
+        bash -c 'valid=$(awk -F/ "\$NF != \"nologin\" && /^\// {print}" /etc/shells)
+        awk -F: "\$1 != \"root\" {print \$1, \$NF}" /etc/passwd | while read -r u s; do
+          printf "%s\n" "$valid" | grep -qxF -- "$s" && continue
+          passwd -S "$u" | awk "\$2 !~ /^L/ {print \"Account: \" \$1 \" does not have a valid login shell and is not locked\"}"
+        done'
       exit-status: 0
       stdout:
       - '!/./'

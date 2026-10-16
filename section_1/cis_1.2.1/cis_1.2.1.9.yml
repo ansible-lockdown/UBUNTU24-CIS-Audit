@@ -6,9 +6,9 @@ command:
   apt_sources_list_d_files:
     title: 1.2.1.9 | Ensure access to files in /etc/apt/sources.list.d are configured
     exit-status: 0
-    exec: find /etc/apt/sources.list.d/ -type f 2>/dev/null | xargs -r stat -c '%U:%G:%a:%n' | grep -Pv -- '^root:root:0[0-6]{3}:' ; true
+    exec: find -L /etc/apt/sources.list.d/ -type f \( ! -user root -o ! -group root -o -perm /0133 \) 2>/dev/null; true
     stdout:
-    - '/^$/'
+    - '!/./'
     meta:
       server: 1
       workstation: 2

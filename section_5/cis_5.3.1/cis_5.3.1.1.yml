@@ -6,11 +6,22 @@ package:
   libpam-runtime:
     title: 5.3.1.1 | Ensure latest version of pam is installed
     installed: true
-    versions:
-      not:
-      - '1.4.0-11ubuntu2.1'
-      - '1.4.0-11ubuntu2.2'
-      - '1.4.0-11ubuntu2.3'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.3.1.1
+      NIST800-53R5: NA
+command:
+  libpam_runtime_upgradable:
+    title: 5.3.1.1 | Ensure latest version of pam is installed | latest version
+    exec: apt list --upgradable 2>/dev/null | grep -P '^libpam-runtime\b'
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - '!/./'
     meta:
       server: 1
       workstation: 1

@@ -9,7 +9,8 @@ file:
     path: /etc/gdm3/custom.conf
     exists: true
     contents:
-    - '/^WaylandEnable=false/'
+    - '/^\s*WaylandEnable\s*=\s*false/'
+    - '!/^\s*WaylandEnable\s*=\s*true/'
     meta:
       server: 2
       workstation: 2

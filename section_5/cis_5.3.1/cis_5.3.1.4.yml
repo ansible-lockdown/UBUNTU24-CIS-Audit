@@ -12,5 +12,21 @@ package:
       CIS_ID:
       - 5.3.1.4
       NIST800-53R5: NA
+command:
+  cracklib_runtime_upgradable:
+    title: 5.3.1.4 | Ensure latest version of cracklib-runtime is installed | latest version
+    exec: apt list --upgradable 2>/dev/null | grep -P '^cracklib-runtime\b'
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - '!/./'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.3.1.4
+      NIST800-53R5: NA
   {{ end }}
 {{ end }}

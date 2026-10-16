@@ -17,5 +17,19 @@ command:
       - 6.2.3.16
       NIST800-53R5:
       - AU-3
+  auditd_17_live:
+    title: 6.2.3.16 | Ensure events that modify /etc/pam.conf and /etc/pam.d/ information are collected | Live
+    exec: auditctl -l | grep identity
+    exit-status: 0
+    stdout:
+    - '-w /etc/pam.conf -p wa -k identity'
+    - '-w /etc/pam.d -p wa -k identity'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.16
+      NIST800-53R5:
+      - AU-3
   {{ end }}
 {{ end }}

@@ -29,6 +29,19 @@ file:
       - 5.3.2.1
       NIST800-53R5:
       - IA-5
+  pam_unix_enabled_common_session_nonint:
+    title: 5.3.2.1 | Ensure pam_unix module is enabled | common-session-noninteractive
+    path: /etc/pam.d/common-session-noninteractive
+    exists: true
+    contents:
+    - '/^\s*session\s+required\s+pam_unix.so/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.3.2.1
+      NIST800-53R5:
+      - IA-5
   pam_unix_enabled_common_auth:
     title: 5.3.2.1 | Ensure pam_unix module is enabled
     path: /etc/pam.d/common-auth

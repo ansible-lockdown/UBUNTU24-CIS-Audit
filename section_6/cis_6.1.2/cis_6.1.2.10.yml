@@ -1,5 +1,6 @@
 ---
 
+{{ if eq .Vars.ubtu24cis_syslog_service "rsyslog" }}
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_6_1_2_10 }}
 file:
@@ -17,4 +18,5 @@ file:
       NIST800-53R5:
       - AU-6
   {{ end }}
+{{ end }}
 {{ end }}

@@ -6,11 +6,28 @@
 file:
   gdm_autorun_never:
     title: 1.7.5 | Ensure GDM autorun-never is configured
-    path: /etc/dconf/db/local.d/00-media-autorun
+    path: /etc/dconf/db/{{ .Vars.ubtu24cis_dconf_db_name }}.d/00-media-autorun
     exists: true
     contents:
-    - '/^[org/gnome/desktop/media-handling]/'
-    - '/^autrun-never=true/'
+    - '/^\[org\/gnome\/desktop\/media-handling\]/'
+    - '/^autorun-never=true/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.7.5
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
+  gdm_autorun_locks:
+    title: 1.7.5 | Ensure GDM autorun-never is configured | locked
+    path: /etc/dconf/db/{{ .Vars.ubtu24cis_dconf_db_name }}.d/locks/00-autorun_lock
+    exists: true
+    contents:
+    - '/^\/org\/gnome\/desktop\/media-handling\/autorun-never$/'
     meta:
       server: 1
       workstation: 1

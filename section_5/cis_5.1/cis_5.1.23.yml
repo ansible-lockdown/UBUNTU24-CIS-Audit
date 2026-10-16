@@ -5,10 +5,17 @@
 command:
   sshd_pqc_kex:
     title: 5.1.23 | Ensure sshd post-quantum cryptography key exchange algorithms are configured
-    exec: sshd -T | grep -i kexalgorithms
+    exec: |
+      l_ver=$(sshd -V 2>&1 | grep -Eio 'openssh_[0-9]+\.[0-9]+' | head -1 | cut -d_ -f2)
+      l_kex=$(sshd -T 2>/dev/null | awk '$1 == "kexalgorithms" {print $2}')
+      echo "$l_kex" | grep -q 'sntrup761x25519-sha512' && echo "PASS: sntrup761x25519-sha512" || echo "FAIL: sntrup761x25519-sha512 not in kexalgorithms"
+      if [ -n "$l_ver" ] && [ "$(printf '%s\n' 9.9 "$l_ver" | sort -V | head -1)" = "9.9" ]; then
+        echo "$l_kex" | grep -q 'mlkem768x25519-sha256' && echo "PASS: mlkem768x25519-sha256" || echo "FAIL: mlkem768x25519-sha256 not in kexalgorithms on OpenSSH $l_ver"
+      fi
     exit-status: 0
     stdout:
-    - '/sntrup761x25519|mlkem768x25519/'
+    - '/^PASS: sntrup761x25519-sha512/'
+    - '!/^FAIL/'
     meta:
       server: 1
       workstation: 1

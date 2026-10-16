@@ -20,14 +20,14 @@ file:
 command:
   users_min_pw_expire:
     title: 5.4.1.2 | Ensure minimum password days is configured | user_check
-    exec: "awk -F: '(/^[^:]+:[^!*]/) {print $4}' /etc/shadow"
-    exit-status:
-      or:
-      - 0
-      - 1
+    skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    exec: |
+      awk -F: '($2~/^\$.+\$/) {if($4 < 1) print "FAIL: " $1 " PASS_MIN_DAYS: " $4}' /etc/shadow
+      echo "scan_done"
+    exit-status: 0
     stdout:
-    - '/^([1-9]|[1-9][0-9]{2,})$/'
-    - '!/^0/'
+    - '/^scan_done$/'
+    - '!/^FAIL:/'
     meta:
       server: 2
       workstation: 2

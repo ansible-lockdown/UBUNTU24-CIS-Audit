@@ -3,12 +3,24 @@
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_6_1_1_1_4 }}
 command:
-  /etc/tmpfiles.d/systemd.conf:
-    title: 6.1.1.1.4 | Ensure journald log file access is configured | Manual Check Required
-    exec: echo "Manual - Please check journald default permissions"
+  journald_tmpfiles_perms:
+    title: 6.1.1.1.4 | Ensure journald log file access is configured
+    exec: |
+      for l_conf in /etc/tmpfiles.d/systemd.conf /usr/lib/tmpfiles.d/systemd.conf; do
+        [ -f "$l_conf" ] || continue
+        while read -r l_type l_path l_perm l_rest; do
+          [ "$l_type" = "f" ] || continue
+          echo "$l_perm" | grep -Eq '^0?[0-7]{3,4}$' || continue
+          [ -f "$l_path" ] || continue
+          l_actual=$(stat -c '%a' "$l_path" 2>/dev/null)
+          [ -n "$l_actual" ] && [ "$l_actual" -gt 640 ] && echo "REVIEW: $l_path is mode $l_actual (max 640) defined in $l_conf"
+        done < "$l_conf"
+      done
+      echo "scan_done"
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^scan_done$/'
+    - '!/^REVIEW:/'
     meta:
       server: 1
       workstation: 1

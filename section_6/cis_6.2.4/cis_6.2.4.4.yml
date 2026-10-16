@@ -4,11 +4,11 @@
   {{ if .Vars.ubtu24cis_rule_6_2_4_4 }}
 command:
   audit_logfile_group_setting:
-    title: 6.2.4.4 | Ensure audit log files group owner is configured
-    exec: find "$(grep ^log_file /etc/audit/auditd.conf | awk '{ print $NF }' | xargs dirname)"  -type f  -group root -o ! -group adm
+    title: 6.2.4.4 | Ensure audit log files group owner is configured | log_group setting
+    exec: grep -E '^\s*log_group' /etc/audit/auditd.conf | awk '{ print $NF}'
     exit-status: 0
     stdout:
-    - '!/.*/'
+    - '/^(adm|root)$/'
     meta:
       server: 2
       workstation: 2
@@ -17,11 +17,11 @@ command:
       NIST800-53R5:
       - AU-3
   audit_logfile_group:
-    title: 6.2.4.4 | Ensure audit log files group owner is configured
-    exec: for file in `grep ^log_file /etc/audit/auditd.conf | awk '{ print $NF }'`; do stat -Lc " %n_%G" $file; done
+    title: 6.2.4.4 | Ensure audit log files group owner is configured | file group
+    exec: d=$(dirname $(grep ^log_file /etc/audit/auditd.conf | awk '{ print $NF }')); find -L $d -maxdepth 1 -type f ! -group root ! -group adm
     exit-status: 0
     stdout:
-    - '/.*_(adm|root)$/'
+    - '!/./'
     meta:
       server: 2
       workstation: 2
