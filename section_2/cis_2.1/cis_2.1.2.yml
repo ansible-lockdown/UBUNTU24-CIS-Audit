@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_2_1_2 }}
     {{ if not .Vars.ubtu24cis_avahi_server }}
       {{ if not .Vars.ubtu24cis_avahi_mask }}

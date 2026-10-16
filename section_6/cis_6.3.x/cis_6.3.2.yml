@@ -3,50 +3,51 @@
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_config_aide }}
     {{ if .Vars.ubtu24cis_rule_6_3_2 }}
-      {{ if eq .Vars.ubtu24cis_aide_scan "cron" }}
+      {{ if or (eq .Vars.ubtu24cis_aide_scan "cron") (eq .Vars.ubtu24cis_aide_scan "timer") }}
 command:
+        {{ if eq .Vars.ubtu24cis_aide_scan "cron" }}
   aide_cron:
     title: 6.3.2 | Ensure filesystem integrity is regularly checked | aide cron
+    exec: |
+      grep -Prs '^([^#\n\r]+\h+)?(\/usr\/s?bin\/|^\h*)aide(\.wrapper)?\h+([^#\n\r]+\h+)?(--(check|update)|\$AIDEARGS)\b' /etc/cron.* /etc/crontab /var/spool/cron/
     exit-status:
       or:
       - 0
       - 2
-    exec: "grep -rs aide /etc/cron.* /etc/crontab /var/spool/cron/*"
     stdout:
-    - '!/^#/'
+    - '/aide/'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 6.3.2
       NIST800-53R5: NA
-      {{ end }}
-service:
-    {{ if eq .Vars.ubtu24cis_aide_scan "timer" }}
-  aidecheck:
+        {{ end }}
+        {{ if eq .Vars.ubtu24cis_aide_scan "timer" }}
+  dailyaidecheck_service:
     title: 6.3.2 | Ensure filesystem integrity is regularly checked | aidecheck service
-    name: dailyaidecheck.service
-    enabled: true
-    running: true
-    skip: false
+    exec: systemctl is-enabled dailyaidecheck.service
+    exit-status: 0
+    stdout:
+    - '/^(static|enabled)$/'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 6.3.2
       NIST800-53R5: NA
-  aidecheck.timer:
+service:
+  dailyaidecheck.timer:
     title: 6.3.2 | Ensure filesystem integrity is regularly checked | aidecheck timer
-    name: dailyaidecheck.timer
     enabled: true
     running: true
-    skip: false
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 6.3.2
       NIST800-53R5: NA
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}

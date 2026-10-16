@@ -5,11 +5,10 @@
 command:
   log_sudoers_d:
     title: 5.2.3 | Ensure sudo log file exists | sudoers.d
-    exec: "grep -Ec '^Defaults logfile=/var/log/*.log' /etc/sudoers /etc/sudoers.d/.*/"
-    exit-status:
-      lt: 3
+    exec: grep -rPsi '^\h*Defaults\h+([^#]+,\h*)?logfile\h*=\h*(\"|\x27)?\H+' /etc/sudoers /etc/sudoers.d/
+    exit-status: 0
     stdout:
-    - '/[1:99]/'
+    - '/logfile\s*=\s*"?{{ .Vars.ubtu24cis_varlog_location }}"?/'
     meta:
       server: 1
       workstation: 1

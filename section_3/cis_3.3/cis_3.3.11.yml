@@ -5,7 +5,7 @@
 kernel-param:
   net.ipv6.conf.all.accept_ra:
     title: 3.3.11 | Ensure ipv6 router advertisements are not accepted | all accept
-    value: '1'
+    value: '0'
     meta:
       server: 1
       workstation: 1
@@ -19,7 +19,7 @@ kernel-param:
       - IA-5
   net.ipv6.conf.default.accept_ra:
     title: 3.3.11 | Ensure ipv6 router advertisements are not accepted | default accept
-    value: '1'
+    value: '0'
     meta:
       server: 1
       workstation: 1
@@ -34,7 +34,7 @@ kernel-param:
 command:
   ipv6_all_accept_ra:
     title: 3.3.11 | Ensure ipv6 router advertisements are not accepted | all accept
-    exec: grep "net\.ipv6\conf\.all\.accept_ra" /etc/sysctl.conf /etc/sysctl.d/*
+    exec: grep "net\.ipv6\.conf\.all\.accept_ra" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0
@@ -53,8 +53,8 @@ command:
       - CM-7
       - IA-5
   ipv6_all_default_ra:
-    title: 3.3.11 | Ensure ipv6 router advertisements are not accepted | all accept
-    exec: grep "net\.ipv6\conf\.default\.accept_ra" /etc/sysctl.conf /etc/sysctl.d/*
+    title: 3.3.11 | Ensure ipv6 router advertisements are not accepted | default accept
+    exec: grep "net\.ipv6\.conf\.default\.accept_ra" /etc/sysctl.conf /etc/sysctl.d/*
     exit-status:
       or:
       - 0

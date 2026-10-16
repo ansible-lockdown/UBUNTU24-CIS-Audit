@@ -40,7 +40,7 @@ command:
       - 0
       - 1
     stdout:
-    - '/^net.ipv6.conf.all.accept_redirects(\s|)=(\s|)0/'
+    - '/^\/etc\/sysctl.*:net.ipv6.conf.all.accept_redirects\s*=\s*0/'
     meta:
       server: 1
       workstation: 1
@@ -60,7 +60,7 @@ command:
       - 0
       - 1
     stdout:
-    - '/^net.ipv6.conf.default.accept_redirects(\s|)=(\s|)0/'
+    - '/^\/etc\/sysctl.*:net.ipv6.conf.default.accept_redirects\s*=\s*0/'
     meta:
       server: 1
       workstation: 1

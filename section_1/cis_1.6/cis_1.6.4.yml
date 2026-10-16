@@ -2,13 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_6_4 }}
-exec:
+command:
   motd_permissions:
     title: 1.6.4 | Ensure access to /etc/motd is configured
-    exec: FILE=/etc/motd && if [ -f $FILE ]; then PERMS=`stat  -c '%U %G %a' $FILE`; if [ "$PERMS" != "root root 644" ]; then echo "Permissions Incorrect"; fi; fi
+    exec: find -L /etc/motd -maxdepth 0 \( ! -user root -o ! -group root -o -perm /0133 \) 2>/dev/null; true
     exit-status: 0
     stdout:
-    - '!/^Permissions Incorrect/'
+    - '!/./'
     meta:
       server: 1
       workstation: 1
