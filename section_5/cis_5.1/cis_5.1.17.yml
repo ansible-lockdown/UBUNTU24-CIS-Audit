@@ -8,8 +8,8 @@ file:
     path: /etc/ssh/sshd_config
     exists: true
     contents:
-    - '/^(?i)MaxSessions ([2-9]|10)/'
-    - '!/^MaxSessions (1|1[1-9]|[2-9][0-9]|[1-9]{3,})/'
+    - '/^(?i)MaxSessions\s+"?([0-9]|10)\b/'
+    - '!/^(?i)\s*MaxSessions\s+"?(1[1-9]|[2-9][0-9]|[1-9][0-9]{2,})\b/'
     meta:
       server: 1
       workstation: 1

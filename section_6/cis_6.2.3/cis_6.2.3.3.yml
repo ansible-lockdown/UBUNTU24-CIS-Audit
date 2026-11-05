@@ -8,7 +8,7 @@ command:
     exec: grep sudo_log_file /etc/audit/rules.d/*.rules
     exit-status: 0
     stdout:
-    - '-w /var/log/sudo.log -p wa -k sudo_log_file'
+    - '-w {{ .Vars.ubtu24cis_varlog_location }} -p wa -k sudo_log_file'
     meta:
       server: 2
       workstation: 2
@@ -20,7 +20,7 @@ command:
     exec: auditctl -l | grep sudo_log_file
     exit-status: 0
     stdout:
-    - '-w /var/log/sudo.log -p wa -k sudo_log_file'
+    - '-w {{ .Vars.ubtu24cis_varlog_location }} -p wa -k sudo_log_file'
     meta:
       server: 2
       workstation: 2

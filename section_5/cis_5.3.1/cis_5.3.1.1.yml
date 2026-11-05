@@ -6,11 +6,19 @@ package:
   libpam-runtime:
     title: 5.3.1.1 | Ensure latest version of pam is installed
     installed: true
-    versions:
-      not:
-      - '1.4.0-11ubuntu2.1'
-      - '1.4.0-11ubuntu2.2'
-      - '1.4.0-11ubuntu2.3'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.3.1.1
+      NIST800-53R5: NA
+command:
+  libpam_runtime_min_version:
+    title: 5.3.1.1 | Ensure latest version of pam is installed
+    exec: v=$(dpkg-query -W -f='${Version}' libpam-runtime 2>/dev/null) && dpkg --compare-versions "$v" ge 1.5.3-5 && echo "version_ok $v"
+    exit-status: 0
+    stdout:
+    - '/^version_ok /'
     meta:
       server: 1
       workstation: 1
@@ -19,4 +27,3 @@ package:
       NIST800-53R5: NA
   {{ end }}
 {{ end }}
-

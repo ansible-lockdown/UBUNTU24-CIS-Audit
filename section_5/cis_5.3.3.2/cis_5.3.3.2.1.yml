@@ -11,7 +11,7 @@ command:
       - 0
       - 1
     stdout:
-    - '/.*\:difok\s*=\s*[2-9]/'
+    - '/:\s*difok\s*=\s*([2-9]|[1-9][0-9]+)\b/'
     meta:
       server: 1
       workstation: 1
@@ -24,7 +24,7 @@ file:
     path: /etc/pam.d/common-password
     exists: true
     contents:
-    - '!/^\s+password\s+(requisite|required|sufficient)\s+pam_pwquality\.so\s+([^#\n\r]+\s+)?difok\s*=\s*([0-1])\b/'
+    - '!/^\s*password\s+(requisite|required|sufficient)\s+pam_pwquality\.so\s+([^#\n\r]+\s+)?difok\s*=\s*([0-1])\b/'
     meta:
       server: 1
       workstation: 1

@@ -5,7 +5,9 @@
 command:
   sshd_ciphers:
     title: 5.1.6 | Ensure sshd Ciphers are configured
-    exec: sshd -T | grep -Pi -- '^ciphers\h+\"?([^#\n\r]+,)?((3des|blowfish|cast128|aes(128|192|256))-cbc|arcfour(128|256)?|rijndael-cbc@lysator\.liu\.se)\b'
+    exec: |
+      out=$(sshd -T 2>&1) || { echo "FAIL: sshd -T failed"; exit 2; }
+      printf '%s\n' "$out" | grep -Pi -- '^ciphers\h+\"?([^#\n\r]+,)?((3des|blowfish|cast128|aes(128|192|256))-cbc|arcfour(128|256)?|rijndael-cbc@lysator\.liu\.se)\b'
     exit-status:
       or:
       - 0

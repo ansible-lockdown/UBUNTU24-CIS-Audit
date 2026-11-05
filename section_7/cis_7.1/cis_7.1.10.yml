@@ -2,17 +2,21 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_7_1_10 }}
-file:
+command:
   etc_security_opasswd_perms:
     title: 7.1.10 | Ensure permissions on /etc/security/opasswd are configured
-    path: /etc/security/opasswd
-    exists: true
-    owner: root
-    group: root
-    mode:
-      or:
-      - "0600"
-      - "0400"
+    exec: |
+      for f in /etc/security/opasswd /etc/security/opasswd.old; do
+        [ -e "$f" ] || continue
+        o=$(stat -Lc '%U:%G' "$f"); m=$(stat -Lc '%a' "$f")
+        [ "$o" != "root:root" ] && echo "FAIL: $f is owned by $o"
+        [ $(( 0$m & 0177 )) -ne 0 ] && echo "FAIL: $f is mode $m"
+      done
+      echo "scan_done"
+    exit-status: 0
+    stdout:
+    - '/^scan_done$/'
+    - '!/^FAIL:/'
     meta:
       server: 1
       workstation: 1

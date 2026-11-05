@@ -2,24 +2,15 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_4 }}
-file:
+command:
   sshd_access_limited:
     title: 5.1.4 | Ensure sshd access is configured
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    {{ if .Vars.ubtu24cis_sshd_allow_users }}
-    - {{ .Vars.ubtu24cis_sshd_allow_users }}
-    {{ end }}
-    {{ if .Vars.ubtu24cis_sshd_allow_groups }}
-    - {{ .Vars.ubtu24cis_sshd_allow_groups }}
-    {{ end }}
-    {{ if .Vars.ubtu24cis_sshd_deny_users }}
-    - {{ .Vars.ubtu24cis_sshd_deny_users }}
-    {{ end }}
-    {{ if .Vars.ubtu24cis_sshd_deny_groups }}
-    - {{ .Vars.ubtu24cis_sshd_deny_groups }}
-    {{ end }}
+    exec: |
+      out=$(sshd -T 2>&1) || { echo "FAIL: sshd -T failed"; exit 2; }
+      printf '%s\n' "$out" | grep -Pi -- '^\h*(allow|deny)(users|groups)\h+\H+'
+    exit-status: 0
+    stdout:
+    - '/^(?i)(allow|deny)(users|groups)\s+\S+/'
     meta:
       server: 1
       workstation: 1
