@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if or (and (eq .Vars.system_type "Server") .Vars.ubtu24cis_level_1) (and (eq .Vars.system_type "Workstation") .Vars.ubtu24cis_level_2) }}
   {{ if .Vars.ubtu24cis_rule_2_1_1 }}
     {{ if not .Vars.ubtu24cis_autofs_services }}
       {{ if not .Vars.ubtu24cis_autofs_mask }}

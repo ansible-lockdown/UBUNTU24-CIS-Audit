@@ -17,6 +17,9 @@ ubtu24cis_section7: true
 
 ubtu24cis_level_1: true
 ubtu24cis_level_2: true
+# CIS profile for controls whose level differs by profile.
+# run_audit.sh sets it: Server, or Workstation with -w
+system_type: Server
 
 
 #  to enable rules that may have IO impact on a system e.g. full filesystem scans or CPU heavy
@@ -498,6 +501,8 @@ ubtu24cis_grub_user: root
 ubtu24cis_bootloader_password_hash: "grub.pbkdf2.sha512.changethispassword"  # pragma: allowlist secret
 
 ## Controls 1.5.x
+# Set false if systemd-coredump is not installed (skips the 1.5.3 coredump.conf test)
+ubtu24cis_coredump_installed: true
 
 ## Controls 1.6.x  - Warning banners
 # The controls 1.6.x set various warning banners and protect the respective files
@@ -616,6 +621,10 @@ ubtu24cis_time_servers:
     options: iburst
 
 # Section 3
+## Control 2.4.2.1
+# Set false if at is not installed (skips the 2.4.2.1 tests)
+ubtu24cis_at_installed: true
+
 ## Control 3.1.1 - Ensure system is checked to determine if IPv6 is enabled
 # This variable governs the mechanism of how the disabling of IPV6 is carried out.
 # Its possible values are `grub` and `sysctl`.
@@ -680,6 +689,9 @@ ubtu24cis_disruption_high: true
 # set sugroup if differs from wheel
 ubtu24cis_sugroup: nosugroup
 
+# sudo package to check, sudo or sudo-ldap
+ubtu24cis_sudo_package: sudo
+
 # var log location variable
 ubtu24cis_varlog_location: "/var/log/sudo.log"
 
@@ -694,4 +706,4 @@ ubtu24cis_remote_log_protocol: tcp
 
 # 6.1.2
 # aide setup via - cron, timer
-ubtu24cis_aide_scan: cron
+ubtu24cis_aide_scan: timer

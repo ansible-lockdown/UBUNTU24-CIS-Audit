@@ -53,7 +53,9 @@ file:
     title: 1.5.3 | Ensure core dumps are restricted | coredump.conf
     exists: true
     path: /etc/systemd/coredump.conf
+    skip: {{ not .Vars.ubtu24cis_coredump_installed }}
     contents:
+    - '/^\[Coredump\]/'
     - '/^Storage=none/'
     - '/^ProcessSizeMax=0/'
     meta:

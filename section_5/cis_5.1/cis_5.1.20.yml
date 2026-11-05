@@ -2,14 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_20 }}
-file:
+command:
   ssh_permit_root:
     title: 5.1.20 | Ensure sshd PermitRootLogin is disabled
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - '/^(?i)PermitRootLogin no/'
-    - '!/^(?i)PermitRootLogin yes/'
+    exec: sshd -T 2>/dev/null | grep -Ei '^(permitrootlogin) '
+    exit-status: 0
+    stdout:
+    - '/^permitrootlogin no$/'
     meta:
       server: 1
       workstation: 1

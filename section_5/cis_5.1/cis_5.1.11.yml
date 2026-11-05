@@ -2,14 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_11 }}
-file:
+command:
   ssh_rhosts:
     title: 5.1.11 | Ensure sshd IgnoreRhosts is enabled
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - '/^(?i)Ignorerhosts yes/'
-    - '!/^(?i)Ignorerhosts no/'
+    exec: sshd -T 2>/dev/null | grep -Ei '^(ignorerhosts) '
+    exit-status: 0
+    stdout:
+    - '/^ignorerhosts yes$/'
     meta:
       server: 1
       workstation: 1
