@@ -54,6 +54,15 @@
 - 7.2.1 and 7.2.2 shadowed password and empty field checks
 - 7.2.4 shadow primary group checked
 - 7.2.10 interactive user homes, .netrc 0600 allowed
+- per-profile level gates on system_type for 1.1.1.9, 1.7.1, 1.7.6, 1.7.7, 2.1.1, 2.1.2, 2.1.11, 2.1.20, 3.1.2, 3.1.3, 5.1.8, 5.1.9
+- 1.5.3 coredump.conf [Coredump] section, skipped when systemd-coredump not installed
+- 1.7.2 and 1.7.3 check the gdm profile and gdm.d keyfiles
+- 2.4.2.1 skipped when at not installed
+- 5.1.5, 5.1.7-5.1.11, 5.1.13, 5.1.14, 5.1.16-5.1.22 read sshd -T
+- 5.1.17 MaxSessions also checks sshd_config.d
+- 5.2.1 checks the configured sudo package
+- 6.3.2 tests dailyaidecheck.timer and service only
+- vars: ubtu24cis_sudo_package, ubtu24cis_coredump_installed, ubtu24cis_at_installed, ubtu24cis_aide_scan timer, system_type
 
 ## October 2026 - QA fixes
 
