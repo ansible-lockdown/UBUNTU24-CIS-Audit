@@ -54,6 +54,8 @@ ubtu24cis_rule_1_1_2_1_1: true
 ubtu24cis_rule_1_1_2_1_2: true
 ubtu24cis_rule_1_1_2_1_3: true
 ubtu24cis_rule_1_1_2_1_4: true
+# /tmp is mounted by the tmp.mount systemd unit rather than /etc/fstab
+ubtu24cis_tmp_svc: false
 
 # /dev/shm
 ubtu24cis_rule_1_1_2_2_1: true
@@ -579,7 +581,7 @@ ubtu24cis_xwindow_server: false  # will remove mask not an option
 ubtu24cis_is_mail_server: false
 
 # Client Services
-# ubtu24cis_nis_client_required: false  # Same package as use nis_server value
+ubtu24cis_nis_client_required: false
 ubtu24cis_rsh_client: false
 ubtu24cis_talk_client: false
 ubtu24cis_telnet_required: false
