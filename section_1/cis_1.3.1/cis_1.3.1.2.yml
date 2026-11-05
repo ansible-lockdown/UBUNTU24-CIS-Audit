@@ -2,21 +2,20 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_3_1_2 }}
-file:
+command:
   apparmor_boot_grub:
     title: 1.3.1.2 | Ensure AppArmor is enabled in the bootloader configuration | running grub
-    path: /boot/grub/grub.cfg
-    exists: true
-    contents:
-    - '/apparmor=1/'
-    - '/security=apparmor/'
-    - '!/apparmor=0/'
+    exec: awk '/^[ \t]*linux/ { n++; if ($0 !~ /apparmor=1/ || $0 !~ /security=apparmor/) print } END { if (n == 0) print "no linux lines found" }' /boot/grub/grub.cfg
+    exit-status: 0
+    stdout:
+    - '!/./'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 1.3.1.2
       NIST800-53R5: AC-3
+file:
   grub_app_armor:
     title: 1.3.1.2 | Ensure AppArmor is enabled in the bootloader configuration | default grub
     exists: true

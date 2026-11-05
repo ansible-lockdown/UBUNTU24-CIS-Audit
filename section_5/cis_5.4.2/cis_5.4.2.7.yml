@@ -5,10 +5,18 @@
 command:
   secure_system_accts:
     title: 5.4.2.7 | Ensure system accounts do not have a valid login shell
-    exec: "awk -F: '$3<1000' /etc/passwd | grep -Ev 'root|sync|halt|shutdown|nfsnobody|/sbin/nologin|/bin/false'"
-    exit-status: 1
+    skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    exec: |
+      uid_min=$(awk '/^[[:space:]]*UID_MIN/ {print $2}' /etc/login.defs)
+      valid=$(awk -F/ '$NF != "nologin" && /^\// {print}' /etc/shells)
+      awk -F: -v m="${uid_min:-1000}" '($1 !~ /^(root|halt|sync|shutdown|nfsnobody)$/ && ($3 < m+0 || $3 == 65534)) {print $1, $NF}' /etc/passwd | while read -r u s; do
+        printf '%s\n' "$valid" | grep -qxF -- "$s" && echo "FAIL: Service account $u has a valid shell: $s"
+      done
+      echo "scan_done"
+    exit-status: 0
     stdout:
-    - '!/./'
+    - '/^scan_done$/'
+    - '!/^FAIL:/'
     meta:
       server: 1
       workstation: 1

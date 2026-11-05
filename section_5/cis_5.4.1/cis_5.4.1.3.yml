@@ -9,7 +9,7 @@ file:
     exists: true
     contents:
     - '/^PASS_WARN_AGE\s*{{ .Vars.ubtu24cis_pass_warn_age }}/'
-    - '!/^PASS_WARN_AGE\s*[1-6]/'
+    - '!/^PASS_WARN_AGE\s*([0-6]|-1)\s*$/'
     meta:
       server: 1
       workstation: 1

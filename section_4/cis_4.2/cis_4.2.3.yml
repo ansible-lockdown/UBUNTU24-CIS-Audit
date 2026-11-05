@@ -14,5 +14,18 @@ service:
       - 4.2.3
       NIST800-53R5:
       - SC-7
+file:
+  /etc/ufw/ufw.conf:
+    title: 4.2.3 | Ensure ufw service is enabled | ufw enabled at boot
+    exists: true
+    contents:
+    - '/^\s*ENABLED\s*=\s*yes/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.2.3
+      NIST800-53R5:
+      - SC-7
   {{ end }}
 {{ end }}

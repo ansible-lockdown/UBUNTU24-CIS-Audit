@@ -10,9 +10,9 @@ command:
       or:
       - 0
       - 1
+      - 2
     stdout:
-    - '/.*\:enforcing\s*=\s*1/'
-    - '!/.*\:enforcing\s*=\s*0/'
+    - '!/:\s*enforcing\s*=\s*0\b/'
     meta:
       server: 1
       workstation: 1

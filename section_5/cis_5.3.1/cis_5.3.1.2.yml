@@ -7,10 +7,7 @@ package:
     title: 5.3.1.2 | Ensure libpam-modules is installed
     installed: true
     versions:
-      not:
-      - '1.4.0-11ubuntu2.1'
-      - '1.4.0-11ubuntu2.2'
-      - '1.4.0-11ubuntu2.3'
+      semver-constraint: '>=1.5.3-5'
     meta:
       server: 1
       workstation: 1

@@ -2,14 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_16 }}
-file:
+command:
   sshd_authtries:
     title: 5.1.16 | Ensure sshd MaxAuthTries is configured
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - '/(?i)maxauthtries [1-4]/'
-    - '!/(?i)maxauthtries ([5-9]|[1-9]{2,})/'
+    exec: sshd -T 2>/dev/null | grep -Ei '^(maxauthtries) '
+    exit-status: 0
+    stdout:
+    - '/^maxauthtries [1-4]$/'
     meta:
       server: 1
       workstation: 1

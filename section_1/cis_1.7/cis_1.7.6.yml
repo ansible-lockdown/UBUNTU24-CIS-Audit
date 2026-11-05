@@ -1,15 +1,15 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if or (and (eq .Vars.system_type "Server") .Vars.ubtu24cis_level_1) (and (eq .Vars.system_type "Workstation") .Vars.ubtu24cis_level_2) }}
   {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_6 }}
 file:
   gnome_automount_disable:
     title: 1.7.6 | Ensure GDM automatic mounting of removable media is disabled
-    path: /etc/dconf/db/local.d/00-media-automount
+    path: /etc/dconf/db/{{ .Vars.ubtu24cis_dconf_db_name }}.d/00-media-automount
     exists: true
     contents:
-    - '/^[org/gnome/desktop/media-handling]/'
+    - '/^\[org\/gnome\/desktop\/media-handling\]/'
     - '/^automount=false/'
     - '/^automount-open=false/'
     meta:

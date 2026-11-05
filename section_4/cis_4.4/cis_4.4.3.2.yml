@@ -4,11 +4,20 @@
   {{ if .Vars.ubtu24cis_rule_4_4_3_2 }}
 command:
   ipt6_loopback:
-    title: 4.4.3.2 | Ensure ip6tables loopback traffic is configured | Manual
-    exec: echo "Manual - Please confirm ip6tables loopback connections are configured and matched site policy"
+    title: 4.4.3.2 | Ensure ip6tables loopback traffic is configured
+    exec: |
+      if ! grep -Pqs -- '^\h*0\b' /sys/module/ipv6/parameters/disable || { sysctl net.ipv6.conf.all.disable_ipv6 2>/dev/null | grep -Pqs -- '=\h*1\b' && sysctl net.ipv6.conf.default.disable_ipv6 2>/dev/null | grep -Pqs -- '=\h*1\b'; }; then echo "PASS: IPv6 is not enabled"; exit 0; fi
+      rin=$(ip6tables -L INPUT -v -n 2>&1) || { echo "FAIL: ip6tables -L INPUT failed"; exit 0; }
+      rout=$(ip6tables -L OUTPUT -v -n 2>&1) || { echo "FAIL: ip6tables -L OUTPUT failed"; exit 0; }
+      fail=0
+      printf '%s\n' "$rin" | grep -Eq '^\s*\S+\s+\S+\s+ACCEPT\s+(all|0)\s+(--\s+)?lo\s+\*\s+::/0\s+::/0' || { echo "FAIL: INPUT ACCEPT on lo rule missing"; fail=1; }
+      printf '%s\n' "$rin" | grep -Eq '^\s*\S+\s+\S+\s+DROP\s+(all|0)\s+(--\s+)?\*\s+\*\s+::1(/128)?\s+::/0' || { echo "FAIL: INPUT DROP from ::1 rule missing"; fail=1; }
+      printf '%s\n' "$rout" | grep -Eq '^\s*\S+\s+\S+\s+ACCEPT\s+(all|0)\s+(--\s+)?\*\s+lo\s+::/0\s+::/0' || { echo "FAIL: OUTPUT ACCEPT on lo rule missing"; fail=1; }
+      if [ "$fail" -eq 0 ]; then echo "PASS"; fi
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^PASS/'
+    - '!/FAIL/'
     meta:
       server: 1
       workstation: 1

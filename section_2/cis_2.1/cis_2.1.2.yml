@@ -1,13 +1,13 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if or (and (eq .Vars.system_type "Server") .Vars.ubtu24cis_level_1) (and (eq .Vars.system_type "Workstation") .Vars.ubtu24cis_level_2) }}
   {{ if .Vars.ubtu24cis_rule_2_1_2 }}
     {{ if not .Vars.ubtu24cis_avahi_server }}
       {{ if not .Vars.ubtu24cis_avahi_mask }}
 package:
   avahi_pkg:
     title: 2.1.2 | Ensure avahi daemon services are not in use | pkg removed
-    name: avahi
+    name: avahi-daemon
     installed: false
     meta:
       server: 1

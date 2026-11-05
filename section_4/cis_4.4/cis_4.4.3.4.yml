@@ -4,11 +4,20 @@
   {{ if .Vars.ubtu24cis_rule_4_4_3_4 }}
 command:
   ipt6_open_ports:
-    title: 4.4.3.4 | Ensure ip6tables firewall rules exist for all open ports | Manual
-    exec: echo "Manual - Please confirm ip6tables rules for open ports configured and matched site policy"
+    title: 4.4.3.4 | Ensure ip6tables firewall rules exist for all open ports
+    exec: |
+      if ! grep -Pqs -- '^\h*0\b' /sys/module/ipv6/parameters/disable || { sysctl net.ipv6.conf.all.disable_ipv6 2>/dev/null | grep -Pqs -- '=\h*1\b' && sysctl net.ipv6.conf.default.disable_ipv6 2>/dev/null | grep -Pqs -- '=\h*1\b'; }; then echo "PASS: IPv6 is not enabled"; exit 0; fi
+      rules=$(ip6tables -L INPUT -v -n 2>&1) || { echo "FAIL: ip6tables -L INPUT -v -n failed"; exit 0; }
+      listen=$(ss -6tulnH 2>&1) || { echo "FAIL: ss failed"; exit 0; }
+      missing=$(printf '%s\n' "$listen" | awk '$5 !~ /%lo:/ && $5 !~ /^\[?::1\]?:/ {p=$5; sub(/.*:/, "", p); print p}' | sort -u | while read -r port; do
+        [ -n "$port" ] || continue
+        printf '%s\n' "$rules" | grep -Eq -- "dpts?:([0-9]+:)?$port([^0-9]|$)" || echo "FAIL: port $port has no ip6tables rule"
+      done)
+      if [ -z "$missing" ]; then echo "PASS"; else printf '%s\n' "$missing"; fi
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^PASS/'
+    - '!/FAIL/'
     meta:
       server: 1
       workstation: 1

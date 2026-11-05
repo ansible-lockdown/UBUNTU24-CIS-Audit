@@ -5,11 +5,11 @@
 file:
   bootloader_password_set:
     title: 1.4.1 | Ensure bootloader password is set
-    path: /etc/grub.d/00_user
+    path: /boot/grub/grub.cfg
     exists: true
     contents:
-    - '/set superusers="{{ .Vars.ubtu24cis_grub_user }}"/'
-    - '/password_pbkdf2 {{ .Vars.ubtu24cis_grub_user }} {{ .Vars.ubtu24cis_bootloader_password_hash }}/'
+    - '/^set superusers="{{ .Vars.ubtu24cis_grub_user }}"/'
+    - '/^\s*password_pbkdf2 {{ .Vars.ubtu24cis_grub_user }} {{ .Vars.ubtu24cis_bootloader_password_hash }}/'
     meta:
       server: 1
       workstation: 1

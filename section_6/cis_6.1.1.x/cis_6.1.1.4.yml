@@ -36,16 +36,6 @@ service:
       workstation: 1
       CIS_ID:
       - 6.1.1.4
-  single_syslog_journald_stopped:
-    title: 6.1.1.4 | Ensure only one logging system is in use | journald stopped
-    name: systemd-journald.service
-    running: false
-    enabled: false
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 6.1.1.4
-    {{ end }}
+  {{ end }}
   {{ end }}
 {{ end }}

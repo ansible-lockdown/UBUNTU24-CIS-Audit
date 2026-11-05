@@ -5,12 +5,26 @@
 command:
   root_path_check:
     title: 5.4.2.5 | Ensure root path integrity
-    exec: "/bin/bash --login -c 'env | grep ^PATH=' | sed -e 's/^PATH=//' | tr ':' '\\n'"
+    exec: |
+      p=$(/bin/bash --login -c 'env' | grep '^PATH=' | cut -d= -f2-)
+      case "$p" in *::*) echo "FAIL: root PATH contains an empty directory (::)";; esac
+      case "$p" in *:) echo "FAIL: root PATH contains a trailing (:)";; esac
+      printf '%s\n' "$p" | tr ':' '\n' | while read -r d; do
+        [ -z "$d" ] && continue
+        [ "$d" = "." ] && echo "FAIL: root PATH contains the current working directory (.)" && continue
+        if [ -d "$d" ]; then
+          o=$(stat -Lc '%U' "$d"); m=$(stat -Lc '%a' "$d")
+          [ "$o" != "root" ] && echo "FAIL: $d is owned by $o"
+          [ $(( 0$m & 022 )) -ne 0 ] && echo "FAIL: $d is mode $m"
+        else
+          echo "FAIL: $d is not a directory"
+        fi
+      done
+      echo "scan_done"
     exit-status: 0
     stdout:
-    - '/^\//'
-    - '!/^$/'
-    - '!/^[^\/]/'
+    - '/^scan_done$/'
+    - '!/^FAIL:/'
     meta:
       server: 1
       workstation: 1

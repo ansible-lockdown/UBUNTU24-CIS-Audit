@@ -5,10 +5,15 @@
 command:
   bad_dot_files:
     title: 7.2.10 | Ensure local interactive user dot files access is configured | bad dot files
-    exec: 'find /home/ -name "\.forward" -o -name "\.netrc" -o -name "\.rhosts"'
+    exec: |
+      awk -F: 'NR==FNR {if ($0 ~ /^\// && $0 !~ /\/nologin$/) v[$0]=1; next} ($NF in v) {print $1, $(NF-1)}' /etc/shells /etc/passwd | while read -r u h; do
+        [ -d "$h" ] && find "$h" -xdev -type f \( -name '.forward' -o -name '.rhost' -o -name '.rhosts' \) -print
+      done
+      echo "scan_done"
     exit-status: 0
     stdout:
-    - '!/./'
+    - '/^scan_done$/'
+    - '!/^\//'
     meta:
       server: 1
       workstation: 1
@@ -22,13 +27,17 @@ command:
       - IA-5
   dot_file_perms:
     title: 7.2.10 | Ensure local interactive user dot files access is configured | dot files permissions
-    exec: 'find /home/ -name "\.*" -perm /g+w,o+w | grep -v .bash_history'
-    exit-status:
-      or:
-      - 0
-      - 1
+    exec: |
+      awk -F: 'NR==FNR {if ($0 ~ /^\// && $0 !~ /\/nologin$/) v[$0]=1; next} ($NF in v) {print $1, $(NF-1)}' /etc/shells /etc/passwd | while read -r u h; do
+        [ -d "$h" ] || continue
+        g=$(id -gn "$u")
+        find "$h" -xdev -type f -name '.*' ! -name '.bash_history' ! -name '.netrc' \( -perm /0133 -o ! -user "$u" -o ! -group "$g" \) -print
+      done
+      echo "scan_done"
+    exit-status: 0
     stdout:
-    - '!/./'
+    - '/^scan_done$/'
+    - '!/^\//'
     meta:
       server: 1
       workstation: 1
@@ -42,10 +51,17 @@ command:
       - IA-5
   dot_file_bash_history:
     title: 7.2.10 | Ensure local interactive user dot files access is configured | bash_history files permissions
-    exec: 'find /home/ -name "\.bash_history" -perm /go+rwx'
+    exec: |
+      awk -F: 'NR==FNR {if ($0 ~ /^\// && $0 !~ /\/nologin$/) v[$0]=1; next} ($NF in v) {print $1, $(NF-1)}' /etc/shells /etc/passwd | while read -r u h; do
+        [ -d "$h" ] || continue
+        g=$(id -gn "$u")
+        find "$h" -xdev -type f \( -name '.bash_history' -o -name '.netrc' \) \( -perm /0177 -o ! -user "$u" -o ! -group "$g" \) -print
+      done
+      echo "scan_done"
     exit-status: 0
     stdout:
-    - '!/./'
+    - '/^scan_done$/'
+    - '!/^\//'
     meta:
       server: 1
       workstation: 1

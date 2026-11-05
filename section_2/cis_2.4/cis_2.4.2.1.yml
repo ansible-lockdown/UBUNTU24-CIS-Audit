@@ -7,6 +7,7 @@ file:
     title: 2.4.2.1 | Ensure at is restricted to authorized users
     path: /etc/at.deny
     exists: false
+    skip: {{ not .Vars.ubtu24cis_at_installed }}
     meta:
       server: 1
       workstation: 1
@@ -18,9 +19,17 @@ file:
   /etc/at.allow:
     title: 2.4.2.1 | Ensure at is restricted to authorized users
     exists: true
+    skip: {{ not .Vars.ubtu24cis_at_installed }}
     owner: root
-    group: root
-    mode: "0640"
+    group:
+      or:
+      - root
+      - daemon
+    mode:
+      or:
+      - "0640"
+      - "0600"
+      - "0400"
     meta:
       server: 1
       workstation: 1

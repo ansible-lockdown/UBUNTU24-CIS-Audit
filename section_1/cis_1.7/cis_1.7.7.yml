@@ -1,16 +1,16 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if or (and (eq .Vars.system_type "Server") .Vars.ubtu24cis_level_1) (and (eq .Vars.system_type "Workstation") .Vars.ubtu24cis_level_2) }}
   {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_7 }}
 file:
   gnome_automount_lock:
     title: 1.7.7 | Ensure GDM disabling automatic mounting of removable media is not overridden
-    path: /etc/dconf/db/local.d/locks/00-automount_lock
+    path: /etc/dconf/db/{{ .Vars.ubtu24cis_dconf_db_name }}.d/locks/00-automount_lock
     exists: true
     contents:
-    - '^/\/org\/gnome\/desktop\/media-handling\/automount/'
-    - '^/\/org\/gnome\/desktop\/media-handling\/automount-open/'
+    - '/^\/org\/gnome\/desktop\/media-handling\/automount$/'
+    - '/^\/org\/gnome\/desktop\/media-handling\/automount-open$/'
     meta:
       server: 1
       workstation: 2

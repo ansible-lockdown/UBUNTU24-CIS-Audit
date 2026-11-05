@@ -19,6 +19,7 @@ mount:
       - AC-3
       - MP-2
 file:
+  {{ if not .Vars.ubtu24cis_tmp_svc }}
   tmp_nodev_fstab_options:
      title: 1.1.2.1.2 | Ensure nodev option set on /tmp partition
      exists: true
@@ -34,5 +35,23 @@ file:
       - CM-7
       - AC-3
       - MP-2
+  {{ end }}
+  {{ if .Vars.ubtu24cis_tmp_svc }}
+  tmp_nodev_tmp_mount_options:
+     title: 1.1.2.1.2 | Ensure nodev option set on /tmp partition
+     exists: true
+     path: /etc/systemd/system/tmp.mount
+     contents:
+     - '/^Options=.*nodev/'
+     meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.2.1.2
+      NIST800-53R5:
+      - CM-7
+      - AC-3
+      - MP-2
+  {{ end }}
   {{ end }}
 {{ end }}

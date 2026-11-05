@@ -2,14 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_5_1_10 }}
-file:
+command:
   ssh_hostbased_auth:
     title: 5.1.10 | Ensure sshd HostbasedAuthentication is disabled
-    path: /etc/ssh/sshd_config
-    exists: true
-    contents:
-    - '/^(?i)HostbasedAuthentication no/'
-    - '!/^(?i)HostbasedAuthentication yes/'
+    exec: sshd -T 2>/dev/null | grep -Ei '^(hostbasedauthentication) '
+    exit-status: 0
+    stdout:
+    - '/^hostbasedauthentication no$/'
     meta:
       server: 1
       workstation: 1

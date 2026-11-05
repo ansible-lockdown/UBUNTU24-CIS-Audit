@@ -6,11 +6,11 @@
 file:
   gdm_autorun_never:
     title: 1.7.8 | Ensure GDM autorun-never is enabled
-    path: /etc/dconf/db/local.d/00-media-autorun
+    path: /etc/dconf/db/{{ .Vars.ubtu24cis_dconf_db_name }}.d/00-media-autorun
     exists: true
     contents:
-    - '/^[org/gnome/desktop/media-handling]/'
-    - '/^autrun-never=true/'
+    - '/^\[org\/gnome\/desktop\/media-handling\]/'
+    - '/^autorun-never=true/'
     meta:
       server: 1
       workstation: 1

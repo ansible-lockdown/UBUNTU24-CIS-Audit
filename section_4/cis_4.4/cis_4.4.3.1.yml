@@ -4,11 +4,19 @@
   {{ if .Vars.ubtu24cis_rule_4_4_3_1 }}
 command:
   ipt6_def_deny:
-    title: 4.4.3.1 | Ensure ip6tables default deny firewall policy | Manual
-    exec: echo "Manual - Please confirm ip6tables default denies are configured and matched site policy"
+    title: 4.4.3.1 | Ensure ip6tables default deny firewall policy
+    exec: |
+      if ! grep -Pqs -- '^\h*0\b' /sys/module/ipv6/parameters/disable || { sysctl net.ipv6.conf.all.disable_ipv6 2>/dev/null | grep -Pqs -- '=\h*1\b' && sysctl net.ipv6.conf.default.disable_ipv6 2>/dev/null | grep -Pqs -- '=\h*1\b'; }; then echo "PASS: IPv6 is not enabled"; exit 0; fi
+      out=$(ip6tables -L -n 2>&1) || { echo "FAIL: ip6tables -L failed"; exit 0; }
+      fail=0
+      for c in INPUT FORWARD OUTPUT; do
+        printf '%s\n' "$out" | grep -Eq "^Chain $c \(policy (DROP|REJECT)" || { echo "FAIL: $c chain policy is not DROP or REJECT"; fail=1; }
+      done
+      if [ "$fail" -eq 0 ]; then echo "PASS"; fi
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^PASS/'
+    - '!/FAIL/'
     meta:
       server: 1
       workstation: 1

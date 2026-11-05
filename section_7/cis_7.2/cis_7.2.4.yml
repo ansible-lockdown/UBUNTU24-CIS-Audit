@@ -17,5 +17,19 @@ file:
       - 7.2.4
       NIST800-53R5:
       - IA-5
+command:
+  shadow_group_primary:
+    title: 7.2.4 | Ensure shadow group is empty | no user has shadow as primary group
+    exec: 'awk -F: -v g="$(getent group shadow | cut -d: -f3)" ''(g != "" && $4 == g) {print $1}'' /etc/passwd'
+    exit-status: 0
+    stdout:
+    - '!/./'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 7.2.4
+      NIST800-53R5:
+      - IA-5
   {{ end }}
 {{ end }}

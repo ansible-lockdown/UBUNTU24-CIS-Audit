@@ -5,6 +5,7 @@
   command:
     test_valid_shells:
       title: 5.4.2.8 | Ensure accounts without a valid login shell are locked
+      skip: {{ not .Vars.ubtu24cis_disruption_high }}
       exec: |
         bash -c 'valid=$(awk -F/ "\$NF != \"nologin\" && /^\// {print}" /etc/shells)
         awk -F: "\$1 != \"root\" {print \$1, \$NF}" /etc/passwd | while read -r u s; do

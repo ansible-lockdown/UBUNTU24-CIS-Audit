@@ -5,7 +5,7 @@
 command:
   audit_logfile_group_setting:
     title: 6.2.4.3 | Ensure audit log files group owner is configured | log_group setting
-    exec: grep log_group /etc/audit/auditd.conf | awk '{ print $NF}'
+    exec: grep -E '^\s*log_group' /etc/audit/auditd.conf | awk '{ print $NF}'
     exit-status: 0
     stdout:
     - '/^(adm|root)$/'
@@ -18,7 +18,7 @@ command:
       - AU-3
   audit_logfile_group:
     title: 6.2.4.3 | Ensure audit log files group owner is configured | file group
-    exec: d=$(dirname $(grep ^log_file /etc/audit/auditd.conf | awk '{ print $NF }')); find $d -maxdepth 1 -type f ! -group root ! -group adm
+    exec: d=$(dirname $(grep ^log_file /etc/audit/auditd.conf | awk '{ print $NF }')); find -L $d -maxdepth 1 -type f ! -group root ! -group adm
     exit-status: 0
     stdout:
     - '!/./'

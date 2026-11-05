@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if and (eq .Vars.system_type "Server") .Vars.ubtu24cis_level_2 }}
   {{ if not .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_1 }}
 package:

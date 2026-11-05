@@ -1,7 +1,8 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_rule_3_3_2 }}
+  {{ if not .Vars.ubtu24cis_is_router }}
+    {{ if .Vars.ubtu24cis_rule_3_3_2 }}
 kernel-param:
   net.ipv4.conf.all.send_redirects:
     title: 3.3.2 | Ensure packet redirect sending is disabled | all send_redirect
@@ -60,7 +61,7 @@ command:
       - 0
       - 1
     stdout:
-    - '/.*:net.ipv4.conf.default.send_redirects=0/'
+    - '/.*:net.ipv4.conf.default.send_redirects\s*=\s*0/'
     meta:
       server: 1
       workstation: 1
@@ -72,5 +73,6 @@ command:
       - CM-6
       - CM-7
       - IA-5
+    {{ end }}
   {{ end }}
 {{ end }}
