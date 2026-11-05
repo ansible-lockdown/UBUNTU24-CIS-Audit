@@ -3,12 +3,27 @@
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_4_4_2_2 }}
 command:
-  ipt_loopback:
-    title: 4.4.2.2 | Ensure iptables loopback traffic is configured | Manual
-    exec: echo "Manual - Please confirm iptables loopback connections are configured and matched site policy"
+  ipt_loopback_input:
+    title: 4.4.2.2 | Ensure iptables loopback traffic is configured | input
+    exec: iptables -L INPUT -v -n
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^\s*\S+\s+\S+\s+ACCEPT\s+(all|0)\s+--\s+lo\s+\*\s+0\.0\.0\.0\/0\s+0\.0\.0\.0\/0/'
+    - '/^\s*\S+\s+\S+\s+DROP\s+(all|0)\s+--\s+\*\s+\*\s+127\.0\.0\.0\/8\s+0\.0\.0\.0\/0/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.4.2.2
+      NIST800-53R5:
+      - CA-9
+      - SC-7
+  ipt_loopback_output:
+    title: 4.4.2.2 | Ensure iptables loopback traffic is configured | output
+    exec: iptables -L OUTPUT -v -n
+    exit-status: 0
+    stdout:
+    - '/^\s*\S+\s+\S+\s+ACCEPT\s+(all|0)\s+--\s+\*\s+lo\s+0\.0\.0\.0\/0\s+0\.0\.0\.0\/0/'
     meta:
       server: 1
       workstation: 1

@@ -4,11 +4,19 @@
   {{ if .Vars.ubtu24cis_rule_4_4_2_4 }}
 command:
   ipt_open_ports:
-    title: 4.4.2.4 | Ensure iptables firewall rules exist for all open ports | Manual
-    exec: echo "Manual - Please confirm iptables rules for open ports configured and matched site policy"
+    title: 4.4.2.4 | Ensure iptables firewall rules exist for all open ports
+    exec: |
+      rules=$(iptables -L INPUT -v -n 2>&1) || { echo "FAIL: iptables -L INPUT -v -n failed"; exit 0; }
+      listen=$(ss -4tulnH 2>&1) || { echo "FAIL: ss failed"; exit 0; }
+      missing=$(printf '%s\n' "$listen" | awk '$5 !~ /%lo:/ && $5 !~ /^127\./ {p=$5; sub(/.*:/, "", p); print p}' | sort -u | while read -r port; do
+        [ -n "$port" ] || continue
+        printf '%s\n' "$rules" | grep -Eq -- "dpts?:([0-9]+:)?$port([^0-9]|$)" || echo "FAIL: port $port has no iptables rule"
+      done)
+      if [ -z "$missing" ]; then echo "PASS"; else printf '%s\n' "$missing"; fi
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^PASS/'
+    - '!/FAIL/'
     meta:
       server: 1
       workstation: 1

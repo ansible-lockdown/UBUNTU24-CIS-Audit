@@ -6,10 +6,21 @@ command:
   wireless_disabled:
     title: 3.1.2 | Ensure wireless interfaces are disabled | MANUAL
     exit-status: 0
-    exec: "if [ $(find /sys/class/net/*/ -type d -name wireless) ]; then echo MANUAL; else echo OK; fi"
+    exec: |
+      l_output2=""
+      l_dname=""
+      if [ -n "$(find /sys/class/net/*/ -type d -name wireless 2>/dev/null)" ]; then
+        l_dname=$(for driverdir in $(find /sys/class/net/*/ -type d -name wireless | xargs dirname); do basename "$(readlink -f "$driverdir"/device/driver/module)"; done | sort -u)
+      fi
+      for l_mname in $l_dname; do
+        modprobe -n -v "$l_mname" | grep -Pq -- '^\h*install \/bin\/(true|false)' || l_output2="$l_output2 $l_mname:loadable"
+        lsmod | grep -Pq -- "^$l_mname\b" && l_output2="$l_output2 $l_mname:loaded"
+        modprobe --showconfig | grep -Pq -- "^\h*blacklist\h+$l_mname\b" || l_output2="$l_output2 $l_mname:not_deny_listed"
+      done
+      if [ -z "$l_output2" ]; then echo OK; else echo "FAIL:$l_output2"; fi
     stdout:
     - '/^OK/'
-    - '!/^MANUAL/'
+    - '!/^FAIL/'
     meta:
       server: 1
       workstation: NA

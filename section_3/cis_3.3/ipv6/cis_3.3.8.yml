@@ -1,7 +1,8 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_rule_3_3_8 }}
+  {{ if not .Vars.ubtu24cis_is_router }}
+    {{ if .Vars.ubtu24cis_rule_3_3_8 }}
 kernel-param:
   net.ipv6.conf.all.accept_source_route:
     title: 3.3.8 | Ensure source routed packets are not accepted | IPv6 all source routed
@@ -72,5 +73,6 @@ command:
       - CM-6
       - CM-7
       - IA-5
+    {{ end }}
   {{ end }}
 {{ end }}

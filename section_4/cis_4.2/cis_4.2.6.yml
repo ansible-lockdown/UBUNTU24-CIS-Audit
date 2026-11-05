@@ -4,11 +4,19 @@
   {{ if .Vars.ubtu24cis_rule_4_2_6 }}
 command:
   ufw_open_ports:
-    title: 4.2.6 | Ensure ufw firewall rules exist for all open ports | Manual
-    exec: echo "Manual - Please confirm firewall rules exist for open ports match site policies"
+    title: 4.2.6 | Ensure ufw firewall rules exist for all open ports
+    exec: |
+      rules=$(ufw status verbose 2>&1) || { echo "FAIL: ufw status verbose failed"; exit 0; }
+      listen=$(ss -tulnH 2>&1) || { echo "FAIL: ss failed"; exit 0; }
+      missing=$(printf '%s\n' "$listen" | awk '$5 !~ /%lo:/ && $5 !~ /^(127\.|\[?::1\]?:)/ {p=$5; sub(/.*:/, "", p); print p}' | sort -u | while read -r port; do
+        [ -n "$port" ] || continue
+        printf '%s\n' "$rules" | grep -Po '^\h*\d+\b' | tr -d ' ' | grep -qx -- "$port" || echo "FAIL: port $port has no ufw rule"
+      done)
+      if [ -z "$missing" ]; then echo "PASS"; else printf '%s\n' "$missing"; fi
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/^PASS/'
+    - '!/FAIL/'
     meta:
       server: 1
       workstation: 1

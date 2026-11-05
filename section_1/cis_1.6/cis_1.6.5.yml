@@ -2,14 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_6_5 }}
-file:
+command:
   etc_issue_perms:
     title: 1.6.5 | Ensure access to /etc/issue is configured
-    exists: true
-    path: /etc/issue
-    owner: root
-    group: root
-    mode: '0644'
+    exec: stat -Lc '%#a %U %G' /etc/issue
+    exit-status: 0
+    stdout:
+    - '/^0[0246][04][04] root root$/'
     meta:
       server: 1
       workstation: 1

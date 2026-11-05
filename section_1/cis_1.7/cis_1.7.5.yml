@@ -6,11 +6,11 @@
 file:
   screensaver_lock_file:
     title: 1.7.5 | Ensure GDM screen locks cannot be overridden
-    path: /etc/dconf/db/local.d/locks/00-screensave_lock
+    path: /etc/dconf/db/{{ .Vars.ubtu24cis_dconf_db_name }}.d/locks/00-screensaver
     exists: true
     contents:
-    - '^\/org\/gnome\/desktop\/session\/idle-delay/'
-    - '^/\/org\/gnome\/desktop\/screensaver\/lock-delay/'
+    - '/^\/org\/gnome\/desktop\/session\/idle-delay$/'
+    - '/^\/org\/gnome\/desktop\/screensaver\/lock-delay$/'
     meta:
       server: 1
       workstation: 1

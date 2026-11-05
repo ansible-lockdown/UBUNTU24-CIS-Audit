@@ -14,5 +14,19 @@ service:
       - 4.2.3
       NIST800-53R5:
       - SC-7
+command:
+  ufw_status_active:
+    title: 4.2.3 | Ensure ufw service is enabled | ufw status
+    exec: ufw status
+    exit-status: 0
+    stdout:
+    - '/^Status: active/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.2.3
+      NIST800-53R5:
+      - SC-7
   {{ end }}
 {{ end }}
