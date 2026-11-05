@@ -6,19 +6,8 @@ package:
   libpam-modules:
     title: 5.3.1.2 | Ensure libpam-modules is installed
     installed: true
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 5.3.1.2
-      NIST800-53R5: NA
-command:
-  libpam_modules_min_version:
-    title: 5.3.1.2 | Ensure libpam-modules is installed
-    exec: v=$(dpkg-query -W -f='${Version}' libpam-modules 2>/dev/null) && dpkg --compare-versions "$v" ge 1.5.3-5 && echo "version_ok $v"
-    exit-status: 0
-    stdout:
-    - '/^version_ok /'
+    versions:
+      semver-constraint: '>=1.5.3-5'
     meta:
       server: 1
       workstation: 1

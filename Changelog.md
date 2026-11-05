@@ -63,6 +63,8 @@
 - 5.2.1 checks the configured sudo package
 - 6.3.2 tests dailyaidecheck.timer and service only
 - vars: ubtu24cis_sudo_package, ubtu24cis_coredump_installed, ubtu24cis_at_installed, ubtu24cis_aide_scan timer, system_type
+- 1.5.5, 1.6.5, 1.6.6, 4.2.3, 5.3.1.1, 5.3.1.2 use typed file, service and package tests instead of command
+- vars: ubtu24cis_apport_installed
 
 ## October 2026 - QA fixes
 

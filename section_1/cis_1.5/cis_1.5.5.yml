@@ -2,16 +2,23 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_1_5_5 }}
-command:
-  apport_not_enabled:
-    title: 1.5.5 | Ensure Automatic Error Reporting is not enabled
-    exec: |
-      dpkg-query -s apport >/dev/null 2>&1 && grep -Psi -- '^\h*enabled\h*=\h*[^0]\b' /etc/default/apport
-      systemctl is-active apport.service 2>/dev/null | grep '^active'
-      true
-    exit-status: 0
-    stdout:
-    - '!/./'
+service:
+  apport:
+    title: 1.5.5 | Ensure Automatic Error Reporting is not enabled | service not active
+    running: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.5
+      NIST800-53R5: NA
+file:
+  /etc/default/apport:
+    title: 1.5.5 | Ensure Automatic Error Reporting is not enabled | enabled=0
+    skip: {{ not .Vars.ubtu24cis_apport_installed }}
+    exists: true
+    contents:
+    - '!/^\s*enabled\s*=\s*[^0]/'
     meta:
       server: 1
       workstation: 1

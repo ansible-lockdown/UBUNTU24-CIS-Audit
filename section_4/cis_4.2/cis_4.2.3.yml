@@ -14,13 +14,12 @@ service:
       - 4.2.3
       NIST800-53R5:
       - SC-7
-command:
-  ufw_status_active:
-    title: 4.2.3 | Ensure ufw service is enabled | ufw status
-    exec: ufw status
-    exit-status: 0
-    stdout:
-    - '/^Status: active/'
+file:
+  /etc/ufw/ufw.conf:
+    title: 4.2.3 | Ensure ufw service is enabled | ufw enabled at boot
+    exists: true
+    contents:
+    - '/^\s*ENABLED\s*=\s*yes/'
     meta:
       server: 1
       workstation: 1
