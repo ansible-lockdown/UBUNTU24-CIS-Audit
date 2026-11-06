@@ -24,10 +24,7 @@ file:
       - root
       - crontab
     mode:
-      or:
-      - "0640"
-      - "0600"
-      - "0400"
+      match-regexp: '^0[0246][04]0$'
     meta:
       server: 1
       workstation: 1

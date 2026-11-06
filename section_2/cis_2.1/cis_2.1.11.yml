@@ -2,11 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_11 }}
-    {{ if not .Vars.ubtu24cis_message_server }}
-      {{ if not .Vars.ubtu24cis_message_mask }}
+    {{ if not .Vars.ubtu24cis_message_mask }}
 package:
   dovecot_imapd_pkg:
     title: 2.1.11 | Ensure message access server services are not in use | pkg removed
+    skip: {{ .Vars.ubtu24cis_message_server }}
+    skip-reason: the IMAP/POP3 server is required, ubtu24cis_message_server is true
     name: dovecot-imapd
     installed: false
     meta:
@@ -18,6 +19,8 @@ package:
       - CM-7
   dovecot_pop3d_pkg:
     title: 2.1.11 | Ensure message access server services are not in use | pkg removed
+    skip: {{ .Vars.ubtu24cis_message_server }}
+    skip-reason: the IMAP/POP3 server is required, ubtu24cis_message_server is true
     name: dovecot-pop3d
     installed: false
     meta:
@@ -27,15 +30,15 @@ package:
       - 2.1.11
       NIST800-53R5:
       - CM-7
-      {{ end }}
-      {{ if .Vars.ubtu24cis_message_mask }}
-file:
+    {{ end }}
+    {{ if .Vars.ubtu24cis_message_mask }}
+service:
   dovecot_service_masked:
     title: 2.1.11 | Ensure message access server services are not in use | masked
-    path: /etc/systemd/system/dovecot.service
-    exists: true
-    filetype: symlink
-    linked-to: /dev/null
+    skip: {{ .Vars.ubtu24cis_message_server }}
+    skip-reason: the IMAP/POP3 server is required, ubtu24cis_message_server is true
+    name: dovecot.service
+    masked: true
     meta:
       server: 1
       workstation: 1
@@ -45,10 +48,10 @@ file:
       - CM-7
   dovecot_socket_masked:
     title: 2.1.11 | Ensure message access server services are not in use | masked
-    path: /etc/systemd/system/dovecot.socket
-    exists: true
-    filetype: symlink
-    linked-to: /dev/null
+    skip: {{ .Vars.ubtu24cis_message_server }}
+    skip-reason: the IMAP/POP3 server is required, ubtu24cis_message_server is true
+    name: dovecot.socket
+    masked: true
     meta:
       server: 1
       workstation: 1
@@ -56,7 +59,6 @@ file:
       - 2.1.11
       NIST800-53R5:
       - CM-7
-      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

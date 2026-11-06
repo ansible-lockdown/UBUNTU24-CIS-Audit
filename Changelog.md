@@ -2,6 +2,35 @@
 
 ## CIS Benchmark 2.0.0
 
+## November 2026 - QA fixes
+
+- run_audit.sh uses syver v0.16.0 by default
+- README describes syver
+- goss.yml renamed syver.yml, run_audit.sh default AUDIT_FILE syver.yml
+- run_audit.sh os name/version default when /etc/os-release is missing
+- 1.1.2.3.x - 1.1.2.7.x mount option checks skipped with a reason when the partition does not exist
+- 1.1.2.1.2 - 1.1.2.1.4 check tmp.mount or /etc/fstab per ubtu24cis_tmp_svc
+- 2.1.x, 3.1.3, 6.1.1.1.2 use service masked; required services, mail and log server skipped with a reason
+- per-profile level gates on system_type for 1.1.1.9, 1.1.1.10, 1.7.4, 2.1.1, 2.1.3, 2.1.14, 2.1.23, 3.1.2, 3.1.3, 3.3.1.1, 5.1.8, 5.1.9
+- sysctl checks read the effective config (systemd-sysctl --cat-config and UFW IPT_SYSCTL), last value wins
+- kernel module checks use modprobe --showconfig and /sys/module
+- su group, pam_pwquality, use_authtok, issue.net, grub ipv6, dconf checks use typed file tests
+- auditd.conf, aide.conf, apport checks use typed file and service tests
+- 1.6.7, 1.6.8, 1.6.10, 5.1.1 mode or more restrictive
+- 1.2.1.x, 1.4.2, 2.4.x, 7.1.x mode or more restrictive
+- 4.1.2 checks ufw status and ufw.conf ENABLED
+- wireless check uses a glob count
+- 6.2.4.1 - 6.2.4.4 read the audit log directory from auditd.conf; 6.2.4.1 fails when auditd.conf is missing
+- 6.2.4.5 - 6.2.4.10 audit config files and audit tools checked from fixed typed lists
+- dailyaidecheck.service as a typed service test
+- ssh host key checks drop the sudo wrapper
+- 7.2.3 no longer writes to /tmp
+- 6.2.2.4 key renamed, collided with 6.2.2.3
+- AIDE and heavy tests reported as skipped with a reason
+- rsyslog checks depend on package:rsyslog
+- toJson replaced by toJSON
+- vars: system_type, ubtu24cis_tmp_svc, time_pool options
+
 ## October 2026 - QA fixes
 
 - CIS Benchmark 1.0.0 October 2026 QA fixes ported to 2.0.0 control IDs

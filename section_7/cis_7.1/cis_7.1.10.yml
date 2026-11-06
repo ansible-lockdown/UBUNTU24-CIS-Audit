@@ -10,9 +10,7 @@ file:
     owner: root
     group: root
     mode:
-      or:
-      - "0600"
-      - "0400"
+      match-regexp: '^0[0246]00$'
     meta:
       server: 1
       workstation: 1

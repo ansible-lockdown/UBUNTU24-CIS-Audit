@@ -6,6 +6,10 @@
 command:
   perms_rsyslog_d:
     title: 6.1.2.3 | Ensure rsyslog log file creation mode is configured
+    {{ if .Vars.ubtu24cis_rule_6_1_2_1 }}
+    depends-on:
+    - package:rsyslog
+    {{ end }}
     exec: grep -Phs -- '^\h*\$FileCreateMode\h+' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
     exit-status: 0
     stdout:
@@ -21,6 +25,10 @@ command:
       - MP-2
   perms_rsyslog_d_permissive:
     title: 6.1.2.3 | Ensure rsyslog log file creation mode is configured | no less restrictive mode set
+    {{ if .Vars.ubtu24cis_rule_6_1_2_1 }}
+    depends-on:
+    - package:rsyslog
+    {{ end }}
     exec: grep -Phs -- '^\h*\$FileCreateMode\h+' /etc/rsyslog.conf /etc/rsyslog.d/*.conf | grep -Pv -- '^\h*\$FileCreateMode\h+0[0246][024]0\b'
     exit-status:
       or:

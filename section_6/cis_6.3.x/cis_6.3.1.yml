@@ -1,11 +1,12 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_config_aide }}
-    {{ if .Vars.ubtu24cis_rule_6_3_1 }}
+  {{ if .Vars.ubtu24cis_rule_6_3_1 }}
 package:
   aide:
     title: 6.3.1 | Ensure AIDE is installed | aide pkg
+    skip: {{ not .Vars.ubtu24cis_config_aide }}
+    skip-reason: AIDE is not managed (ubtu24cis_config_aide is false)
     installed: true
     meta:
       server: 1
@@ -15,6 +16,8 @@ package:
       - AU-2
   aide-common:
     title: 6.3.1 | Ensure AIDE is installed | aide-common pkg
+    skip: {{ not .Vars.ubtu24cis_config_aide }}
+    skip-reason: AIDE is not managed (ubtu24cis_config_aide is false)
     installed: true
     meta:
       server: 1
@@ -23,6 +26,5 @@ package:
       - 6.3.1
       NIST800-53R5:
       - AU-2
-    {{ end }}
   {{ end }}
 {{ end }}

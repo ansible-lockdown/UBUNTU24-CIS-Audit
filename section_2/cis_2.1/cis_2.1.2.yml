@@ -1,11 +1,12 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if not .Vars.ubtu24cis_is_mail_server }}
-    {{ if .Vars.ubtu24cis_rule_2_1_2 }}
+  {{ if .Vars.ubtu24cis_rule_2_1_2 }}
 command:
   mta_listening_ports:
     title: 2.1.2 | Ensure mail transfer agents are configured for local-only mode | not listening on non-loopback
+    skip: {{ .Vars.ubtu24cis_is_mail_server }}
+    skip-reason: this host is a mail server, ubtu24cis_is_mail_server is true
     exec: ss -plntu | grep -P -- ':(25|465|587)\b' | grep -Pv -- '\h+(127\.0\.0\.1|\[?::1\]?):(25|465|587)\b'
     exit-status: 1
     stdout:
@@ -19,6 +20,8 @@ command:
       - CM-7
   mta_postfix_inet_interfaces:
     title: 2.1.2 | Ensure mail transfer agents are configured for local-only mode | postfix inet_interfaces
+    skip: {{ .Vars.ubtu24cis_is_mail_server }}
+    skip-reason: this host is a mail server, ubtu24cis_is_mail_server is true
     exec: |
       if command -v postconf >/dev/null 2>&1; then
         postconf -h inet_interfaces | grep -Piv -- '^\h*(loopback-only|localhost|127\.0\.0\.1|\[?::1\]?)(\h*[,\h]\h*(localhost|127\.0\.0\.1|\[?::1\]?))*\h*$'
@@ -34,6 +37,5 @@ command:
       - 2.1.2
       NIST800-53R5:
       - CM-7
-    {{ end }}
   {{ end }}
 {{ end }}

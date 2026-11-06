@@ -2,11 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_9 }}
-    {{ if not .Vars.ubtu24cis_dnsmasq_server }}
-      {{ if not .Vars.ubtu24cis_dnsmasq_mask }}
+    {{ if not .Vars.ubtu24cis_dnsmasq_mask }}
 package:
   dnsmasq_pkg:
     title: 2.1.9 | Ensure dnsmasq services are not in use | pkg removed
+    skip: {{ .Vars.ubtu24cis_dnsmasq_server }}
+    skip-reason: dnsmasq is required, ubtu24cis_dnsmasq_server is true
     name: dnsmasq
     installed: false
     meta:
@@ -16,15 +17,15 @@ package:
       - 2.1.9
       NIST800-53R5:
       - CM-7
-      {{ end }}
-      {{ if .Vars.ubtu24cis_dnsmasq_mask }}
-file:
+    {{ end }}
+    {{ if .Vars.ubtu24cis_dnsmasq_mask }}
+service:
   dnsmasq_service_masked:
     title: 2.1.9 | Ensure dnsmasq services are not in use | masked
-    path: /etc/systemd/system/dnsmasq.service
-    exists: true
-    filetype: symlink
-    linked-to: /dev/null
+    skip: {{ .Vars.ubtu24cis_dnsmasq_server }}
+    skip-reason: dnsmasq is required, ubtu24cis_dnsmasq_server is true
+    name: dnsmasq.service
+    masked: true
     meta:
       server: 1
       workstation: 1
@@ -32,7 +33,6 @@ file:
       - 2.1.9
       NIST800-53R5:
       - CM-7
-      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

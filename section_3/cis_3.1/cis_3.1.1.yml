@@ -4,14 +4,14 @@
   {{ if not .Vars.ubtu24cis_ipv6_required }}
    {{ if .Vars.ubtu24cis_rule_3_1_1 }}
      {{ if eq .Vars.ubtu24cis_ipv6_disable "grub" }}
-command:
+file:
   grub_ipv6:
     title: 3.1.1 | Ensure IPv6 status is identified | via grub boot
-    exec: grep -i "^[^#]\s.*ipv6" /boot/grub/grub.cfg
-    exit-status: 0
-    stdout:
-    - '/^\s*linux.*ipv6.disable=1/'
-    - '!/ipv6.disable=0/'
+    path: /boot/grub/grub.cfg
+    exists: true
+    contents:
+    - '/^\s*linux.*ipv6\.disable=1/'
+    - '!/^\s*linux.*ipv6\.disable=0/'
     meta:
       server: 1
       workstation: 1
@@ -20,11 +20,11 @@ command:
       - CM-7
   ipv6_etc_default_grub:
     title: 3.1.1 | Ensure IPv6 status is identified | default grub
-    exec: grep -i "GRUB_CMDLINE_LINUX=.*ipv6" /etc/default/grub
-    exit-status: 0
-    stdout:
-    - '/^GRUB_CMDLINE_LINUX=.*ipv6.disable=1/'
-    - '!/ipv6.disable=0/'
+    path: /etc/default/grub
+    exists: true
+    contents:
+    - '/^\s*GRUB_CMDLINE_LINUX=.*ipv6\.disable=1/'
+    - '!/^\s*GRUB_CMDLINE_LINUX(_DEFAULT)?=.*ipv6\.disable=0/'
     meta:
       server: 1
       workstation: 1

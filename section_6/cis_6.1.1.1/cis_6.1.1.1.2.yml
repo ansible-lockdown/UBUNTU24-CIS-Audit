@@ -2,12 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_6_1_1_1_2 }}
-    {{ if not .Vars.ubtu24cis_system_is_log_server }}
 service:
   systemd-journal-remote.service:
     title: 6.1.1.1.2 | Ensure systemd-journal-remote service is not in use | service
+    skip: {{ .Vars.ubtu24cis_system_is_log_server }}
+    skip-reason: this host is a log server, ubtu24cis_system_is_log_server is true
     running: false
-    # enabled: false  # managed by socket so seen as indirect although not enabled - goss issue
+    masked: true
     meta:
       server: 1
       workstation: 1
@@ -19,8 +20,10 @@ service:
       - AU-12
   systemd-journal-remote.socket:
     title: 6.1.1.1.2 | Ensure systemd-journal-remote service is not in use | socket
+    skip: {{ .Vars.ubtu24cis_system_is_log_server }}
+    skip-reason: this host is a log server, ubtu24cis_system_is_log_server is true
     running: false
-    enabled: false
+    masked: true
     meta:
       server: 1
       workstation: 1
@@ -30,37 +33,5 @@ service:
       - AU-2
       - AU-7
       - AU-12
-command:
-  journald_remote_not_enabled:
-    title: 6.1.1.1.2 | Ensure systemd-journal-remote service is not in use | not enabled
-    exec: systemctl is-enabled systemd-journal-remote.socket systemd-journal-remote.service 2>/dev/null | grep '^enabled'
-    exit-status: 1
-    stdout:
-    - '!/./'
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 6.1.1.1.2
-      NIST800-53R5:
-      - AU-2
-      - AU-7
-      - AU-12
-  journald_remote_not_active:
-    title: 6.1.1.1.2 | Ensure systemd-journal-remote service is not in use | not active
-    exec: systemctl is-active systemd-journal-remote.socket systemd-journal-remote.service 2>/dev/null | grep '^active'
-    exit-status: 1
-    stdout:
-    - '!/./'
-    meta:
-      server: 1
-      workstation: 1
-      CIS_ID:
-      - 6.1.1.1.2
-      NIST800-53R5:
-      - AU-2
-      - AU-7
-      - AU-12
-    {{ end }}
   {{ end }}
 {{ end }}

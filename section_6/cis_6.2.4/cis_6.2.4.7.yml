@@ -16,5 +16,20 @@ command:
       - 6.2.4.7
       NIST800-53R5:
       - AU-3
+file:
+{{- range mkSlice "/etc/audit/auditd.conf" "/etc/audit/audit.rules" "/etc/audit/audit-stop.rules" "/etc/audit/audisp-remote.conf" "/etc/audit/zos-remote.conf" "/etc/audit/rules.d/audit.rules" "/etc/audit/plugins.d/af_unix.conf" "/etc/audit/plugins.d/au-remote.conf" "/etc/audit/plugins.d/audispd-zos-remote.conf" "/etc/audit/plugins.d/syslog.conf" }}
+  audit_conf_group_{{ . }}:
+    title: 6.2.4.7 | Ensure audit configuration files group owner is configured
+    path: {{ . }}
+    exists: true
+    group: root
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.4.7
+      NIST800-53R5:
+      - AU-3
+{{- end }}
   {{ end }}
 {{ end }}

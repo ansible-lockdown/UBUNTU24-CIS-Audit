@@ -10,12 +10,7 @@ file:
     owner: root
     group: root
     mode:
-      or:
-      - "0644"
-      - "0640"
-      - "0604"
-      - "0600"
-      - "0400"
+      match-regexp: '^0[0246][04][04]$'
     meta:
       server: 1
       workstation: 1

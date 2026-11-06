@@ -2,13 +2,14 @@
 
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_6_2_4_4 }}
-command:
+{{- if $logdir := or (and (glob "/etc/audit/auditd.conf") (readFile "/etc/audit/auditd.conf" | findStringSubmatch `(?m)^\s*log_file\s*=\s*(?P<dir>\S*)/[^/\s]*\s*$` | get "dir")) "/var/log/audit" }}
+file:
   audit_logfile_group_setting:
     title: 6.2.4.4 | Ensure audit log files group owner is configured | log_group setting
-    exec: grep -E '^\s*log_group' /etc/audit/auditd.conf | awk '{ print $NF}'
-    exit-status: 0
-    stdout:
-    - '/^(adm|root)$/'
+    path: /etc/audit/auditd.conf
+    exists: true
+    contents:
+    - '/^\s*log_group\s*=\s*(adm|root)\s*$/'
     meta:
       server: 2
       workstation: 2
@@ -16,9 +17,10 @@ command:
       - 6.2.4.4
       NIST800-53R5:
       - AU-3
+command:
   audit_logfile_group:
     title: 6.2.4.4 | Ensure audit log files group owner is configured | file group
-    exec: d=$(dirname $(grep ^log_file /etc/audit/auditd.conf | awk '{ print $NF }')); find -L $d -maxdepth 1 -type f ! -group root ! -group adm
+    exec: find -L "{{ $logdir }}" -maxdepth 1 -type f ! -group root ! -group adm
     exit-status: 0
     stdout:
     - '!/./'
@@ -29,5 +31,6 @@ command:
       - 6.2.4.4
       NIST800-53R5:
       - AU-3
+{{- end }}
   {{ end }}
 {{ end }}
