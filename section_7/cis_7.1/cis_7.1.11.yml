@@ -1,11 +1,12 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.run_heavy_tests }}
-    {{ if .Vars.ubtu24cis_rule_7_1_11 }}
+  {{ if .Vars.ubtu24cis_rule_7_1_11 }}
 command:
   world_writable:
     title: 7.1.11 | Ensure world writable files and directories are secured
+    skip: {{ not .Vars.run_heavy_tests }}
+    skip-reason: heavy filesystem scans are disabled (run_heavy_tests is false)
     exec: "df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type f -perm -0002 -o -type d \\( -perm -0002 -a ! -perm -1000 \\)"
     exit-status:
       or:
@@ -24,6 +25,5 @@ command:
       NIST800-53R5:
       - AC-3
       - MP-2
-    {{ end }}
   {{ end }}
 {{ end }}

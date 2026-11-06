@@ -7,6 +7,10 @@
 command:
   local_syslog_module:
     title: 6.1.2.6 | Ensure rsyslog is not configured to receive logs from a remote client | module
+    {{ if .Vars.ubtu24cis_rule_6_1_2_1 }}
+    depends-on:
+    - package:rsyslog
+    {{ end }}
     exec: grep -Psi -- '^\h*module\(load=\"?imtcp\"?\)|^\h*\$ModLoad\h+imtcp\b' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
     exit-status:
       or:
@@ -27,6 +31,10 @@ command:
       - CM-6
   local_syslog_input:
     title: 6.1.2.6 | Ensure rsyslog is not configured to receive logs from a remote client | server/port
+    {{ if .Vars.ubtu24cis_rule_6_1_2_1 }}
+    depends-on:
+    - package:rsyslog
+    {{ end }}
     exec: grep -Psi -- '^\h*input\(type=\"?imtcp\"?\b|^\h*\$InputTCPServerRun\b' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
     exit-status:
       or:

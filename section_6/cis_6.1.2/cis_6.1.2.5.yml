@@ -8,6 +8,10 @@
 command:
   remote_syslog:
     title: 6.1.2.5 | Ensure rsyslog is configured to send logs to a remote log host
+    {{ if .Vars.ubtu24cis_rule_6_1_2_1 }}
+    depends-on:
+    - package:rsyslog
+    {{ end }}
     exec: grep -hEv '^[[:space:]]*#' /etc/rsyslog.conf /etc/rsyslog.d/*.conf 2>/dev/null | tr '\n' ' '
     exit-status: 0
     stdout:

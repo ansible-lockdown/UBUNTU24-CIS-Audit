@@ -2,12 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_6_2_2_4 }}
-command:
-  auditd_space_actions:
+file:
+  auditd_space_left_actions:
     title: 6.2.2.4 | Ensure system warns when audit logs are low on space
-    exec: grep -E "action" /etc/audit/auditd.conf
-    exit-status: 0
-    stdout:
+    path: /etc/audit/auditd.conf
+    exists: true
+    contents:
     - '/^\s*space_left_action\s*=\s*{{ .Vars.ubtu24cis_auditd_space_left_action }}\b/'
     - '/(?i)^\s*space_left_action\s*=\s*(email|exec|single|halt)\b/'
     - '/^\s*admin_space_left_action\s*=\s*{{ .Vars.ubtu24cis_auditd_admin_space_left_action }}\b/'

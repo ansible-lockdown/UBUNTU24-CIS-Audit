@@ -20,13 +20,11 @@
     command:
       ipv4_def_rp_filter:
         title: 3.3.1.13 | Ensure net.ipv4.conf.default.rp_filter is configured | conf
-        exec: grep "net\.ipv4\.conf\.default\.rp_filter" /etc/sysctl.conf /etc/sysctl.d/*
-        exit-status:
-          or:
-          - 0
-          - 1
+        exec: |
+          { /usr/lib/systemd/systemd-sysctl --cat-config; f=$(awk -F= '/^\s*IPT_SYSCTL=/{print $2}' /etc/default/ufw 2>/dev/null); [ -f "$f" ] && cat "$f"; } | grep -Pi '^\h*net(\.|/)ipv4(\.|/)conf(\.|/)default(\.|/)rp_filter\h*=' | tail -n 1
+        exit-status: 0
         stdout:
-        - '/net\.ipv4\.conf\.default\.rp_filter\s*=\s*1/'
+        - '/=\s*1\s*$/'
         meta:
           server: 1
           workstation: 1

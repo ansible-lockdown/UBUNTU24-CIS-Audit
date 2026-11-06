@@ -2,11 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_20 }}
-    {{ if not .Vars.ubtu24cis_tftp_server }}
-      {{ if not .Vars.ubtu24cis_tftp_mask }}
+    {{ if not .Vars.ubtu24cis_tftp_mask }}
 package:
   tftp_pkg:
     title: 2.1.20 | Ensure tftp server services are not in use | pkg removed
+    skip: {{ .Vars.ubtu24cis_tftp_server }}
+    skip-reason: the TFTP server is required, ubtu24cis_tftp_server is true
     name: tftpd-hpa
     installed: false
     meta:
@@ -16,15 +17,15 @@ package:
       - 2.1.20
       NIST800-53R5:
       - CM-7
-      {{ end }}
-      {{ if .Vars.ubtu24cis_tftp_mask }}
-file:
+    {{ end }}
+    {{ if .Vars.ubtu24cis_tftp_mask }}
+service:
   tftp_service_masked:
     title: 2.1.20 | Ensure tftp server services are not in use | masked
-    path: /etc/systemd/system/tftpd-hpa.service
-    exists: true
-    filetype: symlink
-    linked-to: /dev/null
+    skip: {{ .Vars.ubtu24cis_tftp_server }}
+    skip-reason: the TFTP server is required, ubtu24cis_tftp_server is true
+    name: tftpd-hpa.service
+    masked: true
     meta:
       server: 1
       workstation: 1
@@ -32,7 +33,6 @@ file:
       - 2.1.20
       NIST800-53R5:
       - CM-7
-      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

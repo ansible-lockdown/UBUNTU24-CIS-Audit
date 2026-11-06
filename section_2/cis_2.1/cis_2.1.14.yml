@@ -1,12 +1,13 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_2 }}
+{{ if or (and (eq .Vars.system_type "Server") .Vars.ubtu24cis_level_1) (and (eq .Vars.system_type "Workstation") .Vars.ubtu24cis_level_2) }}
   {{ if .Vars.ubtu24cis_rule_2_1_14 }}
-    {{ if not .Vars.ubtu24cis_print_server }}
-      {{ if not .Vars.ubtu24cis_print_mask }}
+    {{ if not .Vars.ubtu24cis_print_mask }}
 package:
   cups_pkg:
     title: 2.1.14 | Ensure print server services are not in use | pkg removed
+    skip: {{ .Vars.ubtu24cis_print_server }}
+    skip-reason: the print server is required, ubtu24cis_print_server is true
     name: cups
     installed: false
     meta:
@@ -16,15 +17,15 @@ package:
       - 2.1.14
       NIST800-53R5:
       - CM-7
-      {{ end }}
-      {{ if .Vars.ubtu24cis_print_mask }}
-file:
+    {{ end }}
+    {{ if .Vars.ubtu24cis_print_mask }}
+service:
   cups_service_masked:
     title: 2.1.14 | Ensure print server services are not in use | masked
-    path: /etc/systemd/system/cups.service
-    exists: true
-    filetype: symlink
-    linked-to: /dev/null
+    skip: {{ .Vars.ubtu24cis_print_server }}
+    skip-reason: the print server is required, ubtu24cis_print_server is true
+    name: cups.service
+    masked: true
     meta:
       server: 1
       workstation: 2
@@ -34,10 +35,10 @@ file:
       - CM-7
   cups_socket_masked:
     title: 2.1.14 | Ensure print server services are not in use | masked
-    path: /etc/systemd/system/cups.socket
-    exists: true
-    filetype: symlink
-    linked-to: /dev/null
+    skip: {{ .Vars.ubtu24cis_print_server }}
+    skip-reason: the print server is required, ubtu24cis_print_server is true
+    name: cups.socket
+    masked: true
     meta:
       server: 1
       workstation: 2
@@ -45,7 +46,6 @@ file:
       - 2.1.14
       NIST800-53R5:
       - CM-7
-      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

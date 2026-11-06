@@ -7,7 +7,8 @@ file:
     title: 5.1.1 | Ensure access to /etc/ssh/sshd_config is configured
     path: /etc/ssh/sshd_config
     exists: true
-    mode: "0600"
+    mode:
+      match-regexp: '^0[0246]00$'
     owner: root
     group: root
     meta:

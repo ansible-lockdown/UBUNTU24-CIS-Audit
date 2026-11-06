@@ -17,6 +17,12 @@ ubtu24cis_section7: true
 
 ubtu24cis_level_1: true
 ubtu24cis_level_2: true
+# CIS profile for controls whose level differs by profile.
+# run_audit.sh sets it: Server, or Workstation with -w
+system_type: Server
+
+# /tmp mounted by tmp.mount (true) or /etc/fstab (false); the role bridges what it discovered
+ubtu24cis_tmp_svc: false
 
 
 #  to enable rules that may have IO impact on a system e.g. full filesystem scans or CPU heavy
@@ -623,6 +629,7 @@ ubtu24cis_time_sync_tool: "chrony"
 # of the time synchronization mechanism you are using.
 ubtu24cis_time_pool:
   - name: time.nist.gov
+    options: iburst maxsources 4
 
 # The following variable represents a list of of time servers used
 # for configuring chrony and timesyncd

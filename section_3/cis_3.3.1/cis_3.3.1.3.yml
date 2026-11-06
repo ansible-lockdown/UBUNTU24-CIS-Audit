@@ -21,13 +21,11 @@
       command:
         ipv4_def_forwarding:
           title: 3.3.1.3 | Ensure net.ipv4.conf.default.forwarding is configured | conf
-          exec: grep "net\.ipv4\.conf\.default\.forwarding" /etc/sysctl.conf /etc/sysctl.d/*
-          exit-status:
-            or:
-            - 0
-            - 1
+          exec: |
+            { /usr/lib/systemd/systemd-sysctl --cat-config; f=$(awk -F= '/^\s*IPT_SYSCTL=/{print $2}' /etc/default/ufw 2>/dev/null); [ -f "$f" ] && cat "$f"; } | grep -Pi '^\h*net(\.|/)ipv4(\.|/)conf(\.|/)default(\.|/)forwarding\h*=' | tail -n 1
+          exit-status: 0
           stdout:
-          - '/net\.ipv4\.conf\.default\.forwarding\s*=\s*0/'
+          - '/=\s*0\s*$/'
           meta:
             server: 1
             workstation: 1

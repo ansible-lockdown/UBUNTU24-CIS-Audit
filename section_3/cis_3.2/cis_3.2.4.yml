@@ -5,13 +5,11 @@
 command:
   modprobe_RDS:
     title: 3.2.4 | Ensure rds kernel module is not available | rds config
-    exit-status:
-      or:
-      - 0
-      - 1
-    exec: 'modprobe -n -v rds'
+    exec: modprobe --showconfig | grep -P '\b(install|blacklist)\h+rds\b'
+    exit-status: 0
     stdout:
-      - '/install /bin/(true|false)/'
+    - '/^blacklist rds$/'
+    - '/^install rds \/bin\/(true|false)/'
     meta:
       server: 1
       workstation: 1
@@ -20,12 +18,11 @@ command:
       NIST800-53R5:
       - CM-7
       - SI-4
-  lsmod_RDS:
+file:
+  sys_module_rds:
     title: 3.2.4 | Ensure rds kernel module is not available | running rds
-    exit-status: 1
-    exec: lsmod | grep -i rds
-    stdout:
-    - '!/^.*/'
+    path: /sys/module/rds
+    exists: false
     meta:
       server: 1
       workstation: 1

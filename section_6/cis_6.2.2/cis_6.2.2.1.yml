@@ -2,13 +2,13 @@
 
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_6_2_2_1 }}
-command:
+file:
   auditd_max_log_file:
     title: 6.2.2.1 | Ensure audit log storage size is configured
-    exec: grep -E "^max_log_file" /etc/audit/auditd.conf
-    exit-status: 0
-    stdout:
-    - '/max_log_file = [1-9][0-9]{1,2}/'
+    path: /etc/audit/auditd.conf
+    exists: true
+    contents:
+    - '/^\s*max_log_file\s*=\s*[1-9][0-9]{1,2}\s*$/'
     meta:
       server: 2
       workstation: 2
