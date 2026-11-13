@@ -57,10 +57,8 @@ syverfile:
   section_3/cis_3.2/*.yml: {}
   # IPv4 kernel parameters
   section_3/cis_3.3.1/*.yml: {}
-  # IPv6 kernel parameters
-    {{ if .Vars.ubtu24cis_ipv6_required }}
+  # IPv6 kernel parameters, skipped with a reason when ubtu24cis_ipv6_required is false
   section_3/cis_3.3.2/*.yml: {}
-    {{ end }}
   {{ end }}
 
 # Section 4

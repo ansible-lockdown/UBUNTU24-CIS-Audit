@@ -1,7 +1,6 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_3 }}
 file:
   gdm_screensaver:
@@ -13,6 +12,8 @@ file:
     - '/^\[org\/gnome\/desktop\/screensaver\]/'
     - '/^idle-delay=uint32 ([1-9]|[1-9][0-9]|[1-8][0-9]{2}|900)$/'
     - '/^lock-delay=uint32 [0-5]$/'
+    skip: {{ if (not .Vars.ubtu24cis_desktop_required) }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_desktop_required is false, no GNOME desktop on this host
     meta:
       server: 1
       workstation: 1
@@ -26,6 +27,8 @@ file:
     contents:
     - '/^\/org\/gnome\/desktop\/session\/idle-delay$/'
     - '/^\/org\/gnome\/desktop\/screensaver\/lock-delay$/'
+    skip: {{ if (not .Vars.ubtu24cis_desktop_required) }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_desktop_required is false, no GNOME desktop on this host
     meta:
       server: 1
       workstation: 1
@@ -33,5 +36,4 @@ file:
       - 1.7.3
       NIST800-53R5: NA
     {{ end }}
-  {{ end }}
 {{ end }}

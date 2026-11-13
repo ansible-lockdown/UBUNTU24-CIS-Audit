@@ -1,12 +1,13 @@
 ---
 
 {{ if or (and (eq .Vars.system_type "Server") .Vars.ubtu24cis_level_2) (and (eq .Vars.system_type "Workstation") .Vars.ubtu24cis_level_1) }}
-  {{ if not .Vars.ubtu24cis_is_router }}
     {{ if .Vars.ubtu24cis_rule_3_3_1_1 }}
       kernel-param:
         net.ipv4.ip_forward:
           title: 3.3.1.1 | Ensure net.ipv4.ip_forward is configured
           value: '0'
+          skip: {{ if .Vars.ubtu24cis_is_router }}true{{ else }}false{{ end }}
+          skip-reason: ubtu24cis_is_router is true, forwarding and redirects are needed on a router
           meta:
             server: 2
             workstation: 1
@@ -26,6 +27,8 @@
           exit-status: 0
           stdout:
           - '/=\s*0\s*$/'
+          skip: {{ if .Vars.ubtu24cis_is_router }}true{{ else }}false{{ end }}
+          skip-reason: ubtu24cis_is_router is true, forwarding and redirects are needed on a router
           meta:
             server: 2
             workstation: 1
@@ -38,5 +41,4 @@
             - CM-7
             - IA-5
       {{ end }}
-    {{ end }}
 {{ end }}
