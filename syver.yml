@@ -24,6 +24,14 @@ discovery:
     apport:
       register: apport_installed
       installed: true
+  # 7.1.10 opasswd files the benchmark says may not exist
+  file:
+    /etc/security/opasswd:
+      register: opasswd_exists
+      exists: true
+    /etc/security/opasswd.old:
+      register: opasswd_old_exists
+      exists: true
 
 syverfile:
 # Section 1

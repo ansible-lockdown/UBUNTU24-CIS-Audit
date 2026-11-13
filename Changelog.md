@@ -4,6 +4,8 @@
 
 ## November 2026 - QA fixes
 
+- 7.1.10 tests /etc/security/opasswd and opasswd.old, each skipped with a reason when absent
+- 1.1.2.5.1 meta key NIST800-53R5
 - run_audit.sh uses syver v0.16.0 by default
 - README describes syver
 - goss.yml renamed syver.yml, run_audit.sh default AUDIT_FILE syver.yml
