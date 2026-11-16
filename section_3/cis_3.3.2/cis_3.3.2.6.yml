@@ -6,8 +6,8 @@
           net.ipv6.conf.default.accept_source_route:
             title: 3.3.2.6 | Ensure net.ipv6.conf.default.accept_source_route is configured
             value: '0'
-            skip: {{ if or .Vars.ubtu24cis_is_router (not .Vars.ubtu24cis_ipv6_required) }}true{{ else }}false{{ end }}
-            skip-reason: ubtu24cis_is_router is true (router) or ubtu24cis_ipv6_required is false (IPv6 disabled)
+            skip: {{ if (not .Vars.ubtu24cis_ipv6_required) }}true{{ else }}false{{ end }}
+            skip-reason: ubtu24cis_ipv6_required is false, IPv6 is disabled
             meta:
               server: 1
               workstation: 1
@@ -27,8 +27,8 @@
             exit-status: 0
             stdout:
             - '/=\s*0\s*$/'
-            skip: {{ if or .Vars.ubtu24cis_is_router (not .Vars.ubtu24cis_ipv6_required) }}true{{ else }}false{{ end }}
-            skip-reason: ubtu24cis_is_router is true (router) or ubtu24cis_ipv6_required is false (IPv6 disabled)
+            skip: {{ if (not .Vars.ubtu24cis_ipv6_required) }}true{{ else }}false{{ end }}
+            skip-reason: ubtu24cis_ipv6_required is false, IPv6 is disabled
             meta:
               server: 1
               workstation: 1

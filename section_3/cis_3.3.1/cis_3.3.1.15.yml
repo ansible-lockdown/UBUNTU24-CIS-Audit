@@ -6,8 +6,6 @@
         net.ipv4.conf.default.accept_source_route:
           title: 3.3.1.15 | Ensure net.ipv4.conf.default.accept_source_route is configured
           value: '0'
-          skip: {{ if .Vars.ubtu24cis_is_router }}true{{ else }}false{{ end }}
-          skip-reason: ubtu24cis_is_router is true, forwarding and redirects are needed on a router
           meta:
             server: 1
             workstation: 1
@@ -27,8 +25,6 @@
           exit-status: 0
           stdout:
           - '/=\s*0\s*$/'
-          skip: {{ if .Vars.ubtu24cis_is_router }}true{{ else }}false{{ end }}
-          skip-reason: ubtu24cis_is_router is true, forwarding and redirects are needed on a router
           meta:
             server: 1
             workstation: 1

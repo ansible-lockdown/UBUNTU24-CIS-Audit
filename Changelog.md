@@ -11,6 +11,7 @@
 - 1.3.1.3, 6.2.3.23 AppArmor and 1.7.x desktop opt-outs skipped with a reason
 - 3.3.2.x loaded on every run, skipped when IPv6 is not required
 - 2.1.23 skipped when ubtu24cis_desktop_required is true
+- 3.3.x router skips follow the benchmark
 - run_audit.sh uses syver v0.16.0 by default
 - README describes syver
 - goss.yml renamed syver.yml, run_audit.sh default AUDIT_FILE syver.yml
