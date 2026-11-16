@@ -4,13 +4,33 @@
   {{ if .Vars.ubtu24cis_rule_7_1_10 }}
 file:
   etc_security_opasswd_perms:
-    title: 7.1.10 | Ensure access to /etc/security/opasswd is configured
+    title: 7.1.10 | Ensure access to /etc/security/opasswd is configured | /etc/security/opasswd
     path: /etc/security/opasswd
     exists: true
     owner: root
     group: root
     mode:
       match-regexp: '^0[0246]00$'
+    skip: {{ not .Discovered.opasswd_exists }}
+    skip-reason: /etc/security/opasswd does not exist on this host, it is created when pam_pwhistory or pam_unix remember is in use
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 7.1.10
+      NIST800-53R5:
+      - AC-3
+      - MP-2
+  etc_security_opasswd_old_perms:
+    title: 7.1.10 | Ensure access to /etc/security/opasswd is configured | /etc/security/opasswd.old
+    path: /etc/security/opasswd.old
+    exists: true
+    owner: root
+    group: root
+    mode:
+      match-regexp: '^0[0246]00$'
+    skip: {{ not .Discovered.opasswd_old_exists }}
+    skip-reason: /etc/security/opasswd.old does not exist on this host, it is created when pam_pwhistory or pam_unix remember is in use
     meta:
       server: 1
       workstation: 1

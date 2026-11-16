@@ -1,7 +1,6 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_2 }}
 command:
   gdm_disable_user:
@@ -11,6 +10,8 @@ command:
     stdout:
     - '/^disable-user-list=true$/'
     - '!/^\s*disable-user-list\s*=\s*false/'
+    skip: {{ if (not .Vars.ubtu24cis_desktop_required) }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_desktop_required is false, no GNOME desktop on this host
     meta:
       server: 1
       workstation: 1
@@ -30,6 +31,8 @@ file:
     contents:
     - '/^\s*user-db:user$/'
     - '/^\s*system-db:{{ .Vars.ubtu24cis_dconf_db_name }}$/'
+    skip: {{ if (not .Vars.ubtu24cis_desktop_required) }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_desktop_required is false, no GNOME desktop on this host
     meta:
       server: 1
       workstation: 1
@@ -47,6 +50,8 @@ file:
     exists: true
     contents:
     - '/^\/org\/gnome\/login-screen\/disable-user-list$/'
+    skip: {{ if (not .Vars.ubtu24cis_desktop_required) }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_desktop_required is false, no GNOME desktop on this host
     meta:
       server: 1
       workstation: 1
@@ -59,5 +64,4 @@ file:
       - CM-7
       - IA-5
     {{ end }}
-  {{ end }}
 {{ end }}

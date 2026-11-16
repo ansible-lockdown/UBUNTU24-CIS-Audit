@@ -4,6 +4,14 @@
 
 ## November 2026 - QA fixes
 
+- 7.1.10 tests /etc/security/opasswd and opasswd.old, each skipped with a reason when absent
+- 1.1.2.5.1 meta key NIST800-53R5
+- 2.2.x client, 3.3.x router and IPv6 opt-outs skipped with a reason
+- 6.1.2.5, 6.1.2.6, 6.1.2.9 log server opt-outs skipped with a reason
+- 1.3.1.3, 6.2.3.23 AppArmor and 1.7.x desktop opt-outs skipped with a reason
+- 3.3.2.x loaded on every run, skipped when IPv6 is not required
+- 2.1.23 skipped when ubtu24cis_desktop_required is true
+- 3.3.x router skips follow the benchmark
 - run_audit.sh uses syver v0.16.0 by default
 - README describes syver
 - goss.yml renamed syver.yml, run_audit.sh default AUDIT_FILE syver.yml

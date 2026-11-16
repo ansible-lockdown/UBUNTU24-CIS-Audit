@@ -1,7 +1,6 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if not .Vars.ubtu24cis_ipv6_required }}
    {{ if .Vars.ubtu24cis_rule_3_1_1 }}
      {{ if eq .Vars.ubtu24cis_ipv6_disable "grub" }}
 file:
@@ -12,6 +11,8 @@ file:
     contents:
     - '/^\s*linux.*ipv6\.disable=1/'
     - '!/^\s*linux.*ipv6\.disable=0/'
+    skip: {{ if .Vars.ubtu24cis_ipv6_required }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_ipv6_required is true, IPv6 stays enabled
     meta:
       server: 1
       workstation: 1
@@ -25,6 +26,8 @@ file:
     contents:
     - '/^\s*GRUB_CMDLINE_LINUX=.*ipv6\.disable=1/'
     - '!/^\s*GRUB_CMDLINE_LINUX(_DEFAULT)?=.*ipv6\.disable=0/'
+    skip: {{ if .Vars.ubtu24cis_ipv6_required }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_ipv6_required is true, IPv6 stays enabled
     meta:
       server: 1
       workstation: 1
@@ -40,6 +43,8 @@ file:
     exists: true
     contents:
     - '/^1/'
+    skip: {{ if .Vars.ubtu24cis_ipv6_required }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_ipv6_required is true, IPv6 stays enabled
     meta:
       server: 1
       workstation: 1
@@ -48,5 +53,4 @@ file:
       - CM-7
       {{ end }}
     {{ end }}
-  {{ end }}
 {{ end }}

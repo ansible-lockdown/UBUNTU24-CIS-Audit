@@ -1,12 +1,13 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_ipv6_required }}
     {{ if .Vars.ubtu24cis_rule_3_3_2_3 }}
       kernel-param:
         net.ipv6.conf.all.accept_redirects:
           title: 3.3.2.3 | Ensure net.ipv6.conf.all.accept_redirects is configured
           value: '0'
+          skip: {{ if or .Vars.ubtu24cis_is_router (not .Vars.ubtu24cis_ipv6_required) }}true{{ else }}false{{ end }}
+          skip-reason: ubtu24cis_is_router is true (router) or ubtu24cis_ipv6_required is false (IPv6 disabled)
           meta:
             server: 1
             workstation: 1
@@ -26,6 +27,8 @@
           exit-status: 0
           stdout:
           - '/=\s*0\s*$/'
+          skip: {{ if or .Vars.ubtu24cis_is_router (not .Vars.ubtu24cis_ipv6_required) }}true{{ else }}false{{ end }}
+          skip-reason: ubtu24cis_is_router is true (router) or ubtu24cis_ipv6_required is false (IPv6 disabled)
           meta:
             server: 1
             workstation: 1
@@ -38,5 +41,4 @@
             - CM-7
             - IA-5
       {{ end }}
-    {{ end }}
 {{ end }}

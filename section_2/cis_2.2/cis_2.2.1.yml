@@ -1,6 +1,5 @@
 ---
 
-{{ if not .Vars.ubtu24cis_nis_client_required }}
   {{ if .Vars.ubtu24cis_level_1 }}
     {{ if .Vars.ubtu24cis_rule_2_2_1 }}
 package:
@@ -8,6 +7,8 @@ package:
     title: 2.2.1 | Ensure nis client is not installed
     installed: false
     name: nis
+    skip: {{ if .Vars.ubtu24cis_nis_client_required }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_nis_client_required is true, the NIS client is required
     meta:
       server: 1
       workstation: 1
@@ -17,4 +18,3 @@ package:
       - CM-11
     {{ end }}
   {{ end }}
-{{ end }}

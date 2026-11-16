@@ -1,6 +1,5 @@
 ---
 
-{{ if not .Vars.ubtu24cis_telnet_required }}
   {{ if .Vars.ubtu24cis_level_1 }}
     {{ if .Vars.ubtu24cis_rule_2_2_4 }}
 package:
@@ -8,6 +7,8 @@ package:
     title: 2.2.4 | Ensure telnet client is not installed | telnet
     installed: false
     name: telnet
+    skip: {{ if .Vars.ubtu24cis_telnet_required }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_telnet_required is true, the telnet client is required
     meta:
       server: 1
       workstation: 1
@@ -19,6 +20,8 @@ package:
     title: 2.2.4 | Ensure telnet client is not installed | inetutils-telnet
     installed: false
     name: inetutils-telnet
+    skip: {{ if .Vars.ubtu24cis_telnet_required }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_telnet_required is true, the telnet client is required
     meta:
       server: 1
       workstation: 1
@@ -28,4 +31,3 @@ package:
       - CM-11
     {{ end }}
   {{ end }}
-{{ end }}

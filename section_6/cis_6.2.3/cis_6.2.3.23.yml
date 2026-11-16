@@ -1,7 +1,6 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_2 }}
-  {{ if not .Vars.ubtu24cis_apparmor_disable }}
 command:
   {{ if .Vars.ubtu24cis_rule_6_2_3_23 }}
   auditd_MAC_cnf:
@@ -11,6 +10,8 @@ command:
     stdout:
     - '-w /etc/apparmor/ -p wa -k MAC-policy'
     - '-w /etc/apparmor.d/ -p wa -k MAC-policy'
+    skip: {{ if .Vars.ubtu24cis_apparmor_disable }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_apparmor_disable is true
     meta:
       server: 2
       workstation: 2
@@ -26,6 +27,8 @@ command:
     stdout:
     - '-w /etc/apparmor -p wa -k MAC-policy'
     - '-w /etc/apparmor.d -p wa -k MAC-policy'
+    skip: {{ if .Vars.ubtu24cis_apparmor_disable }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_apparmor_disable is true
     meta:
       server: 2
       workstation: 2
@@ -35,5 +38,4 @@ command:
       - AU-3
       - CM-6
     {{ end }}
-  {{ end }}
 {{ end }}
