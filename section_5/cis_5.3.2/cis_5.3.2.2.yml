@@ -5,6 +5,8 @@
 file:
   pam_faillock_enabled_common_act:
     title: 5.3.2.2 | Ensure pam_faillock module is enabled
+    skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    skip-reason: ubtu24cis_disruption_high is false, the role does not change the PAM configuration
     path: /etc/pam.d/common-account
     exists: true
     contents:
@@ -17,6 +19,8 @@ file:
       NIST800-53R5: NA
   pam_faillock_enabled_common_auth:
     title: 5.3.2.2 | Ensure pam_faillock module is enabled
+    skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    skip-reason: ubtu24cis_disruption_high is false, the role does not change the PAM configuration
     path: /etc/pam.d/common-auth
     exists: true
     contents:

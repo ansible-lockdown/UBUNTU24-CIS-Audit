@@ -705,6 +705,11 @@ ubtu24cis_pass_warn_age: 7
 # existing users only changed when disruption_high is true
 ubtu24cis_disruption_high: true
 
+## 5.2.4 users the role leaves with NOPASSWD in sudoers
+ubtu24cis_sudoers_exclude_nopasswd_list:
+  - ec2-user
+  - vagrant
+
 # set sugroup if differs from wheel
 ubtu24cis_sugroup: nosugroup
 

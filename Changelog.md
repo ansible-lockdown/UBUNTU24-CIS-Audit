@@ -12,6 +12,9 @@
 - 3.3.2.x loaded on every run, skipped when IPv6 is not required
 - 2.1.23 skipped when ubtu24cis_desktop_required is true
 - 3.3.x router skips follow the benchmark
+- 5.3.2.x, 5.3.3.3.x, 5.3.3.4.1 skipped with a reason unless ubtu24cis_disruption_high
+- 5.4.1.x, 5.4.2.7, 5.4.2.8 disruption_high skips given a reason
+- 5.2.4 excludes ubtu24cis_sudoers_exclude_nopasswd_list users
 - run_audit.sh uses syver v0.16.0 by default
 - README describes syver
 - goss.yml renamed syver.yml, run_audit.sh default AUDIT_FILE syver.yml
