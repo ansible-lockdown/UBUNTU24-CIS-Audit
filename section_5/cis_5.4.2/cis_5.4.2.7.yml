@@ -6,6 +6,7 @@ command:
   secure_system_accts:
     title: 5.4.2.7 | Ensure system accounts do not have a valid login shell
     skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    skip-reason: ubtu24cis_disruption_high is false, the role does not change existing accounts
     exec: |
       uid_min=$(awk '/^[[:space:]]*UID_MIN/ {print $2}' /etc/login.defs)
       valid=$(awk -F/ '$NF != "nologin" && /^\// {print}' /etc/shells)
