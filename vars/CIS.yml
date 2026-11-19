@@ -704,6 +704,9 @@ ubtu24cis_pass_warn_age: 7
 
 # existing users only changed when disruption_high is true
 ubtu24cis_disruption_high: true
+# 5.4.2.7 system accounts allowed a shell, and the connecting user (set by the role)
+ubtu24cis_system_users_shell: []
+ubtu24cis_playbook_user: ''
 
 ## 5.2.4 users the role leaves with NOPASSWD in sudoers
 ubtu24cis_sudoers_exclude_nopasswd_list:

@@ -41,6 +41,9 @@
 - rsyslog checks depend on package:rsyslog
 - toJson replaced by toJSON
 - vars: system_type, ubtu24cis_tmp_svc, time_pool options
+- 2.1.6: nginx-plus package check
+- 5.4.2.7: ubtu24cis_system_users_shell accounts and the playbook user excluded
+- vars: ubtu24cis_system_users_shell, ubtu24cis_playbook_user
 
 ## October 2026 - QA fixes
 
