@@ -28,7 +28,7 @@ command:
     skip: {{ not .Vars.ubtu24cis_disruption_high }}
     skip-reason: ubtu24cis_disruption_high is false, the role does not change existing accounts
     exec: |
-      awk -F: '($2~/^\$.+\$/) {if($5 > 365 || $5 < 1) print "FAIL: " $1 " PASS_MAX_DAYS: " $5}' /etc/shadow
+      awk -F: -v pu="{{ .Vars.ubtu24cis_playbook_user }}" '($1 != pu && $2~/^\$.+\$/) {if($5 > 365 || $5 < 1) print "FAIL: " $1 " PASS_MAX_DAYS: " $5}' /etc/shadow
       echo "scan_done"
     exit-status: 0
     stdout:

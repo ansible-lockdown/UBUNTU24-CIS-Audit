@@ -44,6 +44,7 @@
 - 2.1.6: nginx-plus package check
 - 5.4.2.7: ubtu24cis_system_users_shell accounts and the playbook user excluded
 - vars: ubtu24cis_system_users_shell, ubtu24cis_playbook_user
+- 5.4.1.1, 5.4.1.2: playbook user excluded, as the role leaves its ageing unchanged
 
 ## October 2026 - QA fixes
 
