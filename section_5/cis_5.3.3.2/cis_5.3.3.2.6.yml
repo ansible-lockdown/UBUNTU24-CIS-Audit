@@ -19,15 +19,13 @@ command:
       CIS_ID:
       - 5.3.3.2.6
       NIST800-53R5: IA-5
+file:
   dictchk_not_pamd:
     title: 5.3.3.2.6 | Ensure password dictionary check is enabled
-    exec: grep -Psi -- '^\h*password\h+(requisite|required|sufficient)\h+pam_pwquality\.so\h+([^#\n\r]+\h+)?dictcheck\h*=\h*0\b' /etc/pam.d/common-password
-    exit-status:
-      or:
-      - 0
-      - 1
-    stdout:
-    - '!/.*/'
+    path: /etc/pam.d/common-password
+    exists: true
+    contents:
+    - '!/(?i)^\s*password\s+(requisite|required|sufficient)\s+pam_pwquality\.so\s+([^#\n\r]+\s+)?dictcheck\s*=\s*0\b/'
     meta:
       server: 1
       workstation: 1

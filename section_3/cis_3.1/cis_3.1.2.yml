@@ -1,15 +1,12 @@
 ---
 
-{{ if .Vars.ubtu24cis_level_1 }}
+{{ if and (eq .Vars.system_type "Server") .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_3_1_2 }}
-command:
+matching:
   wireless_disabled:
-    title: 3.1.2 | Ensure wireless interfaces are not available | MANUAL
-    exit-status: 0
-    exec: "if [ $(find /sys/class/net/*/ -type d -name wireless) ]; then echo MANUAL; else echo OK; fi"
-    stdout:
-    - '/^OK/'
-    - '!/^MANUAL/'
+    title: 3.1.2 | Ensure wireless interfaces are not available
+    content: {{ len (glob "/sys/class/net/*/wireless") }}
+    matches: 0
     meta:
       server: 1
       workstation: NA

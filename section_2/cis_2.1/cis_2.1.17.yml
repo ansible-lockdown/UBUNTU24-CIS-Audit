@@ -2,11 +2,12 @@
 
 {{ if .Vars.ubtu24cis_level_1 }}
   {{ if .Vars.ubtu24cis_rule_2_1_17 }}
-    {{ if not .Vars.ubtu24cis_samba_server }}
-      {{ if not .Vars.ubtu24cis_samba_mask }}
+    {{ if not .Vars.ubtu24cis_samba_mask }}
 package:
   samba_pkg:
     title: 2.1.17 | Ensure samba file server services are not in use | pkg removed
+    skip: {{ .Vars.ubtu24cis_samba_server }}
+    skip-reason: the samba server is required, ubtu24cis_samba_server is true
     name: samba
     installed: false
     meta:
@@ -17,15 +18,15 @@ package:
       NIST800-53R5:
       - CM-6
       - CM-7
-      {{ end }}
-      {{ if .Vars.ubtu24cis_samba_mask }}
-file:
+    {{ end }}
+    {{ if .Vars.ubtu24cis_samba_mask }}
+service:
   samba_service_masked:
     title: 2.1.17 | Ensure samba file server services are not in use | masked
-    path: /etc/systemd/system/smbd.service
-    exists: true
-    filetype: symlink
-    linked-to: /dev/null
+    skip: {{ .Vars.ubtu24cis_samba_server }}
+    skip-reason: the samba server is required, ubtu24cis_samba_server is true
+    name: smbd.service
+    masked: true
     meta:
       server: 1
       workstation: 1
@@ -34,7 +35,6 @@ file:
       NIST800-53R5:
       - CM-6
       - CM-7
-      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

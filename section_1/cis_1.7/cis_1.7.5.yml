@@ -1,7 +1,6 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_desktop_required }}
     {{ if .Vars.ubtu24cis_rule_1_7_5 }}
 file:
   gdm_autorun_never:
@@ -11,6 +10,8 @@ file:
     contents:
     - '/^\[org\/gnome\/desktop\/media-handling\]/'
     - '/^autorun-never=true/'
+    skip: {{ if (not .Vars.ubtu24cis_desktop_required) }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_desktop_required is false, no GNOME desktop on this host
     meta:
       server: 1
       workstation: 1
@@ -28,6 +29,8 @@ file:
     exists: true
     contents:
     - '/^\/org\/gnome\/desktop\/media-handling\/autorun-never$/'
+    skip: {{ if (not .Vars.ubtu24cis_desktop_required) }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_desktop_required is false, no GNOME desktop on this host
     meta:
       server: 1
       workstation: 1
@@ -40,5 +43,4 @@ file:
       - CM-7
       - IA-5
     {{ end }}
-  {{ end }}
 {{ end }}

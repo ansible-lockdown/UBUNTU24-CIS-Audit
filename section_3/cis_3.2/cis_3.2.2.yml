@@ -5,13 +5,11 @@
 command:
   modprobe_can:
     title: 3.2.2 | Ensure can kernel module is not available | can config
-    exit-status:
-      or:
-      - 0
-      - 1
-    exec: 'modprobe -n -v can'
+    exec: modprobe --showconfig | grep -P '\b(install|blacklist)\h+can\b'
+    exit-status: 0
     stdout:
-      - '/install /bin/(true|false)/'
+    - '/^blacklist can$/'
+    - '/^install can \/bin\/(true|false)/'
     meta:
       server: 1
       workstation: 1
@@ -20,12 +18,11 @@ command:
       NIST800-53R5:
       - CM-7
       - SI-4
-  lsmod_can:
+file:
+  sys_module_can:
     title: 3.2.2 | Ensure can kernel module is not available | running can
-    exit-status: 1
-    exec: lsmod | grep -i can
-    stdout:
-    - '!/^.*/'
+    path: /sys/module/can
+    exists: false
     meta:
       server: 1
       workstation: 1

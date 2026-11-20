@@ -5,6 +5,8 @@
 file:
   pwhistory_use_authtok:
     title: 5.3.3.3.3 | Ensure pam_pwhistory includes use_authtok | common-password
+    skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    skip-reason: ubtu24cis_disruption_high is false, the role does not change the PAM configuration
     path: /etc/pam.d/common-password
     exists: true
     contents:
@@ -18,6 +20,8 @@ file:
 command:
   pwhistory_use_authtok_pam_configs:
     title: 5.3.3.3.3 | Ensure pam_pwhistory includes use_authtok | pam_configs
+    skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    skip-reason: ubtu24cis_disruption_high is false, the role does not change the PAM configuration
     exec: for file in `awk '/Password-Type:/{ f = 1;next } /-Type:/{ f = 0 } f {if (/pam_pwhistory\.so/) print FILENAME}' /usr/share/pam-configs/*`; do grep pam_pwhistory $file | grep -v use_authtok; done
     exit-status:
       or:

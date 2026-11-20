@@ -1,12 +1,13 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_ipv6_required }}
     {{ if .Vars.ubtu24cis_rule_3_3_2_7 }}
       kernel-param:
         net.ipv6.conf.all.accept_ra:
           title: 3.3.2.7 | Ensure net.ipv6.conf.all.accept_ra is configured
           value: '0'
+          skip: {{ if (not .Vars.ubtu24cis_ipv6_required) }}true{{ else }}false{{ end }}
+          skip-reason: ubtu24cis_ipv6_required is false, IPv6 is disabled
           meta:
             server: 1
             workstation: 1
@@ -21,13 +22,13 @@
       command:
         ipv6_all_accept_ra:
           title: 3.3.2.7 | Ensure net.ipv6.conf.all.accept_ra is configured | conf
-          exec: grep "net\.ipv6\.conf\.all\.accept_ra" /etc/sysctl.conf /etc/sysctl.d/*
-          exit-status:
-            or:
-            - 0
-            - 1
+          exec: |
+            { /usr/lib/systemd/systemd-sysctl --cat-config; f=$(awk -F= '/^\s*IPT_SYSCTL=/{print $2}' /etc/default/ufw 2>/dev/null); [ -f "$f" ] && cat "$f"; } | grep -Pi '^\h*net(\.|/)ipv6(\.|/)conf(\.|/)all(\.|/)accept_ra\h*=' | tail -n 1
+          exit-status: 0
           stdout:
-          - '/net\.ipv6\.conf\.all\.accept_ra\s*=\s*0/'
+          - '/=\s*0\s*$/'
+          skip: {{ if (not .Vars.ubtu24cis_ipv6_required) }}true{{ else }}false{{ end }}
+          skip-reason: ubtu24cis_ipv6_required is false, IPv6 is disabled
           meta:
             server: 1
             workstation: 1
@@ -40,5 +41,4 @@
             - CM-7
             - IA-5
       {{ end }}
-    {{ end }}
 {{ end }}

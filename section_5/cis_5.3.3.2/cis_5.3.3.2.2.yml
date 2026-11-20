@@ -18,16 +18,13 @@ command:
       CIS_ID:
       - 5.3.3.2.2
       NIST800-53R5: IA-5
+file:
   password_minlen_not_pamd:
     title: 5.3.3.2.2 | Ensure password length is configured
-    exec: grep -Psi -- '^\h*password\h+(requisite|required|sufficient)\h+pam_pwquality\.so\h+([^#\n\r]+\h+)?minlen\h*=\h*([0-9]|1[0-3])\b' /etc/pam.d/system-auth /etc/pam.d/common-password
-    exit-status:
-      or:
-      - 0
-      - 1
-      - 2
-    stdout:
-    - '!/.*/'
+    path: /etc/pam.d/common-password
+    exists: true
+    contents:
+    - '!/(?i)^\s*password\s+(requisite|required|sufficient)\s+pam_pwquality\.so\s+([^#\n\r]+\s+)?minlen\s*=\s*([0-9]|1[0-3])\b/'
     meta:
       server: 1
       workstation: 1

@@ -5,6 +5,8 @@
 file:
   pwhistory_enforce_for_root:
     title: 5.3.3.3.2 | Ensure password history is enforced for the root user | common-password
+    skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    skip-reason: ubtu24cis_disruption_high is false, the role does not change the PAM configuration
     path: /etc/pam.d/common-password
     exists: true
     contents:
@@ -18,6 +20,8 @@ file:
 command:
   pwhistory_enforce_for_root_pam_configs:
     title: 5.3.3.3.2 | Ensure password history is enforced for the root user | pam_configs
+    skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    skip-reason: ubtu24cis_disruption_high is false, the role does not change the PAM configuration
     exec: for file in `awk '/Password-Type:/{ f = 1;next } /-Type:/{ f = 0 } f {if (/pam_pwhistory\.so/) print FILENAME}' /usr/share/pam-configs/*`; do grep pam_pwhistory $file | grep -v enforce_for_root; done
     exit-status:
       or:

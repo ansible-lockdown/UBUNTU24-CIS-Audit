@@ -3,10 +3,11 @@
 command:
   modprobe_sctp:
     title: 3.2.5 | Ensure sctp kernel module is not available | sctp config
+    exec: modprobe --showconfig | grep -P '\b(install|blacklist)\h+sctp\b'
     exit-status: 0
-    exec: 'modprobe -n -v sctp'
     stdout:
-      - '/install /bin/(true|false)/'
+    - '/^blacklist sctp$/'
+    - '/^install sctp \/bin\/(true|false)/'
     meta:
       server: 1
       workstation: 1
@@ -15,12 +16,11 @@ command:
       NIST800-53R5:
       - CM-7
       - SI-4
-  lsmod_sctp:
+file:
+  sys_module_sctp:
     title: 3.2.5 | Ensure sctp kernel module is not available | running sctp
-    exit-status: 1
-    exec: lsmod | grep -i sctp
-    stdout:
-    - '!/^.*/'
+    path: /sys/module/sctp
+    exists: false
     meta:
       server: 1
       workstation: 1

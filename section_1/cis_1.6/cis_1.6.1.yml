@@ -9,7 +9,7 @@ file:
     exists: true
     contents:
 {{- range splitList "\n" (trim .Vars.ubtu24cis_warning_banner) }}
-    - {{ toJson . }}
+    - {{ toJSON . }}
 {{- end }}
     - '!/(\\v|\\r|\\m|\\s)/'
     - '!/\/etc\/os-release/'
