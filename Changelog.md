@@ -2,6 +2,50 @@
 
 ## CIS Benchmark 2.0.0
 
+## November 2026 - QA fixes
+
+- 7.1.10 tests /etc/security/opasswd and opasswd.old, each skipped with a reason when absent
+- 1.1.2.5.1 meta key NIST800-53R5
+- 2.2.x client, 3.3.x router and IPv6 opt-outs skipped with a reason
+- 6.1.2.5, 6.1.2.6, 6.1.2.9 log server opt-outs skipped with a reason
+- 1.3.1.3, 6.2.3.23 AppArmor and 1.7.x desktop opt-outs skipped with a reason
+- 3.3.2.x loaded on every run, skipped when IPv6 is not required
+- 2.1.23 skipped when ubtu24cis_desktop_required is true
+- 3.3.x router skips follow the benchmark
+- 5.3.2.x, 5.3.3.3.x, 5.3.3.4.1 skipped with a reason unless ubtu24cis_disruption_high
+- 5.4.1.x, 5.4.2.7, 5.4.2.8 disruption_high skips given a reason
+- 5.2.4 excludes ubtu24cis_sudoers_exclude_nopasswd_list users
+- run_audit.sh uses syver v0.16.0 by default
+- README describes syver
+- goss.yml renamed syver.yml, run_audit.sh default AUDIT_FILE syver.yml
+- run_audit.sh os name/version default when /etc/os-release is missing
+- 1.1.2.3.x - 1.1.2.7.x mount option checks skipped with a reason when the partition does not exist
+- 1.1.2.1.2 - 1.1.2.1.4 check tmp.mount or /etc/fstab per ubtu24cis_tmp_svc
+- 2.1.x, 3.1.3, 6.1.1.1.2 use service masked; required services, mail and log server skipped with a reason
+- per-profile level gates on system_type for 1.1.1.9, 1.1.1.10, 1.7.4, 2.1.1, 2.1.3, 2.1.14, 2.1.23, 3.1.2, 3.1.3, 3.3.1.1, 5.1.8, 5.1.9
+- sysctl checks read the effective config (systemd-sysctl --cat-config and UFW IPT_SYSCTL), last value wins
+- kernel module checks use modprobe --showconfig and /sys/module
+- su group, pam_pwquality, use_authtok, issue.net, grub ipv6, dconf checks use typed file tests
+- auditd.conf, aide.conf, apport checks use typed file and service tests
+- 1.6.7, 1.6.8, 1.6.10, 5.1.1 mode or more restrictive
+- 1.2.1.x, 1.4.2, 2.4.x, 7.1.x mode or more restrictive
+- 4.1.2 checks ufw status and ufw.conf ENABLED
+- wireless check uses a glob count
+- 6.2.4.1 - 6.2.4.4 read the audit log directory from auditd.conf; 6.2.4.1 fails when auditd.conf is missing
+- 6.2.4.5 - 6.2.4.10 audit config files and audit tools checked from fixed typed lists
+- dailyaidecheck.service as a typed service test
+- ssh host key checks drop the sudo wrapper
+- 7.2.3 no longer writes to /tmp
+- 6.2.2.4 key renamed, collided with 6.2.2.3
+- AIDE and heavy tests reported as skipped with a reason
+- rsyslog checks depend on package:rsyslog
+- toJson replaced by toJSON
+- vars: system_type, ubtu24cis_tmp_svc, time_pool options
+- 2.1.6: nginx-plus package check
+- 5.4.2.7: ubtu24cis_system_users_shell accounts and the playbook user excluded
+- vars: ubtu24cis_system_users_shell, ubtu24cis_playbook_user
+- 5.4.1.1, 5.4.1.2: playbook user excluded, as the role leaves its ageing unchanged
+
 ## October 2026 - QA fixes
 
 - CIS Benchmark 1.0.0 October 2026 QA fixes ported to 2.0.0 control IDs

@@ -5,13 +5,11 @@
 command:
   modprobe_TIPC:
     title: 3.2.6 | Ensure tipc kernel module is not available | tipc config
-    exit-status:
-      or:
-      - 0
-      - 1
-    exec: 'modprobe -n -v tipc'
+    exec: modprobe --showconfig | grep -P '\b(install|blacklist)\h+tipc\b'
+    exit-status: 0
     stdout:
-      - '/install /bin/(true|false)/'
+    - '/^blacklist tipc$/'
+    - '/^install tipc \/bin\/(true|false)/'
     meta:
       server: 1
       workstation: 1
@@ -20,12 +18,11 @@ command:
       NIST800-53R5:
       - CM-7
       - SI-4
-  lsmod_TIPC:
+file:
+  sys_module_tipc:
     title: 3.2.6 | Ensure tipc kernel module is not available | running tipc
-    exit-status: 1
-    exec: lsmod | grep -i tipc
-    stdout:
-    - '!/^.*/'
+    path: /sys/module/tipc
+    exists: false
     meta:
       server: 1
       workstation: 1

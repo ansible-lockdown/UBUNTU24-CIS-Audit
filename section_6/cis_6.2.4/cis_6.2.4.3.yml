@@ -2,10 +2,11 @@
 
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_6_2_4_3 }}
+{{- if $logdir := or (and (glob "/etc/audit/auditd.conf") (readFile "/etc/audit/auditd.conf" | findStringSubmatch `(?m)^\s*log_file\s*=\s*(?P<dir>\S*)/[^/\s]*\s*$` | get "dir")) "/var/log/audit" }}
 command:
   audit_logfile_owner:
     title: 6.2.4.3 | Ensure audit log files owner is configured
-    exec: find "$(grep ^log_file /etc/audit/auditd.conf | awk '{ print $NF }' | xargs dirname)"  -type f ! -user root
+    exec: find "{{ $logdir }}" -type f ! -user root
     exit-status: 0
     stdout:
     - '!/.*/'
@@ -16,5 +17,6 @@ command:
       - 6.2.4.3
       NIST800-53R5:
       - AU-3
+{{- end }}
   {{ end }}
 {{ end }}

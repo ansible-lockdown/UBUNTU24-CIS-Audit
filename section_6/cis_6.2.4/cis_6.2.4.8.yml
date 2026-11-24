@@ -2,13 +2,14 @@
 
 {{ if .Vars.ubtu24cis_level_2 }}
   {{ if .Vars.ubtu24cis_rule_6_2_4_8 }}
-command:
-  audit_tools_perms:
+file:
+{{- range mkSlice "/sbin/auditctl" "/sbin/aureport" "/sbin/ausearch" "/sbin/autrace" "/sbin/auditd" "/sbin/augenrules" }}
+  audit_tools_perms_{{ . }}:
     title: 6.2.4.8 | Ensure audit tools mode is configured
-    exec: find -L /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/augenrules -perm /0022
-    exit-status: 0
-    stdout:
-    - '!/./'
+    path: {{ . }}
+    exists: true
+    mode:
+      match-regexp: '^0[0-7][0145][0145]$'
     meta:
       server: 2
       workstation: 2
@@ -16,5 +17,6 @@ command:
       - 6.2.4.8
       NIST800-53R5:
       - AU-3
+{{- end }}
   {{ end }}
 {{ end }}

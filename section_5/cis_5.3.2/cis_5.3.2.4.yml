@@ -5,6 +5,8 @@
 file:
   pam_pwhistory_enabled_common_passwd:
     title: 5.3.2.4 | Ensure pam_pwhistory module is enabled
+    skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    skip-reason: ubtu24cis_disruption_high is false, the role does not change the PAM configuration
     path: /etc/pam.d/common-password
     exists: true
     contents:

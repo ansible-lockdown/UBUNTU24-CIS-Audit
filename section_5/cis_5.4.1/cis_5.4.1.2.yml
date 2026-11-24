@@ -21,8 +21,9 @@ command:
   users_min_pw_expire:
     title: 5.4.1.2 | Ensure minimum password days is configured | user_check
     skip: {{ not .Vars.ubtu24cis_disruption_high }}
+    skip-reason: ubtu24cis_disruption_high is false, the role does not change existing accounts
     exec: |
-      awk -F: '($2~/^\$.+\$/) {if($4 < 1) print "FAIL: " $1 " PASS_MIN_DAYS: " $4}' /etc/shadow
+      awk -F: -v pu="{{ .Vars.ubtu24cis_playbook_user }}" '($1 != pu && $2~/^\$.+\$/) {if($4 < 1) print "FAIL: " $1 " PASS_MIN_DAYS: " $4}' /etc/shadow
       echo "scan_done"
     exit-status: 0
     stdout:

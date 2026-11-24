@@ -1,24 +1,24 @@
 ---
 
 {{ if .Vars.ubtu24cis_level_1 }}
-  {{ if .Vars.ubtu24cis_config_aide }}
-    {{ if .Vars.ubtu24cis_rule_6_3_2 }}
-command:
+  {{ if .Vars.ubtu24cis_rule_6_3_2 }}
+service:
   dailyaidecheck_service:
     title: 6.3.2 | Ensure filesystem integrity is regularly checked | aidecheck service static or enabled
-    exec: systemctl is-enabled dailyaidecheck.service
-    exit-status: 0
-    stdout:
-    - '/^(static|enabled)$/'
+    skip: {{ not .Vars.ubtu24cis_config_aide }}
+    skip-reason: AIDE is not managed (ubtu24cis_config_aide is false)
+    name: dailyaidecheck.service
+    enabled: true
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 6.3.2
       NIST800-53R5: NA
-service:
   dailyaidecheck.timer:
     title: 6.3.2 | Ensure filesystem integrity is regularly checked | aidecheck timer enabled and active
+    skip: {{ not .Vars.ubtu24cis_config_aide }}
+    skip-reason: AIDE is not managed (ubtu24cis_config_aide is false)
     enabled: true
     running: true
     meta:
@@ -27,6 +27,5 @@ service:
       CIS_ID:
       - 6.3.2
       NIST800-53R5: NA
-    {{ end }}
   {{ end }}
 {{ end }}

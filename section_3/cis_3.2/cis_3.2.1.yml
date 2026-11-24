@@ -5,13 +5,11 @@
 command:
   modprobe_atm:
     title: 3.2.1 | Ensure atm kernel module is not available | atm config
-    exit-status:
-      or:
-      - 0
-      - 1
-    exec: 'modprobe -n -v atm'
+    exec: modprobe --showconfig | grep -P '\b(install|blacklist)\h+atm\b'
+    exit-status: 0
     stdout:
-      - '/install /bin/(true|false)/'
+    - '/^blacklist atm$/'
+    - '/^install atm \/bin\/(true|false)/'
     meta:
       server: 1
       workstation: 1
@@ -20,12 +18,11 @@ command:
       NIST800-53R5:
       - CM-7
       - SI-4
-  lsmod_atm:
+file:
+  sys_module_atm:
     title: 3.2.1 | Ensure atm kernel module is not available | running atm
-    exit-status: 1
-    exec: lsmod | grep -i atm
-    stdout:
-    - '!/^.*/'
+    path: /sys/module/atm
+    exists: false
     meta:
       server: 1
       workstation: 1

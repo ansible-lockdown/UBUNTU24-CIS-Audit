@@ -5,10 +5,11 @@
 command:
   modprobe_dccp:
     title: 3.2.3 | Ensure dccp kernel module is not available | DCCP config
+    exec: modprobe --showconfig | grep -P '\b(install|blacklist)\h+dccp\b'
     exit-status: 0
-    exec: 'modprobe -n -v dccp'
     stdout:
-      - '/install /bin/(true|false)/'
+    - '/^blacklist dccp$/'
+    - '/^install dccp \/bin\/(true|false)/'
     meta:
       server: 1
       workstation: 1
@@ -17,12 +18,11 @@ command:
       NIST800-53R5:
       - CM-7
       - SI-4
-  lsmod_dccp:
+file:
+  sys_module_dccp:
     title: 3.2.3 | Ensure dccp kernel module is not available | running dccp
-    exit-status: 1
-    exec: lsmod | grep -i dccp
-    stdout:
-    - '!/^.*/'
+    path: /sys/module/dccp
+    exists: false
     meta:
       server: 1
       workstation: 1

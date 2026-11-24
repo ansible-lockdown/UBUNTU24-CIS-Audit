@@ -1,12 +1,13 @@
 ---
 
-{{ if not .Vars.ubtu24cis_talk_client }}
   {{ if .Vars.ubtu24cis_level_1 }}
     {{ if .Vars.ubtu24cis_rule_2_2_3 }}
 package:
   talk:
     title: 2.2.3 | Ensure talk client is not installed
     installed: false
+    skip: {{ if .Vars.ubtu24cis_talk_client }}true{{ else }}false{{ end }}
+    skip-reason: ubtu24cis_talk_client is true, the talk client is required
     meta:
       server: 1
       workstation: 1
@@ -15,4 +16,3 @@ package:
       - CM-7
     {{ end }}
   {{ end }}
-{{ end }}
